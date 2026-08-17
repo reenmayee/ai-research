@@ -1,0 +1,1873 @@
+{
+  "metadata": {
+    "total_apps": 100,
+    "methodology": "Analysis is derived from the final merged dataset. Composio coverage, API availability, authentication, access, MCP, buildability and verification status are treated as separate dimensions.",
+    "accuracy_note": "These statistics describe the research pipeline output and evidence coverage. They should not be presented as 100-app factual accuracy without human verification.",
+    "scoring_note": "Opportunity scores are prioritization heuristics, not measures of objective business value."
+  },
+  "headline_patterns": {
+    "auth_dominates": {
+      "pattern": "API key",
+      "count": 39,
+      "share_of_all_records": 39.0
+    },
+    "direct_composio_coverage": {
+      "count": 52,
+      "percentage": 52.0
+    },
+    "semantic_only_opportunities": {
+      "count": 48,
+      "percentage": 48.0
+    },
+    "api_available": {
+      "count": 43,
+      "percentage": 43.0
+    },
+    "self_serve": {
+      "count": 13,
+      "percentage": 13.0
+    },
+    "gated": {
+      "count": 29,
+      "percentage": 29.0
+    },
+    "mcp_existing": {
+      "count": 42,
+      "percentage": 42.0
+    },
+    "build_now": {
+      "count": 9,
+      "percentage": 9.0
+    },
+    "verified_build_now": {
+      "count": 2,
+      "percentage": 2.0
+    },
+    "build_with_constraints": {
+      "count": 16,
+      "percentage": 16.0
+    },
+    "human_review": {
+      "count": 90,
+      "percentage": 90.0
+    }
+  },
+  "composio_coverage": {
+    "confirmed": 52,
+    "semantic_match_only": 48,
+    "not_found": 0,
+    "errors": 0,
+    "confirmed_percentage": 52.0,
+    "semantic_percentage": 48.0,
+    "not_found_percentage": 0.0,
+    "actual_tools": 380,
+    "average_tools_per_confirmed_app": 7.31
+  },
+  "authentication": {
+    "counts": {
+      "OAuth2": 30,
+      "JWT": 8,
+      "Unknown": 36,
+      "API key": 39,
+      "Bearer token": 33,
+      "Access token": 27,
+      "Client credentials": 25,
+      "Personal access token": 10,
+      "API token": 15,
+      "Auth token": 12,
+      "Basic": 7
+    },
+    "apps_with_documented_auth": 64,
+    "unknown": 36,
+    "documented_percentage": 64.0
+  },
+  "access": {
+    "self_serve": 13,
+    "conditional": 7,
+    "gated": 29,
+    "unknown": 51,
+    "self_serve_percentage": 13.0,
+    "gated_percentage": 29.0
+  },
+  "api": {
+    "availability": {
+      "yes": 43,
+      "unknown": 57
+    },
+    "types": {
+      "REST": 36,
+      "GraphQL": 16
+    },
+    "breadth": {
+      "documented": 43,
+      "unknown": 57
+    },
+    "available_percentage": 43.0
+  },
+  "mcp": {
+    "existing": 42,
+    "possible": 0,
+    "not_found": 58,
+    "unknown": 0
+  },
+  "buildability": {
+    "counts": {
+      "BUILD_NOW": 9,
+      "RESEARCH_REQUIRED": 75,
+      "BUILD_WITH_CONSTRAINTS": 16
+    },
+    "easy_wins_count": 9,
+    "verified_build_now_count": 2,
+    "build_with_constraints_count": 16,
+    "outreach_count": 16,
+    "research_required_count": 75
+  },
+  "confidence": {
+    "high": 43,
+    "medium": 19,
+    "low": 38,
+    "average": 0.535
+  },
+  "verification": {
+    "human_review_required": 90,
+    "human_review_percentage": 90.0,
+    "records_without_human_review": 10,
+    "records_with_evidence": 79,
+    "evidence_coverage_percentage": 79.0,
+    "critical_fields_complete": 25,
+    "critical_fields_complete_percentage": 25.0,
+    "missing_evidence_apps": [
+      "Podio",
+      "LiveAgent",
+      "Help Scout",
+      "Zoho Cliq",
+      "Lark",
+      "Telegram",
+      "WhatsApp Business",
+      "Meta Ads",
+      "GoHighLevel",
+      "Threads",
+      "Salesforce Commerce Cloud",
+      "Gumroad",
+      "SE Ranking",
+      "Neo4j",
+      "Binance",
+      "iPayX",
+      "QuickBooks",
+      "Ramp",
+      "PitchBook",
+      "Fathom",
+      "Consensus"
+    ],
+    "apps_requiring_review": [
+      "Salesforce",
+      "HubSpot",
+      "Pipedrive",
+      "Attio",
+      "Twenty",
+      "Podio",
+      "Zoho CRM",
+      "Close",
+      "Copper",
+      "DealCloud",
+      "Intercom",
+      "Freshdesk",
+      "Front",
+      "Pylon",
+      "LiveAgent",
+      "Plain",
+      "Help Scout",
+      "Gorgias",
+      "Gladly",
+      "Slack",
+      "Zoho Cliq",
+      "Lark",
+      "Pumble",
+      "Discord",
+      "Telegram",
+      "WhatsApp Business",
+      "Aircall",
+      "Google Ads",
+      "Meta Ads",
+      "LinkedIn Ads",
+      "GoHighLevel",
+      "Mailchimp",
+      "Klaviyo",
+      "systeme.io",
+      "Pinterest",
+      "Threads",
+      "SendGrid",
+      "Shopify",
+      "WooCommerce",
+      "Salesforce Commerce Cloud",
+      "Magento Adobe Commerce",
+      "Ecwid",
+      "Gumroad",
+      "Amazon Selling Partner",
+      "fanbasis",
+      "DataForSEO",
+      "SE Ranking",
+      "Ahrefs",
+      "MrScraper",
+      "Apify",
+      "Firecrawl",
+      "Bright Data",
+      "Sherlock",
+      "Waterfall.io",
+      "GitHub",
+      "Vercel",
+      "Cloudflare",
+      "Neo4j",
+      "MongoDB Atlas",
+      "Datadog",
+      "Sentry",
+      "Airtable",
+      "Linear",
+      "Jira",
+      "Asana",
+      "Monday.com",
+      "ClickUp",
+      "Coda",
+      "Smartsheet",
+      "Harvest",
+      "Stripe",
+      "Plaid",
+      "Binance",
+      "Paygent Connect",
+      "iPayX",
+      "QuickBooks",
+      "Xero",
+      "Brex",
+      "Ramp",
+      "PitchBook",
+      "NotebookLM",
+      "Otter AI",
+      "Fathom",
+      "Consensus",
+      "Reducto",
+      "Devin",
+      "higgsfield",
+      "Mermaid CLI",
+      "YouTube Transcript",
+      "Grain"
+    ]
+  },
+  "category_stats": {
+    "CRM and Sales": {
+      "total": 10,
+      "direct_composio": 6,
+      "semantic_only": 4,
+      "not_found": 0,
+      "api_available": 5,
+      "auth_documented": 5,
+      "self_serve": 1,
+      "conditional": 0,
+      "gated": 6,
+      "mcp_existing": 7,
+      "build_now": 1,
+      "build_with_constraints": 2,
+      "research_required": 7,
+      "human_review": 10,
+      "direct_composio_pct": 60.0,
+      "api_available_pct": 50.0,
+      "self_serve_pct": 10.0,
+      "build_now_pct": 10.0,
+      "human_review_pct": 100.0
+    },
+    "Support and Helpdesk": {
+      "total": 10,
+      "direct_composio": 5,
+      "semantic_only": 5,
+      "not_found": 0,
+      "api_available": 3,
+      "auth_documented": 4,
+      "self_serve": 1,
+      "conditional": 1,
+      "gated": 5,
+      "mcp_existing": 3,
+      "build_now": 1,
+      "build_with_constraints": 2,
+      "research_required": 7,
+      "human_review": 9,
+      "direct_composio_pct": 50.0,
+      "api_available_pct": 30.0,
+      "self_serve_pct": 10.0,
+      "build_now_pct": 10.0,
+      "human_review_pct": 90.0
+    },
+    "Communications and Messaging": {
+      "total": 10,
+      "direct_composio": 3,
+      "semantic_only": 7,
+      "not_found": 0,
+      "api_available": 2,
+      "auth_documented": 5,
+      "self_serve": 3,
+      "conditional": 0,
+      "gated": 3,
+      "mcp_existing": 1,
+      "build_now": 1,
+      "build_with_constraints": 1,
+      "research_required": 8,
+      "human_review": 8,
+      "direct_composio_pct": 30.0,
+      "api_available_pct": 20.0,
+      "self_serve_pct": 30.0,
+      "build_now_pct": 10.0,
+      "human_review_pct": 80.0
+    },
+    "Marketing Ads Email Social": {
+      "total": 10,
+      "direct_composio": 6,
+      "semantic_only": 4,
+      "not_found": 0,
+      "api_available": 2,
+      "auth_documented": 5,
+      "self_serve": 0,
+      "conditional": 1,
+      "gated": 1,
+      "mcp_existing": 2,
+      "build_now": 0,
+      "build_with_constraints": 0,
+      "research_required": 10,
+      "human_review": 10,
+      "direct_composio_pct": 60.0,
+      "api_available_pct": 20.0,
+      "self_serve_pct": 0.0,
+      "build_now_pct": 0.0,
+      "human_review_pct": 100.0
+    },
+    "Ecommerce": {
+      "total": 10,
+      "direct_composio": 2,
+      "semantic_only": 8,
+      "not_found": 0,
+      "api_available": 7,
+      "auth_documented": 5,
+      "self_serve": 1,
+      "conditional": 1,
+      "gated": 2,
+      "mcp_existing": 2,
+      "build_now": 1,
+      "build_with_constraints": 1,
+      "research_required": 8,
+      "human_review": 8,
+      "direct_composio_pct": 20.0,
+      "api_available_pct": 70.0,
+      "self_serve_pct": 10.0,
+      "build_now_pct": 10.0,
+      "human_review_pct": 80.0
+    },
+    "Data SEO and Scraping": {
+      "total": 10,
+      "direct_composio": 6,
+      "semantic_only": 4,
+      "not_found": 0,
+      "api_available": 6,
+      "auth_documented": 9,
+      "self_serve": 1,
+      "conditional": 1,
+      "gated": 4,
+      "mcp_existing": 7,
+      "build_now": 0,
+      "build_with_constraints": 4,
+      "research_required": 6,
+      "human_review": 9,
+      "direct_composio_pct": 60.0,
+      "api_available_pct": 60.0,
+      "self_serve_pct": 10.0,
+      "build_now_pct": 0.0,
+      "human_review_pct": 90.0
+    },
+    "Developer Infra and Data": {
+      "total": 10,
+      "direct_composio": 8,
+      "semantic_only": 2,
+      "not_found": 0,
+      "api_available": 8,
+      "auth_documented": 9,
+      "self_serve": 4,
+      "conditional": 0,
+      "gated": 1,
+      "mcp_existing": 4,
+      "build_now": 4,
+      "build_with_constraints": 1,
+      "research_required": 5,
+      "human_review": 7,
+      "direct_composio_pct": 80.0,
+      "api_available_pct": 80.0,
+      "self_serve_pct": 40.0,
+      "build_now_pct": 40.0,
+      "human_review_pct": 70.0
+    },
+    "Productivity and Project Management": {
+      "total": 10,
+      "direct_composio": 8,
+      "semantic_only": 2,
+      "not_found": 0,
+      "api_available": 7,
+      "auth_documented": 10,
+      "self_serve": 0,
+      "conditional": 2,
+      "gated": 3,
+      "mcp_existing": 6,
+      "build_now": 0,
+      "build_with_constraints": 4,
+      "research_required": 6,
+      "human_review": 9,
+      "direct_composio_pct": 80.0,
+      "api_available_pct": 70.0,
+      "self_serve_pct": 0.0,
+      "build_now_pct": 0.0,
+      "human_review_pct": 90.0
+    },
+    "Finance and Fintech": {
+      "total": 10,
+      "direct_composio": 5,
+      "semantic_only": 5,
+      "not_found": 0,
+      "api_available": 0,
+      "auth_documented": 5,
+      "self_serve": 0,
+      "conditional": 0,
+      "gated": 2,
+      "mcp_existing": 3,
+      "build_now": 0,
+      "build_with_constraints": 0,
+      "research_required": 10,
+      "human_review": 10,
+      "direct_composio_pct": 50.0,
+      "api_available_pct": 0.0,
+      "self_serve_pct": 0.0,
+      "build_now_pct": 0.0,
+      "human_review_pct": 100.0
+    },
+    "AI Research and Media": {
+      "total": 10,
+      "direct_composio": 3,
+      "semantic_only": 7,
+      "not_found": 0,
+      "api_available": 3,
+      "auth_documented": 7,
+      "self_serve": 2,
+      "conditional": 1,
+      "gated": 2,
+      "mcp_existing": 7,
+      "build_now": 1,
+      "build_with_constraints": 1,
+      "research_required": 8,
+      "human_review": 10,
+      "direct_composio_pct": 30.0,
+      "api_available_pct": 30.0,
+      "self_serve_pct": 20.0,
+      "build_now_pct": 10.0,
+      "human_review_pct": 100.0
+    }
+  },
+  "top_opportunities": [
+    {
+      "app": "Vonage",
+      "category": "Communications and Messaging",
+      "score": 10,
+      "reasons": [
+        "public API detected",
+        "authentication documented",
+        "self-serve access",
+        "no direct Composio toolkit",
+        "classified as build-now"
+      ],
+      "buildability": "BUILD_NOW",
+      "composio_coverage": "semantic_match_only",
+      "api": "yes",
+      "auth_documented": true,
+      "self_serve": "self-serve",
+      "needs_human_review": false
+    },
+    {
+      "app": "BigCommerce",
+      "category": "Ecommerce",
+      "score": 10,
+      "reasons": [
+        "public API detected",
+        "authentication documented",
+        "self-serve access",
+        "no direct Composio toolkit",
+        "classified as build-now"
+      ],
+      "buildability": "BUILD_NOW",
+      "composio_coverage": "semantic_match_only",
+      "api": "yes",
+      "auth_documented": true,
+      "self_serve": "self-serve",
+      "needs_human_review": false
+    },
+    {
+      "app": "YouTube Transcript",
+      "category": "AI Research and Media",
+      "score": 9,
+      "reasons": [
+        "public API detected",
+        "authentication documented",
+        "self-serve access",
+        "no direct Composio toolkit",
+        "classified as build-now",
+        "requires human verification"
+      ],
+      "buildability": "BUILD_NOW",
+      "composio_coverage": "semantic_match_only",
+      "api": "yes",
+      "auth_documented": true,
+      "self_serve": "self-serve",
+      "needs_human_review": true
+    },
+    {
+      "app": "Supabase",
+      "category": "Developer Infra and Data",
+      "score": 9,
+      "reasons": [
+        "public API detected",
+        "authentication documented",
+        "self-serve access",
+        "classified as build-now"
+      ],
+      "buildability": "BUILD_NOW",
+      "composio_coverage": "confirmed",
+      "api": "yes",
+      "auth_documented": true,
+      "self_serve": "self-serve",
+      "needs_human_review": false
+    },
+    {
+      "app": "Snowflake",
+      "category": "Developer Infra and Data",
+      "score": 9,
+      "reasons": [
+        "public API detected",
+        "authentication documented",
+        "self-serve access",
+        "classified as build-now"
+      ],
+      "buildability": "BUILD_NOW",
+      "composio_coverage": "confirmed",
+      "api": "yes",
+      "auth_documented": true,
+      "self_serve": "self-serve",
+      "needs_human_review": false
+    },
+    {
+      "app": "Squarespace",
+      "category": "Ecommerce",
+      "score": 8,
+      "reasons": [
+        "public API detected",
+        "authentication documented",
+        "conditional access",
+        "no direct Composio toolkit",
+        "buildable with constraints"
+      ],
+      "buildability": "BUILD_WITH_CONSTRAINTS",
+      "composio_coverage": "semantic_match_only",
+      "api": "yes",
+      "auth_documented": true,
+      "self_serve": "conditional",
+      "needs_human_review": false
+    },
+    {
+      "app": "Twilio",
+      "category": "Communications and Messaging",
+      "score": 7,
+      "reasons": [
+        "public API detected",
+        "authentication documented",
+        "gated access",
+        "no direct Composio toolkit",
+        "buildable with constraints"
+      ],
+      "buildability": "BUILD_WITH_CONSTRAINTS",
+      "composio_coverage": "semantic_match_only",
+      "api": "yes",
+      "auth_documented": true,
+      "self_serve": "gated",
+      "needs_human_review": false
+    },
+    {
+      "app": "Salesforce",
+      "category": "CRM and Sales",
+      "score": 7,
+      "reasons": [
+        "public API detected",
+        "authentication documented",
+        "self-serve access",
+        "classified as build-now",
+        "requires human verification"
+      ],
+      "buildability": "BUILD_NOW",
+      "composio_coverage": "confirmed",
+      "api": "yes",
+      "auth_documented": true,
+      "self_serve": "self-serve",
+      "needs_human_review": true
+    },
+    {
+      "app": "Plain",
+      "category": "Support and Helpdesk",
+      "score": 7,
+      "reasons": [
+        "public API detected",
+        "authentication documented",
+        "self-serve access",
+        "classified as build-now",
+        "requires human verification"
+      ],
+      "buildability": "BUILD_NOW",
+      "composio_coverage": "confirmed",
+      "api": "yes",
+      "auth_documented": true,
+      "self_serve": "self-serve",
+      "needs_human_review": true
+    },
+    {
+      "app": "Netlify",
+      "category": "Developer Infra and Data",
+      "score": 7,
+      "reasons": [
+        "public API detected",
+        "authentication documented",
+        "gated access",
+        "no direct Composio toolkit",
+        "buildable with constraints"
+      ],
+      "buildability": "BUILD_WITH_CONSTRAINTS",
+      "composio_coverage": "semantic_match_only",
+      "api": "yes",
+      "auth_documented": true,
+      "self_serve": "gated",
+      "needs_human_review": false
+    },
+    {
+      "app": "Datadog",
+      "category": "Developer Infra and Data",
+      "score": 7,
+      "reasons": [
+        "public API detected",
+        "authentication documented",
+        "self-serve access",
+        "classified as build-now",
+        "requires human verification"
+      ],
+      "buildability": "BUILD_NOW",
+      "composio_coverage": "confirmed",
+      "api": "yes",
+      "auth_documented": true,
+      "self_serve": "self-serve",
+      "needs_human_review": true
+    },
+    {
+      "app": "Cloudflare",
+      "category": "Developer Infra and Data",
+      "score": 7,
+      "reasons": [
+        "public API detected",
+        "authentication documented",
+        "self-serve access",
+        "classified as build-now",
+        "requires human verification"
+      ],
+      "buildability": "BUILD_NOW",
+      "composio_coverage": "confirmed",
+      "api": "yes",
+      "auth_documented": true,
+      "self_serve": "self-serve",
+      "needs_human_review": true
+    },
+    {
+      "app": "Clay",
+      "category": "Data SEO and Scraping",
+      "score": 7,
+      "reasons": [
+        "public API detected",
+        "authentication documented",
+        "gated access",
+        "no direct Composio toolkit",
+        "buildable with constraints"
+      ],
+      "buildability": "BUILD_WITH_CONSTRAINTS",
+      "composio_coverage": "semantic_match_only",
+      "api": "yes",
+      "auth_documented": true,
+      "self_serve": "gated",
+      "needs_human_review": false
+    },
+    {
+      "app": "Notion",
+      "category": "Productivity and Project Management",
+      "score": 6,
+      "reasons": [
+        "public API detected",
+        "authentication documented",
+        "conditional access",
+        "buildable with constraints"
+      ],
+      "buildability": "BUILD_WITH_CONSTRAINTS",
+      "composio_coverage": "confirmed",
+      "api": "yes",
+      "auth_documented": true,
+      "self_serve": "conditional",
+      "needs_human_review": false
+    },
+    {
+      "app": "Zendesk",
+      "category": "Support and Helpdesk",
+      "score": 5,
+      "reasons": [
+        "public API detected",
+        "authentication documented",
+        "gated access",
+        "buildable with constraints"
+      ],
+      "buildability": "BUILD_WITH_CONSTRAINTS",
+      "composio_coverage": "confirmed",
+      "api": "yes",
+      "auth_documented": true,
+      "self_serve": "gated",
+      "needs_human_review": false
+    }
+  ],
+  "easy_wins": [
+    {
+      "app": "Salesforce",
+      "category": "CRM and Sales",
+      "buildability": "BUILD_NOW",
+      "coverage": "confirmed",
+      "api": "yes",
+      "auth": [
+        "OAuth2",
+        "JWT"
+      ],
+      "self_serve": "self-serve",
+      "needs_human_review": true
+    },
+    {
+      "app": "Plain",
+      "category": "Support and Helpdesk",
+      "buildability": "BUILD_NOW",
+      "coverage": "confirmed",
+      "api": "yes",
+      "auth": [
+        "API key",
+        "Bearer token"
+      ],
+      "self_serve": "self-serve",
+      "needs_human_review": true
+    },
+    {
+      "app": "Vonage",
+      "category": "Communications and Messaging",
+      "buildability": "BUILD_NOW",
+      "coverage": "semantic_match_only",
+      "api": "yes",
+      "auth": [
+        "JWT"
+      ],
+      "self_serve": "self-serve",
+      "needs_human_review": false
+    },
+    {
+      "app": "BigCommerce",
+      "category": "Ecommerce",
+      "buildability": "BUILD_NOW",
+      "coverage": "semantic_match_only",
+      "api": "yes",
+      "auth": [
+        "API token",
+        "Bearer token",
+        "JWT",
+        "Access token",
+        "API key",
+        "Client credentials"
+      ],
+      "self_serve": "self-serve",
+      "needs_human_review": false
+    },
+    {
+      "app": "Cloudflare",
+      "category": "Developer Infra and Data",
+      "buildability": "BUILD_NOW",
+      "coverage": "confirmed",
+      "api": "yes",
+      "auth": [
+        "Client credentials",
+        "Auth token",
+        "API key",
+        "API token",
+        "Bearer token"
+      ],
+      "self_serve": "self-serve",
+      "needs_human_review": true
+    },
+    {
+      "app": "Supabase",
+      "category": "Developer Infra and Data",
+      "buildability": "BUILD_NOW",
+      "coverage": "confirmed",
+      "api": "yes",
+      "auth": [
+        "API key",
+        "JWT",
+        "Access token",
+        "Client credentials",
+        "OAuth2",
+        "Auth token"
+      ],
+      "self_serve": "self-serve",
+      "needs_human_review": false
+    },
+    {
+      "app": "Snowflake",
+      "category": "Developer Infra and Data",
+      "buildability": "BUILD_NOW",
+      "coverage": "confirmed",
+      "api": "yes",
+      "auth": [
+        "OAuth2"
+      ],
+      "self_serve": "self-serve",
+      "needs_human_review": false
+    },
+    {
+      "app": "Datadog",
+      "category": "Developer Infra and Data",
+      "buildability": "BUILD_NOW",
+      "coverage": "confirmed",
+      "api": "yes",
+      "auth": [
+        "OAuth2",
+        "API key",
+        "Access token",
+        "Personal access token",
+        "Client credentials"
+      ],
+      "self_serve": "self-serve",
+      "needs_human_review": true
+    },
+    {
+      "app": "YouTube Transcript",
+      "category": "AI Research and Media",
+      "buildability": "BUILD_NOW",
+      "coverage": "semantic_match_only",
+      "api": "yes",
+      "auth": [
+        "API key",
+        "Bearer token",
+        "Client credentials",
+        "OAuth2"
+      ],
+      "self_serve": "self-serve",
+      "needs_human_review": true
+    }
+  ],
+  "build_with_constraints": [
+    {
+      "app": "Attio",
+      "category": "CRM and Sales",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "confirmed",
+      "api": "yes",
+      "self_serve": "gated"
+    },
+    {
+      "app": "Close",
+      "category": "CRM and Sales",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "confirmed",
+      "api": "yes",
+      "self_serve": "gated"
+    },
+    {
+      "app": "Zendesk",
+      "category": "Support and Helpdesk",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "confirmed",
+      "api": "yes",
+      "self_serve": "gated"
+    },
+    {
+      "app": "Intercom",
+      "category": "Support and Helpdesk",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "semantic_match_only",
+      "api": "yes",
+      "self_serve": "gated"
+    },
+    {
+      "app": "Twilio",
+      "category": "Communications and Messaging",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "semantic_match_only",
+      "api": "yes",
+      "self_serve": "gated"
+    },
+    {
+      "app": "Squarespace",
+      "category": "Ecommerce",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "semantic_match_only",
+      "api": "yes",
+      "self_serve": "conditional"
+    },
+    {
+      "app": "Ahrefs",
+      "category": "Data SEO and Scraping",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "confirmed",
+      "api": "yes",
+      "self_serve": "gated"
+    },
+    {
+      "app": "Apify",
+      "category": "Data SEO and Scraping",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "confirmed",
+      "api": "yes",
+      "self_serve": "gated"
+    },
+    {
+      "app": "Firecrawl",
+      "category": "Data SEO and Scraping",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "confirmed",
+      "api": "yes",
+      "self_serve": "conditional"
+    },
+    {
+      "app": "Clay",
+      "category": "Data SEO and Scraping",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "semantic_match_only",
+      "api": "yes",
+      "self_serve": "gated"
+    },
+    {
+      "app": "Netlify",
+      "category": "Developer Infra and Data",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "semantic_match_only",
+      "api": "yes",
+      "self_serve": "gated"
+    },
+    {
+      "app": "Notion",
+      "category": "Productivity and Project Management",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "confirmed",
+      "api": "yes",
+      "self_serve": "conditional"
+    },
+    {
+      "app": "Jira",
+      "category": "Productivity and Project Management",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "confirmed",
+      "api": "yes",
+      "self_serve": "gated"
+    },
+    {
+      "app": "Asana",
+      "category": "Productivity and Project Management",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "confirmed",
+      "api": "yes",
+      "self_serve": "gated"
+    },
+    {
+      "app": "Coda",
+      "category": "Productivity and Project Management",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "confirmed",
+      "api": "yes",
+      "self_serve": "gated"
+    },
+    {
+      "app": "NotebookLM",
+      "category": "AI Research and Media",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint.",
+      "coverage": "confirmed",
+      "api": "yes",
+      "self_serve": "gated"
+    }
+  ],
+  "outreach_required": [
+    {
+      "app": "Attio",
+      "category": "CRM and Sales",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    },
+    {
+      "app": "Close",
+      "category": "CRM and Sales",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    },
+    {
+      "app": "Zendesk",
+      "category": "Support and Helpdesk",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    },
+    {
+      "app": "Intercom",
+      "category": "Support and Helpdesk",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    },
+    {
+      "app": "Twilio",
+      "category": "Communications and Messaging",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    },
+    {
+      "app": "Squarespace",
+      "category": "Ecommerce",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    },
+    {
+      "app": "Ahrefs",
+      "category": "Data SEO and Scraping",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    },
+    {
+      "app": "Apify",
+      "category": "Data SEO and Scraping",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    },
+    {
+      "app": "Firecrawl",
+      "category": "Data SEO and Scraping",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    },
+    {
+      "app": "Clay",
+      "category": "Data SEO and Scraping",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    },
+    {
+      "app": "Netlify",
+      "category": "Developer Infra and Data",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    },
+    {
+      "app": "Notion",
+      "category": "Productivity and Project Management",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    },
+    {
+      "app": "Jira",
+      "category": "Productivity and Project Management",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    },
+    {
+      "app": "Asana",
+      "category": "Productivity and Project Management",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    },
+    {
+      "app": "Coda",
+      "category": "Productivity and Project Management",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    },
+    {
+      "app": "NotebookLM",
+      "category": "AI Research and Media",
+      "blocker": "API and authentication are documented, but credential/account access has a constraint."
+    }
+  ],
+  "research_required": [
+    {
+      "app": "HubSpot",
+      "category": "CRM and Sales",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Pipedrive",
+      "category": "CRM and Sales",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Twenty",
+      "category": "CRM and Sales",
+      "blocker": "API appears available, but credential/access requirements could not be established confidently.",
+      "missing_fields": [
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Podio",
+      "category": "CRM and Sales",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Zoho CRM",
+      "category": "CRM and Sales",
+      "blocker": "API was detected, but the authentication method could not be established confidently.",
+      "missing_fields": [
+        "auth"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Copper",
+      "category": "CRM and Sales",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "DealCloud",
+      "category": "CRM and Sales",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "self_serve",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Freshdesk",
+      "category": "Support and Helpdesk",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Front",
+      "category": "Support and Helpdesk",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Pylon",
+      "category": "Support and Helpdesk",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "self_serve",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "LiveAgent",
+      "category": "Support and Helpdesk",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Help Scout",
+      "category": "Support and Helpdesk",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Gorgias",
+      "category": "Support and Helpdesk",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Gladly",
+      "category": "Support and Helpdesk",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Slack",
+      "category": "Communications and Messaging",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Zoho Cliq",
+      "category": "Communications and Messaging",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Lark",
+      "category": "Communications and Messaging",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Pumble",
+      "category": "Communications and Messaging",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Discord",
+      "category": "Communications and Messaging",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Telegram",
+      "category": "Communications and Messaging",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "WhatsApp Business",
+      "category": "Communications and Messaging",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Aircall",
+      "category": "Communications and Messaging",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Google Ads",
+      "category": "Marketing Ads Email Social",
+      "blocker": "API appears available, but credential/access requirements could not be established confidently.",
+      "missing_fields": [
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Meta Ads",
+      "category": "Marketing Ads Email Social",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "LinkedIn Ads",
+      "category": "Marketing Ads Email Social",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "GoHighLevel",
+      "category": "Marketing Ads Email Social",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Mailchimp",
+      "category": "Marketing Ads Email Social",
+      "blocker": "API was detected, but the authentication method could not be established confidently.",
+      "missing_fields": [
+        "auth",
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Klaviyo",
+      "category": "Marketing Ads Email Social",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "self_serve",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "systeme.io",
+      "category": "Marketing Ads Email Social",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "self_serve",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Pinterest",
+      "category": "Marketing Ads Email Social",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Threads",
+      "category": "Marketing Ads Email Social",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "SendGrid",
+      "category": "Marketing Ads Email Social",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Shopify",
+      "category": "Ecommerce",
+      "blocker": "API was detected, but the authentication method could not be established confidently.",
+      "missing_fields": [
+        "auth"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "WooCommerce",
+      "category": "Ecommerce",
+      "blocker": "API appears available, but credential/access requirements could not be established confidently.",
+      "missing_fields": [
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Salesforce Commerce Cloud",
+      "category": "Ecommerce",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Magento Adobe Commerce",
+      "category": "Ecommerce",
+      "blocker": "API appears available, but credential/access requirements could not be established confidently.",
+      "missing_fields": [
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Ecwid",
+      "category": "Ecommerce",
+      "blocker": "API was detected, but the authentication method could not be established confidently.",
+      "missing_fields": [
+        "auth",
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Gumroad",
+      "category": "Ecommerce",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Amazon Selling Partner",
+      "category": "Ecommerce",
+      "blocker": "API appears available, but credential/access requirements could not be established confidently.",
+      "missing_fields": [
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "fanbasis",
+      "category": "Ecommerce",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "DataForSEO",
+      "category": "Data SEO and Scraping",
+      "blocker": "API appears available, but credential/access requirements could not be established confidently.",
+      "missing_fields": [
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "SE Ranking",
+      "category": "Data SEO and Scraping",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "MrScraper",
+      "category": "Data SEO and Scraping",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Bright Data",
+      "category": "Data SEO and Scraping",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Sherlock",
+      "category": "Data SEO and Scraping",
+      "blocker": "API appears available, but credential/access requirements could not be established confidently.",
+      "missing_fields": [
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Waterfall.io",
+      "category": "Data SEO and Scraping",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "self_serve",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "GitHub",
+      "category": "Developer Infra and Data",
+      "blocker": "API appears available, but credential/access requirements could not be established confidently.",
+      "missing_fields": [
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Vercel",
+      "category": "Developer Infra and Data",
+      "blocker": "API appears available, but credential/access requirements could not be established confidently.",
+      "missing_fields": [
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Neo4j",
+      "category": "Developer Infra and Data",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "MongoDB Atlas",
+      "category": "Developer Infra and Data",
+      "blocker": "API appears available, but credential/access requirements could not be established confidently.",
+      "missing_fields": [
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Sentry",
+      "category": "Developer Infra and Data",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "self_serve",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Airtable",
+      "category": "Productivity and Project Management",
+      "blocker": "API appears available, but credential/access requirements could not be established confidently.",
+      "missing_fields": [
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Linear",
+      "category": "Productivity and Project Management",
+      "blocker": "API appears available, but credential/access requirements could not be established confidently.",
+      "missing_fields": [
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Monday.com",
+      "category": "Productivity and Project Management",
+      "blocker": "API appears available, but credential/access requirements could not be established confidently.",
+      "missing_fields": [
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "ClickUp",
+      "category": "Productivity and Project Management",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "self_serve",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Smartsheet",
+      "category": "Productivity and Project Management",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Harvest",
+      "category": "Productivity and Project Management",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "self_serve",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Stripe",
+      "category": "Finance and Fintech",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Plaid",
+      "category": "Finance and Fintech",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Binance",
+      "category": "Finance and Fintech",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Paygent Connect",
+      "category": "Finance and Fintech",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "self_serve",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "iPayX",
+      "category": "Finance and Fintech",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "QuickBooks",
+      "category": "Finance and Fintech",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Xero",
+      "category": "Finance and Fintech",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "self_serve",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Brex",
+      "category": "Finance and Fintech",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "self_serve",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Ramp",
+      "category": "Finance and Fintech",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "PitchBook",
+      "category": "Finance and Fintech",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Otter AI",
+      "category": "AI Research and Media",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Fathom",
+      "category": "AI Research and Media",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Consensus",
+      "category": "AI Research and Media",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api",
+        "evidence"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Reducto",
+      "category": "AI Research and Media",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Devin",
+      "category": "AI Research and Media",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "higgsfield",
+      "category": "AI Research and Media",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "self_serve",
+        "api"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Mermaid CLI",
+      "category": "AI Research and Media",
+      "blocker": "API appears available, but credential/access requirements could not be established confidently.",
+      "missing_fields": [
+        "self_serve"
+      ],
+      "needs_human_review": true
+    },
+    {
+      "app": "Grain",
+      "category": "AI Research and Media",
+      "blocker": "API availability could not be established confidently from the researched documentation.",
+      "missing_fields": [
+        "auth",
+        "self_serve",
+        "api"
+      ],
+      "needs_human_review": true
+    }
+  ],
+  "largest_category_gap": {
+    "category": "Ecommerce",
+    "gap": 8,
+    "stats": {
+      "total": 10,
+      "direct_composio": 2,
+      "semantic_only": 8,
+      "not_found": 0,
+      "api_available": 7,
+      "auth_documented": 5,
+      "self_serve": 1,
+      "conditional": 1,
+      "gated": 2,
+      "mcp_existing": 2,
+      "build_now": 1,
+      "build_with_constraints": 1,
+      "research_required": 8,
+      "human_review": 8,
+      "direct_composio_pct": 20.0,
+      "api_available_pct": 70.0,
+      "self_serve_pct": 10.0,
+      "build_now_pct": 10.0,
+      "human_review_pct": 80.0
+    }
+  }
+}

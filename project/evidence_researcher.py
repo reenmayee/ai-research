@@ -1,852 +1,762 @@
 import json
 import re
 import time
-import requests
-
 from pathlib import Path
+from urllib.parse import urljoin, urlparse
+
+import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 
 load_dotenv()
 
-INPUT_FILE = Path(
-    "data/composio_results.json"
-)
+PROJECT_DIR = Path(__file__).resolve().parent
+DATA_DIR = PROJECT_DIR / "data"
 
-OUTPUT_FILE = Path(
-    "data/research_results.json"
-)
+INPUT_FILE = DATA_DIR / "composio_results.json"
+OUTPUT_FILE = DATA_DIR / "research_results.json"
 
 REQUEST_DELAY = 0.35
 REQUEST_TIMEOUT = 15
+MAX_PAGES = 10
+MAX_LINKS_FROM_PAGE = 20
 
 HEADERS = {
-
-    "User-Agent":
-        "Mozilla/5.0 "
-        "(Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 "
-        "(KHTML, like Gecko) "
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
         "Chrome/151 Safari/537.36"
+    )
 }
 
-
-# ============================================================
-# RULES
-# ============================================================
+# ------------------------------------------------------------
+# Stronger, more conservative research rules
+# ------------------------------------------------------------
 
 AUTH_RULES = {
-
     "OAuth2": [
-        r"\boauth 2\.0\b",
+        r"\boauth\s*2\.0\b",
         r"\boauth2\b",
-        r"\boauth\b",
-        r"authorization code",
-        r"oauth authorization"
+        r"authorization code grant",
+        r"client credentials grant",
+        r"oauth authorization",
     ],
-
     "API key": [
         r"\bapi key\b",
         r"\bapikey\b",
-        r"x-api-key"
+        r"x-api-key",
+        r"api-key",
     ],
-
+    "API token": [
+        r"\bapi token\b",
+        r"\bapitoken\b",
+        r"api-token",
+    ],
     "Bearer token": [
         r"bearer token",
         r"authorization:\s*bearer",
-        r"\bbearer\b"
+        r"\bbearer\s+authentication\b",
     ],
-
     "Basic": [
         r"basic authentication",
-        r"basic auth"
+        r"basic auth",
     ],
-
     "JWT": [
         r"\bjwt\b",
-        r"json web token"
-    ]
+        r"json web token",
+    ],
+    "Access token": [
+        r"\baccess token\b",
+        r"\baccess_token\b",
+    ],
+    "Personal access token": [
+        r"personal access token",
+        r"\bPAT\b",
+    ],
+    "Private app token": [
+        r"private app token",
+        r"private integration token",
+    ],
+    "Client credentials": [
+        r"client credentials",
+        r"client_id",
+        r"client secret",
+    ],
+    "Auth token": [
+        r"\bauth token\b",
+        r"authentication token",
+    ],
 }
-
 
 API_RULES = {
-
     "REST": [
-        r"\brest api\b",
-        r"\brestful api\b",
-        r"\brest api reference\b",
-        r"\bhttp api\b",
-        r"\brest endpoints?\b"
+        r"\bREST API\b",
+        r"\bRESTful API\b",
+        r"\bREST API reference\b",
+        r"\bHTTP API\b",
+        r"\bREST endpoints?\b",
     ],
-
     "GraphQL": [
-        r"\bgraphql\b",
-        r"graphql api",
-        r"graphql endpoint"
+        r"\bGraphQL\b",
+        r"GraphQL API",
+        r"GraphQL endpoint",
     ],
-
-    "Webhooks": [
-        r"\bwebhooks?\b"
-    ],
-
-    "SDK": [
-        r"\bsdk\b",
-        r"software development kit",
-        r"client library"
-    ]
 }
 
+SUPPORTING_API_RULES = {
+    "Webhooks": [r"\bwebhooks?\b"],
+    "SDK": [r"\bSDK\b", r"software development kit", r"client library"],
+}
 
 SELF_SERVE_RULES = [
-
-    r"free plan",
-    r"free trial",
-    r"developer account",
-    r"create an account",
-    r"\bsign up\b",
     r"get an api key",
     r"generate an api key",
-    r"developer portal",
-    r"self.?serve",
-    r"developer signup",
+    r"create an application",
     r"register an application",
-    r"create an application"
+    r"developer portal",
+    r"developer signup",
+    r"generate an access token",
+    r"create an api token",
+    r"create a private app",
+    r"self[- ]serve api access",
 ]
 
-
 GATED_RULES = [
-
     r"contact sales",
     r"contact our sales team",
     r"enterprise only",
-    r"enterprise plan",
-    r"request access",
+    r"enterprise plan.*api",
+    r"request api access",
+    r"request access.*api",
     r"approval required",
     r"admin approval",
-    r"\bpartner\b",
-    r"partnership",
+    r"partner approval required",
+    r"become a partner",
+    r"partnership required",
+    r"partner access required",
     r"waitlist",
-    r"invite only"
+    r"invite only",
 ]
 
-
 MCP_RULES = [
-
     r"\bmcp server\b",
     r"model context protocol server",
     r"model-context-protocol",
-    r"\bmcp integration\b",
-    r"\bmcp tool\b",
-    r"\bmcp endpoint\b"
+    r"\bofficial mcp\b",
 ]
 
+DOC_KEYWORDS = (
+    "developer",
+    "developers",
+    "docs",
+    "documentation",
+    "api",
+    "reference",
+    "authentication",
+    "auth",
+    "oauth",
+    "token",
+    "mcp",
+    "graphql",
+)
 
-# ============================================================
-# DESCRIPTION MAP
-# ============================================================
+AUTH_PAGE_KEYWORDS = (
+    "auth",
+    "oauth",
+    "token",
+    "authorization",
+    "api-key",
+    "apikey",
+    "authentication",
+)
 
-DESCRIPTIONS = {
+API_PAGE_KEYWORDS = (
+    "api",
+    "reference",
+    "rest",
+    "graphql",
+    "endpoint",
+)
 
-    "Salesforce":
-        "Enterprise CRM for sales, service, marketing and customer data.",
-
-    "HubSpot":
-        "CRM platform combining sales, marketing, customer service and content tools.",
-
-    "Pipedrive":
-        "Sales CRM focused on pipeline, deals, activities and sales workflows.",
-
-    "Attio":
-        "Modern CRM for managing contacts, companies, deals and relationship data.",
-
-    "Twenty":
-        "Open-source CRM for managing people, companies, opportunities and workflows.",
-
-    "Slack":
-        "Team communication platform for channels, messaging, apps and automation.",
-
-    "Twilio":
-        "Communications platform providing programmable messaging, voice and other APIs.",
-
-    "GitHub":
-        "Developer platform for source control, collaboration, issues and CI/CD.",
-
-    "Shopify":
-        "Commerce platform providing storefront, product, order and customer management.",
-
-    "Stripe":
-        "Payments platform providing APIs for payments, billing, subscriptions and financial workflows.",
-
-    "Notion":
-        "Workspace platform for documents, databases, knowledge and team collaboration.",
-
-    "Airtable":
-        "Collaborative database platform for structured data, workflows and applications."
-}
+MCP_PAGE_KEYWORDS = ("mcp", "model-context-protocol")
 
 
-# ============================================================
-# HTTP
-# ============================================================
+# ------------------------------------------------------------
+# HTTP / parsing
+# ------------------------------------------------------------
+
+SESSION = requests.Session()
+SESSION.headers.update(HEADERS)
+
 
 def fetch(url):
-
     try:
-
-        response = requests.get(
+        response = SESSION.get(
             url,
-            headers=HEADERS,
             timeout=REQUEST_TIMEOUT,
-            allow_redirects=True
+            allow_redirects=True,
         )
-
         return {
-
-            "status":
-                response.status_code,
-
-            "url":
-                response.url,
-
-            "html":
-                response.text
+            "status": response.status_code,
+            "url": response.url,
+            "html": response.text,
         }
-
-    except Exception as e:
-
+    except Exception as exc:
         return {
-
-            "status":
-                0,
-
-            "url":
-                url,
-
-            "html":
-                "",
-
-            "error":
-                str(e)
+            "status": 0,
+            "url": url,
+            "html": "",
+            "error": str(exc),
         }
 
 
-# ============================================================
-# TEXT
-# ============================================================
-
-def extract_text(html):
-
+def extract_page(html, url):
     if not html:
-        return ""
+        return None
 
-    soup = BeautifulSoup(
-        html,
-        "html.parser"
-    )
+    soup = BeautifulSoup(html, "html.parser")
+
+    title = ""
+    if soup.title:
+        title = soup.title.get_text(" ", strip=True)
+
+    description = ""
+    meta = soup.find("meta", attrs={"name": "description"})
+    if meta:
+        description = meta.get("content", "") or ""
 
     for tag in soup(
-        [
-            "script",
-            "style",
-            "noscript",
-            "svg"
-        ]
+        ["script", "style", "noscript", "svg", "template"]
     ):
-
         tag.decompose()
 
-    return " ".join(
-        soup.stripped_strings
-    )
+    text = " ".join(soup.stripped_strings)
+
+    links = []
+    for anchor in soup.find_all("a", href=True):
+        href = anchor.get("href", "").strip()
+        if not href:
+            continue
+        absolute = urljoin(url, href)
+        links.append(absolute)
+
+    return {
+        "url": url,
+        "title": title,
+        "description": description,
+        "text": text,
+        "links": links,
+    }
 
 
-# ============================================================
-# PATTERN MATCHING
-# ============================================================
+def host(url):
+    return urlparse(url).netloc.lower().split(":")[0]
 
-def matched_patterns(
-    text,
-    patterns
-):
 
+def same_host(url_a, url_b):
+    a = host(url_a)
+    b = host(url_b)
+    return bool(a and b and (a == b or a.endswith("." + b) or b.endswith("." + a)))
+
+
+def url_is_doc_like(url):
+    path = urlparse(url).path.lower()
+    return any(k in path for k in DOC_KEYWORDS)
+
+
+def score_url(url, keywords):
+    path = urlparse(url).path.lower()
+    return sum(1 for k in keywords if k in path)
+
+
+def unique_urls(urls):
+    result = []
+    seen = set()
+
+    for url in urls:
+        normalized = url.split("#")[0].rstrip("/")
+        if normalized and normalized not in seen:
+            seen.add(normalized)
+            result.append(normalized)
+
+    return result
+
+
+# ------------------------------------------------------------
+# Candidate documentation discovery
+# ------------------------------------------------------------
+
+def candidate_urls(website):
+    base = website.rstrip("/")
+
+    candidates = [
+        base + "/developers",
+        base + "/developer",
+        base + "/docs",
+        base + "/api",
+        base + "/developer/docs",
+        base + "/developers/docs",
+        base + "/docs/api",
+        base + "/api/docs",
+        base + "/docs/auth",
+        base + "/docs/authentication",
+        base + "/docs/oauth",
+        base + "/docs/api-reference",
+        base + "/developer/api",
+        base + "/developers/api",
+        base + "/developers/docs/api",
+    ]
+
+    return unique_urls(candidates)
+
+
+def discover_links(page):
+    links = []
+
+    for link in page.get("links", []):
+        if not same_host(link, page["url"]):
+            continue
+
+        if url_is_doc_like(link):
+            links.append(link)
+
+    return unique_urls(links)
+
+
+def collect_pages(website):
+    pages = []
+    queue = candidate_urls(website) + [website]
+    seen = set()
+
+    # Homepage is intentionally fetched first.
+    ordered = [website] + candidate_urls(website)
+
+    while ordered and len(pages) < MAX_PAGES:
+        url = ordered.pop(0)
+        url = url.split("#")[0].rstrip("/")
+
+        if url in seen:
+            continue
+        seen.add(url)
+
+        response = fetch(url)
+
+        if response["status"] != 200:
+            continue
+
+        page = extract_page(response["html"], response["url"])
+
+        if not page or len(page["text"]) < 100:
+            continue
+
+        pages.append(page)
+
+        # Follow relevant same-site documentation links.
+        links = discover_links(page)
+
+        links.sort(
+            key=lambda x: score_url(
+                x,
+                DOC_KEYWORDS
+            ),
+            reverse=True,
+        )
+
+        for link in links[:MAX_LINKS_FROM_PAGE]:
+            if link not in seen:
+                queue.append(link)
+
+        # Keep the queue focused on the most useful pages.
+        queue = unique_urls(queue)
+        queue.sort(
+            key=lambda x: score_url(
+                x,
+                DOC_KEYWORDS
+            ),
+            reverse=True,
+        )
+
+        ordered.extend(queue[:MAX_LINKS_FROM_PAGE])
+        queue = []
+
+        time.sleep(0.1)
+
+    return pages
+
+
+# ------------------------------------------------------------
+# Evidence helpers
+# ------------------------------------------------------------
+
+def matched_patterns(text, patterns):
     if not text:
         return []
 
-    results = []
+    found = []
 
     for pattern in patterns:
+        if re.search(pattern, text, flags=re.I):
+            found.append(pattern)
 
-        if re.search(
-            pattern,
-            text,
-            flags=re.I
-        ):
+    return found
 
-            results.append(
-                pattern
+
+def page_score(page, keywords):
+    path_score = score_url(page["url"], keywords)
+    text = page["text"].lower()
+
+    keyword_score = sum(
+        1 for k in keywords if k.lower() in text
+    )
+
+    return path_score * 3 + min(keyword_score, 10)
+
+
+def best_matches(pages, rules, url_keywords):
+    results = []
+
+    for page in pages:
+        found = []
+
+        for rule_name, patterns in rules.items():
+            matches = matched_patterns(
+                page["text"],
+                patterns,
             )
+            if matches:
+                found.append(
+                    {
+                        "name": rule_name,
+                        "patterns": matches,
+                    }
+                )
+
+        if found:
+            results.append(
+                {
+                    "page": page,
+                    "matches": found,
+                    "score": page_score(page, url_keywords),
+                }
+            )
+
+    results.sort(
+        key=lambda x: x["score"],
+        reverse=True,
+    )
 
     return results
 
 
-# ============================================================
-# FIELD DETECTION WITH SOURCE
-# ============================================================
-
-def detect_field(
-    pages,
-    rules
-):
-
-    matches = []
-
-    for page in pages:
-
-        found = matched_patterns(
-            page["text"],
-            rules
-        )
-
-        if found:
-
-            matches.append({
-
-                "url":
-                    page["url"],
-
-                "patterns":
-                    found
-            })
-
-    return matches
+def make_evidence(field, value, page, matches):
+    return {
+        "field": field,
+        "value": value,
+        "source": page["url"],
+        "evidence_quality": "official",
+        "signals": matches,
+    }
 
 
-# ============================================================
-# AUTH
-# ============================================================
+# ------------------------------------------------------------
+# Field detection
+# ------------------------------------------------------------
 
 def detect_auth(pages):
-
     detected = []
-
     evidence = []
 
-    for auth_type, rules in AUTH_RULES.items():
+    results = best_matches(
+        pages,
+        AUTH_RULES,
+        AUTH_PAGE_KEYWORDS,
+    )
 
-        matches = detect_field(
-            pages,
-            rules
-        )
+    for result in results[:4]:
+        page = result["page"]
 
-        if matches:
-
-            detected.append(
-                auth_type
-            )
-
-            evidence.append({
-
-                "field":
-                    "auth",
-
-                "value":
-                    auth_type,
-
-                "source":
-                    matches[0]["url"],
-
-                "signals":
-                    matches[0]["patterns"]
-            })
+        for match in result["matches"]:
+            if match["name"] not in detected:
+                detected.append(match["name"])
+                evidence.append(
+                    make_evidence(
+                        "auth",
+                        match["name"],
+                        page,
+                        match["patterns"],
+                    )
+                )
 
     return detected, evidence
 
 
-# ============================================================
-# API
-# ============================================================
-
 def detect_api(pages):
-
     detected = []
-
     evidence = []
+    supporting = []
 
-    total_endpoint_signals = 0
+    results = best_matches(
+        pages,
+        API_RULES,
+        API_PAGE_KEYWORDS,
+    )
 
-    for page in pages:
+    for result in results[:4]:
+        page = result["page"]
 
-        total_endpoint_signals += len(
-            re.findall(
-                r"\b(GET|POST|PUT|PATCH|DELETE)\b",
-                page["text"],
-                flags=re.I
-            )
-        )
+        for match in result["matches"]:
+            if match["name"] not in detected:
+                detected.append(match["name"])
+                evidence.append(
+                    make_evidence(
+                        "api",
+                        match["name"],
+                        page,
+                        match["patterns"],
+                    )
+                )
 
-    for api_type, rules in API_RULES.items():
+    support_results = best_matches(
+        pages,
+        SUPPORTING_API_RULES,
+        API_PAGE_KEYWORDS,
+    )
 
-        matches = detect_field(
-            pages,
-            rules
-        )
+    for result in support_results[:2]:
+        page = result["page"]
 
-        if matches:
-
-            detected.append(
-                api_type
-            )
-
-            evidence.append({
-
-                "field":
-                    "api",
-
-                "value":
-                    api_type,
-
-                "source":
-                    matches[0]["url"],
-
-                "signals":
-                    matches[0]["patterns"]
-            })
+        for match in result["matches"]:
+            if match["name"] not in supporting:
+                supporting.append(match["name"])
+                evidence.append(
+                    make_evidence(
+                        "api_supporting",
+                        match["name"],
+                        page,
+                        match["patterns"],
+                    )
+                )
 
     if not detected:
-
-        return {
-
-            "available":
-                "unknown",
-
-            "types":
-                [],
-
-            "breadth":
-                "unknown"
-        }, evidence
-
-    if (
-        len(detected) >= 3
-        or total_endpoint_signals >= 10
-    ):
-
-        breadth = "broad"
-
-    elif (
-        len(detected) >= 2
-        or total_endpoint_signals >= 3
-    ):
-
-        breadth = "medium"
-
+        available = "unknown"
+        breadth = "unknown"
     else:
+        available = "yes"
 
-        breadth = "narrow"
+        # Conservative: don't call something "broad"
+        # merely because GET/POST words appear repeatedly.
+        if len(detected) >= 2:
+            breadth = "documented"
+        else:
+            breadth = "documented"
 
     return {
-
-        "available":
-            "yes",
-
-        "types":
-            detected,
-
-        "breadth":
-            breadth
-
+        "available": available,
+        "types": detected,
+        "breadth": breadth,
+        "additional_capabilities": supporting,
     }, evidence
 
 
-# ============================================================
-# SELF SERVE
-# ============================================================
-
 def detect_access(pages):
+    self_matches = []
+    gated_matches = []
 
-    self_matches = detect_field(
-        pages,
-        SELF_SERVE_RULES
-    )
+    for page in pages:
+        self_found = matched_patterns(
+            page["text"],
+            SELF_SERVE_RULES,
+        )
+        gated_found = matched_patterns(
+            page["text"],
+            GATED_RULES,
+        )
 
-    gated_matches = detect_field(
-        pages,
-        GATED_RULES
-    )
+        if self_found:
+            self_matches.append(
+                {
+                    "page": page,
+                    "patterns": self_found,
+                }
+            )
 
-    if (
-        self_matches
-        and gated_matches
-    ):
+        if gated_found:
+            gated_matches.append(
+                {
+                    "page": page,
+                    "patterns": gated_found,
+                }
+            )
 
+    if self_matches and gated_matches:
         status = "conditional"
-
     elif gated_matches:
-
         status = "gated"
-
     elif self_matches:
-
         status = "self-serve"
-
     else:
-
         status = "unknown"
 
     evidence = []
 
     for item in self_matches[:3]:
-
-        evidence.append({
-
-            "field":
+        evidence.append(
+            make_evidence(
                 "self_serve",
-
-            "value":
                 "self-serve",
-
-            "source":
-                item["url"],
-
-            "signals":
-                item["patterns"]
-        })
+                item["page"],
+                item["patterns"],
+            )
+        )
 
     for item in gated_matches[:3]:
-
-        evidence.append({
-
-            "field":
+        evidence.append(
+            make_evidence(
                 "self_serve",
-
-            "value":
                 "gated",
+                item["page"],
+                item["patterns"],
+            )
+        )
 
-            "source":
-                item["url"],
-
-            "signals":
-                item["patterns"]
-        })
+    signals = [
+        pattern
+        for item in self_matches + gated_matches
+        for pattern in item["patterns"]
+    ][:10]
 
     return {
-
-        "status":
-            status,
-
-        "signals":
-            [
-                x
-                for item in (
-                    self_matches
-                    + gated_matches
-                )
-                for x in item["patterns"]
-            ][:10]
-
+        "status": status,
+        "signals": signals,
     }, evidence
 
 
-# ============================================================
-# MCP
-# ============================================================
-
 def detect_mcp(pages):
-
     evidence = []
 
     for page in pages:
-
         matches = matched_patterns(
             page["text"],
-            MCP_RULES
+            MCP_RULES,
         )
 
         if matches:
-
-            evidence.append({
-
-                "field":
+            evidence.append(
+                make_evidence(
                     "mcp",
-
-                "value":
-                    "possible",
-
-                "source":
-                    page["url"],
-
-                "signals":
-                    matches
-            })
+                    "existing",
+                    page,
+                    matches,
+                )
+            )
 
     if evidence:
-
-        return "possible", evidence
+        return "existing", evidence
 
     return "not_found", []
 
 
-# ============================================================
-# CANDIDATE DOC URLS
-# ============================================================
+# ------------------------------------------------------------
+# Description
+# ------------------------------------------------------------
 
-def candidate_urls(website):
+def description_for(app, category, pages):
+    # Prefer the supplied site's metadata/title over a generic
+    # category sentence.
+    for page in pages:
+        description = page.get("description", "").strip()
 
-    base = website.rstrip("/")
+        if 30 <= len(description) <= 300:
+            return description
 
-    return [
+    for page in pages:
+        title = page.get("title", "").strip()
 
-        base + "/developers",
-
-        base + "/developer",
-
-        base + "/docs",
-
-        base + "/api",
-
-        base + "/developer/docs",
-
-        base + "/developers/docs",
-
-        base + "/docs/api",
-
-        base + "/api/docs"
-    ]
-
-
-# ============================================================
-# DESCRIPTION
-# ============================================================
-
-def description_for(
-    app,
-    category
-):
-
-    if app in DESCRIPTIONS:
-
-        return DESCRIPTIONS[app]
+        if title and len(title) <= 150:
+            return f"{app}: {title}"
 
     category_descriptions = {
-
         "CRM and Sales":
             "CRM and sales platform for managing customer relationships and sales workflows.",
-
         "Support and Helpdesk":
             "Customer support platform for managing conversations, tickets and service workflows.",
-
         "Communications and Messaging":
             "Communication platform for messaging, calls, notifications or collaboration.",
-
         "Marketing, Ads, Email and Social":
             "Marketing, advertising, email or social platform for audience engagement.",
-
         "Ecommerce":
             "Commerce platform for products, orders, customers or online sales.",
-
         "Data, SEO and Scraping":
             "Data, SEO, web-scraping or enrichment platform.",
-
         "Developer, Infra and Data platforms":
             "Developer, infrastructure or data platform with programmable services.",
-
         "Productivity and Project Management":
             "Productivity and project-management platform for organizing work and collaboration.",
-
         "Finance and Fintech":
             "Financial platform for payments, financial data or business finance workflows.",
-
         "AI, Research and Media-native":
-            "AI, research, meeting, media or content platform with programmable capabilities."
+            "AI, research, meeting, media or content platform with programmable capabilities.",
     }
 
     return category_descriptions.get(
         category,
-        f"{app} software platform."
+        f"{app} software platform.",
     )
 
 
-# ============================================================
-# RESEARCH ONE APP
-# ============================================================
+# ------------------------------------------------------------
+# Confidence
+# ------------------------------------------------------------
 
-def research_app(record):
+def confidence_for(auth, api, access, mcp, evidence):
+    score = 0.0
 
-    app = record["app"]
-
-    website = record["website"]
-
-    print(
-        f"    Researching official sources..."
-    )
-
-    pages = []
-
-    # --------------------------------------------------------
-    # Homepage
-    # --------------------------------------------------------
-
-    home = fetch(
-        website
-    )
-
-    if home["status"]:
-
-        home_text = extract_text(
-            home["html"]
-        )
-
-        if home_text:
-
-            pages.append({
-
-                "url":
-                    home["url"],
-
-                "text":
-                    home_text,
-
-                "status":
-                    home["status"]
-            })
-
-    # --------------------------------------------------------
-    # Candidate developer/docs pages
-    # --------------------------------------------------------
-
-    seen_urls = {
-        p["url"]
-        for p in pages
+    fields = {
+        "auth": auth,
+        "api": api.get("available") == "yes",
+        "access": access != "unknown",
+        "mcp": mcp != "not_found",
     }
 
-    successful_docs = 0
+    if fields["auth"]:
+        score += 0.25
 
-    for url in candidate_urls(
-        website
-    ):
+    if fields["api"]:
+        score += 0.25
 
-        if url in seen_urls:
-            continue
+    if fields["access"]:
+        score += 0.20
 
-        response = fetch(
-            url
-        )
+    if fields["mcp"]:
+        score += 0.15
 
-        final_url = response["url"]
-
-        seen_urls.add(
-            final_url
-        )
-
-        if response["status"] != 200:
-            continue
-
-        text = extract_text(
-            response["html"]
-        )
-
-        if len(text) < 150:
-            continue
-
-        pages.append({
-
-            "url":
-                final_url,
-
-            "text":
-                text,
-
-            "status":
-                response["status"]
-        })
-
-        successful_docs += 1
-
-        # We don't need to crawl dozens of pages.
-        if successful_docs >= 4:
-            break
-
-        time.sleep(
-            0.15
-        )
-
-    # --------------------------------------------------------
-    # Detection
-    # --------------------------------------------------------
-
-    auth, auth_evidence = detect_auth(
-        pages
+    official_evidence_count = sum(
+        1
+        for item in evidence
+        if item.get("evidence_quality") == "official"
     )
 
-    api, api_evidence = detect_api(
-        pages
-    )
+    score += min(official_evidence_count * 0.05, 0.15)
 
-    access, access_evidence = detect_access(
-        pages
-    )
+    return round(min(score, 1.0), 2)
 
-    mcp, mcp_evidence = detect_mcp(
-        pages
-    )
 
-    # --------------------------------------------------------
-    # Confidence
-    # --------------------------------------------------------
+# ------------------------------------------------------------
+# Research one app
+# ------------------------------------------------------------
 
-    confidence = 0.25
+def research_app(record):
+    app = record["app"]
+    website = record["website"]
 
-    if home["status"] == 200:
+    print("    Discovering official documentation...")
 
-        confidence += 0.20
+    pages = collect_pages(website)
 
-    if successful_docs >= 1:
-
-        confidence += 0.15
-
-    if successful_docs >= 2:
-
-        confidence += 0.10
-
-    if auth:
-
-        confidence += 0.05
-
-    if api["available"] == "yes":
-
-        confidence += 0.05
-
-    if access["status"] != "unknown":
-
-        confidence += 0.05
-
-    confidence = min(
-        confidence,
-        0.85
-    )
-
-    # --------------------------------------------------------
-    # Human review
-    #
-    # Keyword research is NOT treated as final proof.
-    # --------------------------------------------------------
-
-    needs_review = (
-
-        confidence < 0.75
-
-        or not auth
-
-        or access["status"] == "unknown"
-
-        or api["available"] == "unknown"
-
-        or mcp == "possible"
-    )
-
-    # --------------------------------------------------------
-    # Evidence
-    # --------------------------------------------------------
+    auth, auth_evidence = detect_auth(pages)
+    api, api_evidence = detect_api(pages)
+    access, access_evidence = detect_access(pages)
+    mcp, mcp_evidence = detect_mcp(pages)
 
     evidence = (
         auth_evidence
@@ -855,291 +765,161 @@ def research_app(record):
         + mcp_evidence
     )
 
-    # Deduplicate evidence
-
+    # Deduplicate evidence.
     unique_evidence = []
-
     seen = set()
 
     for item in evidence:
-
         key = (
             item["field"],
             item["value"],
-            item["source"]
+            item["source"],
         )
 
         if key not in seen:
-
             seen.add(key)
+            unique_evidence.append(item)
 
-            unique_evidence.append(
-                item
-            )
+    confidence = confidence_for(
+        auth,
+        api,
+        access["status"],
+        mcp,
+        unique_evidence,
+    )
+
+    needs_review = (
+        confidence < 0.75
+        or not auth
+        or access["status"] == "unknown"
+        or api["available"] == "unknown"
+        or not unique_evidence
+    )
 
     return {
-
-        "id":
-            record["id"],
-
-        "app":
+        "id": record["id"],
+        "app": app,
+        "category": record["category"],
+        "website": website,
+        "description": description_for(
             app,
-
-        "category":
             record["category"],
-
-        "website":
-            website,
-
-        "description":
-            description_for(
-                app,
-                record["category"]
-            ),
-
-        "auth":
-            auth,
-
-        "self_serve":
-            access["status"],
-
-        "self_serve_signals":
-            access["signals"],
-
-        "api":
-            api,
-
-        "mcp":
-            mcp,
-
-        "evidence":
-            unique_evidence,
-
-        "confidence":
-            round(
-                confidence,
-                2
-            ),
-
-        "needs_human_review":
-            needs_review,
-
-        # Keep Composio untouched.
-        "composio":
-            record.get(
-                "composio",
-                {}
-            )
+            pages,
+        ),
+        "auth": auth,
+        "self_serve": access["status"],
+        "self_serve_signals": access["signals"],
+        "api": api,
+        "mcp": mcp,
+        "evidence": unique_evidence,
+        "confidence": confidence,
+        "needs_human_review": needs_review,
+        "pages_researched": len(pages),
     }
 
 
-# ============================================================
-# MAIN
-# ============================================================
+# ------------------------------------------------------------
+# Main
+# ------------------------------------------------------------
 
 def main():
-
     print("=" * 70)
     print("STARTING EVIDENCE RESEARCH")
     print("=" * 70)
 
-    with open(
-        INPUT_FILE,
-        "r",
-        encoding="utf-8"
-    ) as f:
+    with open(INPUT_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
 
-        records = json.load(f)
-
-    if isinstance(
-        records,
-        dict
-    ):
-
-        records = records.get(
-            "results",
-            []
-        )
+    if isinstance(data, dict):
+        records = data.get("results", [])
+    else:
+        records = data
 
     if len(records) != 100:
-
         raise ValueError(
-            f"Expected 100 apps, "
-            f"found {len(records)}"
+            f"Expected 100 apps, found {len(records)}"
         )
 
     results = []
-
     errors = 0
 
-    for index, record in enumerate(
-        records,
-        start=1
-    ):
-
+    for index, record in enumerate(records, start=1):
         print()
-        print(
-            f"[{index}/100] "
-            f"{record['app']}"
-        )
+        print(f"[{index}/100] {record['app']}")
 
         try:
+            result = research_app(record)
+            results.append(result)
 
-            result = research_app(
-                record
-            )
-
-            results.append(
-                result
-            )
-
+            print(f"    Auth: {result['auth'] or 'unknown'}")
             print(
-                f"    Auth: "
-                f"{result['auth'] or 'unknown'}"
-            )
-
-            print(
-                f"    API: "
-                f"{result['api']['available']} "
+                f"    API: {result['api']['available']} "
                 f"{result['api']['types']}"
             )
-
+            print(f"    Access: {result['self_serve']}")
+            print(f"    MCP: {result['mcp']}")
+            print(f"    Confidence: {result['confidence']}")
             print(
-                f"    Access: "
-                f"{result['self_serve']}"
+                f"    Review: "
+                f"{result['needs_human_review']}"
             )
 
-            print(
-                f"    MCP: "
-                f"{result['mcp']}"
-            )
-
-            print(
-                f"    Confidence: "
-                f"{result['confidence']}"
-            )
-
-        except Exception as e:
-
+        except Exception as exc:
             errors += 1
 
-            print(
-                f"    ERROR: {e}"
-            )
+            print(f"    ERROR: {exc}")
 
             results.append({
-
-                "id":
-                    record.get("id"),
-
-                "app":
-                    record.get("app"),
-
-                "category":
-                    record.get("category"),
-
-                "website":
-                    record.get("website"),
-
-                "description":
-                    description_for(
-                        record.get("app", ""),
-                        record.get("category", "")
-                    ),
-
-                "auth":
-                    [],
-
-                "self_serve":
-                    "unknown",
-
-                "self_serve_signals":
-                    [],
-
+                "id": record.get("id"),
+                "app": record.get("app"),
+                "category": record.get("category"),
+                "website": record.get("website"),
+                "description": (
+                    f"{record.get('app', 'Unknown')} software platform."
+                ),
+                "auth": [],
+                "self_serve": "unknown",
+                "self_serve_signals": [],
                 "api": {
-
-                    "available":
-                        "unknown",
-
-                    "types":
-                        [],
-
-                    "breadth":
-                        "unknown"
+                    "available": "unknown",
+                    "types": [],
+                    "breadth": "unknown",
+                    "additional_capabilities": [],
                 },
-
-                "mcp":
-                    "unknown",
-
-                "evidence":
-                    [],
-
-                "confidence":
-                    0.0,
-
-                "needs_human_review":
-                    True,
-
-                "error":
-                    str(e),
-
-                "composio":
-                    record.get(
-                        "composio",
-                        {}
-                    )
+                "mcp": "unknown",
+                "evidence": [],
+                "confidence": 0.0,
+                "needs_human_review": True,
+                "error": str(exc),
+                "pages_researched": 0,
             })
 
-        time.sleep(
-            REQUEST_DELAY
-        )
-
-    # ========================================================
-    # SAVE
-    # ========================================================
+        time.sleep(REQUEST_DELAY)
 
     OUTPUT_FILE.parent.mkdir(
         parents=True,
-        exist_ok=True
+        exist_ok=True,
     )
 
     with open(
         OUTPUT_FILE,
         "w",
-        encoding="utf-8"
+        encoding="utf-8",
     ) as f:
-
         json.dump(
             results,
             f,
             indent=2,
-            ensure_ascii=False
+            ensure_ascii=False,
         )
-
-    # ========================================================
-    # SUMMARY
-    # ========================================================
 
     print()
     print("=" * 70)
     print("EVIDENCE RESEARCH COMPLETE")
     print("=" * 70)
-
-    print(
-        f"Records researched: "
-        f"{len(results)}"
-    )
-
-    print(
-        f"Errors: "
-        f"{errors}"
-    )
-
-    print(
-        f"Saved: "
-        f"{OUTPUT_FILE}"
-    )
-
+    print(f"Records researched: {len(results)}")
+    print(f"Errors: {errors}")
+    print(f"Saved: {OUTPUT_FILE}")
     print("=" * 70)
 
 

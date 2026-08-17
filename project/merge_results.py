@@ -7,9 +7,12 @@ from collections import Counter, defaultdict
 # FILES
 # ============================================================
 
-RESEARCH_FILE = Path("data/research_results.json")
-COMPOSIO_FILE = Path("data/composio_results.json")
-OUTPUT_FILE = Path("data/final_results.json")
+PROJECT_DIR = Path(__file__).resolve().parent
+DATA_DIR = PROJECT_DIR / "data"
+
+COMPOSIO_FILE = DATA_DIR / "composio_results.json"
+RESEARCH_FILE = DATA_DIR / "research_results.json"
+OUTPUT_FILE = DATA_DIR / "final_results.json"
 
 
 # ============================================================
@@ -17,6 +20,11 @@ OUTPUT_FILE = Path("data/final_results.json")
 # ============================================================
 
 def load_json(path):
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Required file not found: {path}"
+        )
+
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -44,6 +52,14 @@ def normalize_name(name):
     )
 
 
+def safe_list(value):
+    return value if isinstance(value, list) else []
+
+
+def safe_dict(value):
+    return value if isinstance(value, dict) else {}
+
+
 # ============================================================
 # LOAD DATA
 # ============================================================
@@ -57,7 +73,6 @@ composio = load_json(COMPOSIO_FILE)
 
 print(f"Research records:  {len(research)}")
 print(f"Composio records:  {len(composio)}")
-
 
 if len(research) != 100:
     raise ValueError(
@@ -78,7 +93,6 @@ composio_by_id = {}
 composio_by_name = {}
 
 for item in composio:
-
     app_id = item.get("id")
     app_name = item.get("app")
 
@@ -96,7 +110,6 @@ for item in composio:
 # ============================================================
 
 final_results = []
-
 merge_errors = []
 
 for research_item in research:
@@ -119,9 +132,9 @@ for research_item in research:
         ]
 
     # --------------------------------------------------------
-    # Start from RESEARCH record
+    # Start from RESEARCH record.
     #
-    # This preserves:
+    # This preserves the actual evidence research:
     # description
     # auth
     # self-serve
@@ -140,69 +153,60 @@ for research_item in research:
 
     if composio_item:
 
-        c = composio_item.get("composio", {})
-
-        if not isinstance(c, dict):
-            c = {}
+        c = safe_dict(
+            composio_item.get("composio", {})
+        )
 
         coverage = c.get(
             "coverage",
             "not_found"
         )
 
-        matched_toolkits = c.get(
-            "matched_toolkits",
-            []
+        matched_toolkits = safe_list(
+            c.get("matched_toolkits", [])
         )
 
-        related_toolkits = c.get(
-            "related_toolkits",
-            []
+        related_toolkits = safe_list(
+            c.get("related_toolkits", [])
         )
 
-        tools = c.get(
-            "tools",
-            []
+        tools = safe_list(
+            c.get("tools", [])
         )
 
-        # ----------------------------------------------------
-        # IMPORTANT:
-        # Only tools from matched toolkit count.
-        #
-        # If coverage is semantic-only, tools MUST be zero.
-        # ----------------------------------------------------
-
+        # Only tools belonging to a confirmed toolkit count.
+        # Semantic matches are NOT counted as actual tools.
         if coverage != "confirmed":
             tools = []
 
-        # Deduplicate
-        tools = list(
-            dict.fromkeys(tools)
-        )
+        # Deduplicate tool names safely.
+        cleaned_tools = []
+        seen_tools = set()
+
+        for tool in tools:
+            if not isinstance(tool, str):
+                continue
+
+            tool = tool.strip()
+
+            if not tool or tool in seen_tools:
+                continue
+
+            seen_tools.add(tool)
+            cleaned_tools.append(tool)
 
         merged["composio"] = {
-
             "coverage": coverage,
-
-            "matched_toolkits":
-                matched_toolkits,
-
-            "related_toolkits":
-                related_toolkits,
-
-            "tools":
-                tools,
-
-            "tool_count":
-                len(tools),
-
-            "connection_required":
-                bool(
-                    c.get(
-                        "connection_required",
-                        False
-                    )
+            "matched_toolkits": matched_toolkits,
+            "related_toolkits": related_toolkits,
+            "tools": cleaned_tools,
+            "tool_count": len(cleaned_tools),
+            "connection_required": bool(
+                c.get(
+                    "connection_required",
+                    False
                 )
+            ),
         }
 
     else:
@@ -223,21 +227,24 @@ for research_item in research:
         }
 
     # --------------------------------------------------------
-    # NORMALIZED BUILDABILITY
+    # NORMALIZED RESEARCH FIELDS
     # --------------------------------------------------------
 
     composio_info = merged["composio"]
-
     coverage = composio_info["coverage"]
 
-    api = merged.get("api", {})
-    api_available = (
-        api.get("available")
-        if isinstance(api, dict)
-        else "unknown"
+    api = safe_dict(
+        merged.get("api", {})
     )
 
-    auth = merged.get("auth", [])
+    api_available = api.get(
+        "available",
+        "unknown"
+    )
+
+    auth = safe_list(
+        merged.get("auth", [])
+    )
 
     self_serve = merged.get(
         "self_serve",
@@ -249,54 +256,96 @@ for research_item in research:
         "unknown"
     )
 
+    evidence = safe_list(
+        merged.get("evidence", [])
+    )
+
     # --------------------------------------------------------
-    # Buildability
+    # BUILDABILITY
     #
-    # Conservative:
-    # do NOT claim READY merely because Composio has coverage.
+    # Conservative interpretation of the assignment:
+    # - BUILD_NOW only when API + auth + self-serve are known.
+    # - BUILD_WITH_CONSTRAINTS when API/auth are known but access
+    #   is conditional or gated.
+    # - RESEARCH_REQUIRED when critical fields remain unknown.
+    # - Composio coverage is reported separately and never used
+    #   as proof that the underlying app is buildable.
     # --------------------------------------------------------
+
+    has_auth = bool(auth)
 
     if (
-        coverage == "confirmed"
-        and
-        composio_info["tool_count"] > 0
+        api_available == "yes"
+        and has_auth
+        and self_serve == "self-serve"
     ):
-
-        buildability = "Composio-covered"
-
+        buildability = "BUILD_NOW"
         blocker = (
-            "No direct Composio coverage blocker; "
-            "credential connection, permissions and "
-            "production validation remain."
+            "No major access blocker detected. "
+            "Requires toolkit implementation plus "
+            "credential, permissions and action validation."
         )
 
-    elif coverage == "semantic_match_only":
-
-        buildability = "Needs toolkit work"
-
+    elif (
+        api_available == "yes"
+        and has_auth
+        and self_serve in ("conditional", "gated")
+    ):
+        buildability = "BUILD_WITH_CONSTRAINTS"
         blocker = (
-            "No direct Composio toolkit confirmed; "
-            "requires integration/API/MCP validation "
-            "or new toolkit work."
+            "API and authentication are documented, but "
+            "credential/account access has a constraint."
+        )
+
+    elif (
+        api_available == "yes"
+        and not has_auth
+    ):
+        buildability = "RESEARCH_REQUIRED"
+        blocker = (
+            "API was detected, but the authentication method "
+            "could not be established confidently."
+        )
+
+    elif (
+        api_available == "yes"
+        and self_serve == "unknown"
+    ):
+        buildability = "RESEARCH_REQUIRED"
+        blocker = (
+            "API appears available, but credential/access "
+            "requirements could not be established confidently."
+        )
+
+    elif api_available == "unknown":
+        buildability = "RESEARCH_REQUIRED"
+        blocker = (
+            "API availability could not be established "
+            "confidently from the researched documentation."
         )
 
     else:
-
-        buildability = "Needs investigation"
-
+        buildability = "RESEARCH_REQUIRED"
         blocker = (
-            "No confirmed Composio toolkit coverage."
+            "The available research does not establish a clear "
+            "public API and credential path."
         )
 
     merged["buildability"] = buildability
 
-    # Only replace blocker if the research didn't already
-    # provide a stronger blocker.
-    if not merged.get("blocker"):
+    existing_blocker = merged.get("blocker")
+    if (
+        not existing_blocker
+        or str(existing_blocker).strip().lower()
+        in {"unknown", "none", "n/a"}
+    ):
         merged["blocker"] = blocker
 
     # --------------------------------------------------------
-    # DATA QUALITY FLAG
+    # DATA QUALITY
+    #
+    # Unknown means insufficient evidence.
+    # Not-found is a legitimate MCP/API research result.
     # --------------------------------------------------------
 
     missing = []
@@ -304,7 +353,7 @@ for research_item in research:
     if not auth:
         missing.append("auth")
 
-    if self_serve == "unknown":
+    if self_serve in (None, "", "unknown"):
         missing.append("self_serve")
 
     if api_available in (None, "", "unknown"):
@@ -313,17 +362,41 @@ for research_item in research:
     if mcp in (None, "", "unknown"):
         missing.append("mcp")
 
-    if not merged.get("evidence"):
+    if not evidence:
         missing.append("evidence")
 
     merged["data_quality"] = {
-
-        "missing_fields":
-            missing,
-
-        "complete":
-            len(missing) == 0
+        "missing_fields": missing,
+        "complete": len(missing) == 0,
+        "verification_status": (
+            "needs_human_review"
+            if missing
+            else "agent_complete"
+        )
     }
+
+    # --------------------------------------------------------
+    # HUMAN REVIEW
+    # --------------------------------------------------------
+
+    needs_review = bool(
+        merged.get(
+            "needs_human_review",
+            False
+        )
+    )
+
+    if missing:
+        needs_review = True
+
+    if buildability == "RESEARCH_REQUIRED":
+        needs_review = True
+
+    # Existing MCP claims are important enough to verify manually.
+    if mcp == "existing":
+        needs_review = True
+
+    merged["needs_human_review"] = needs_review
 
     final_results.append(merged)
 
@@ -350,6 +423,7 @@ auth_counter = Counter()
 self_serve_counter = Counter()
 api_counter = Counter()
 mcp_counter = Counter()
+buildability_counter = Counter()
 category_counter = Counter()
 
 category_stats = defaultdict(
@@ -357,7 +431,17 @@ category_stats = defaultdict(
         "total": 0,
         "confirmed": 0,
         "semantic_only": 0,
-        "tools": 0
+        "not_found": 0,
+        "tools": 0,
+        "api_available": 0,
+        "auth_documented": 0,
+        "self_serve": 0,
+        "gated": 0,
+        "mcp_existing": 0,
+        "build_now": 0,
+        "build_with_constraints": 0,
+        "research_required": 0,
+        "human_review": 0,
     }
 )
 
@@ -369,7 +453,6 @@ for item in final_results:
     # --------------------------------------------------------
 
     coverage = item["composio"]["coverage"]
-
     coverage_counter[coverage] += 1
 
     # --------------------------------------------------------
@@ -382,41 +465,37 @@ for item in final_results:
     )
 
     category_counter[category] += 1
-
     category_stats[category]["total"] += 1
 
     if coverage == "confirmed":
-
-        category_stats[category][
-            "confirmed"
-        ] += 1
+        category_stats[category]["confirmed"] += 1
 
     elif coverage == "semantic_match_only":
+        category_stats[category]["semantic_only"] += 1
 
-        category_stats[category][
-            "semantic_only"
-        ] += 1
+    elif coverage == "not_found":
+        category_stats[category]["not_found"] += 1
 
-    category_stats[category][
-        "tools"
-    ] += item["composio"]["tool_count"]
+    category_stats[category]["tools"] += (
+        item["composio"]["tool_count"]
+    )
 
     # --------------------------------------------------------
     # Auth
     # --------------------------------------------------------
 
-    auth = item.get("auth", [])
+    auth = safe_list(
+        item.get("auth", [])
+    )
 
     if not auth:
         auth_counter["unknown"] += 1
 
     else:
-
         for method in auth:
+            auth_counter[str(method)] += 1
 
-            auth_counter[
-                str(method)
-            ] += 1
+        category_stats[category]["auth_documented"] += 1
 
     # --------------------------------------------------------
     # Self serve
@@ -431,17 +510,19 @@ for item in final_results:
         str(self_serve)
     ] += 1
 
+    if self_serve == "self-serve":
+        category_stats[category]["self_serve"] += 1
+
+    elif self_serve == "gated":
+        category_stats[category]["gated"] += 1
+
     # --------------------------------------------------------
     # API
     # --------------------------------------------------------
 
-    api = item.get(
-        "api",
-        {}
+    api = safe_dict(
+        item.get("api", {})
     )
-
-    if not isinstance(api, dict):
-        api = {}
 
     available = api.get(
         "available",
@@ -451,6 +532,9 @@ for item in final_results:
     api_counter[
         str(available)
     ] += 1
+
+    if available == "yes":
+        category_stats[category]["api_available"] += 1
 
     # --------------------------------------------------------
     # MCP
@@ -465,13 +549,42 @@ for item in final_results:
         str(mcp)
     ] += 1
 
+    if mcp == "existing":
+        category_stats[category]["mcp_existing"] += 1
+
+    # --------------------------------------------------------
+    # Buildability
+    # --------------------------------------------------------
+
+    buildability = item.get(
+        "buildability",
+        "UNCLEAR"
+    )
+
+    buildability_counter[
+        buildability
+    ] += 1
+
+    if buildability == "BUILD_NOW":
+        category_stats[category]["build_now"] += 1
+
+    elif buildability == "BUILD_WITH_CONSTRAINTS":
+        category_stats[category]["build_with_constraints"] += 1
+
+    elif buildability == "RESEARCH_REQUIRED":
+        category_stats[category]["research_required"] += 1
+
+    if item.get("needs_human_review", False):
+        category_stats[category]["human_review"] += 1
+
 
 # ============================================================
 # TOOL STATISTICS
 # ============================================================
 
 confirmed_apps = [
-    x for x in final_results
+    x
+    for x in final_results
     if x["composio"]["coverage"] == "confirmed"
 ]
 
@@ -489,8 +602,7 @@ average_tools = (
 
 top_apps = sorted(
     final_results,
-    key=lambda x:
-        x["composio"]["tool_count"],
+    key=lambda x: x["composio"]["tool_count"],
     reverse=True
 )[:10]
 
@@ -511,13 +623,121 @@ human_review_records = sum(
     if x.get("needs_human_review", False)
 )
 
+verified_records = len(final_results) - human_review_records
+
+critical_fields_complete = sum(
+    1
+    for x in final_results
+    if (
+        safe_list(x.get("auth"))
+        and safe_dict(x.get("api", {})).get("available")
+            not in (None, "", "unknown")
+        and x.get("self_serve", "unknown")
+            not in (None, "", "unknown")
+    )
+)
+
+
+# ============================================================
+# OPPORTUNITY / PRIORITIZATION
+# ============================================================
+
+def opportunity_score(item):
+    """
+    Transparent prioritization heuristic.
+
+    Higher score means:
+      - public API detected
+      - authentication documented
+      - self-serve access
+      - no confirmed Composio toolkit
+
+    Human-review records receive a penalty.
+    This is a prioritization heuristic, not business value.
+    """
+
+    score = 0
+    reasons = []
+
+    api = safe_dict(item.get("api", {}))
+    auth = safe_list(item.get("auth", []))
+    self_serve = item.get("self_serve", "unknown")
+    coverage = item["composio"]["coverage"]
+    buildability = item.get("buildability", "RESEARCH_REQUIRED")
+    review = item.get("needs_human_review", False)
+
+    if api.get("available") == "yes":
+        score += 3
+        reasons.append("public API detected")
+    else:
+        reasons.append("API not confirmed")
+
+    if auth:
+        score += 2
+        reasons.append("authentication documented")
+    else:
+        reasons.append("authentication unknown")
+
+    if self_serve == "self-serve":
+        score += 3
+        reasons.append("self-serve access")
+    elif self_serve == "conditional":
+        score += 1
+        reasons.append("conditional access")
+    elif self_serve == "gated":
+        reasons.append("gated access")
+    else:
+        reasons.append("access unknown")
+
+    if coverage != "confirmed":
+        score += 2
+        reasons.append("no confirmed Composio toolkit")
+
+    if buildability == "BUILD_NOW":
+        score += 1
+        reasons.append("build-now classification")
+
+    if review:
+        score -= 2
+        reasons.append("human verification required")
+
+    score = max(0, min(score, 10))
+
+    return score, reasons
+
+
+opportunities = []
+
+for item in final_results:
+
+    score, reasons = opportunity_score(item)
+
+    opportunities.append({
+        "app": item.get("app"),
+        "category": item.get("category"),
+        "score": score,
+        "reasons": reasons,
+        "buildability": item.get(
+            "buildability",
+            "UNCLEAR"
+        ),
+        "composio_coverage": item[
+            "composio"
+        ]["coverage"],
+    })
+
+
+opportunities.sort(
+    key=lambda x: x["score"],
+    reverse=True
+)
+
 
 # ============================================================
 # FINAL OBJECT
 # ============================================================
 
 output = {
-
     "metadata": {
 
         "total_apps":
@@ -557,8 +777,37 @@ output = {
         "records_needing_human_review":
             human_review_records,
 
+        "records_without_human_review":
+            verified_records,
+
+        "critical_fields_complete":
+            critical_fields_complete,
+
+        "critical_fields_complete_percentage":
+            round(
+                critical_fields_complete / len(final_results) * 100,
+                1
+            ) if final_results else 0,
+
         "merge_errors":
-            len(merge_errors)
+            len(merge_errors),
+
+        "methodology": (
+            "The 100 supplied URLs are treated as research "
+            "starting points. App research and Composio toolkit "
+            "coverage are kept as separate dimensions. "
+            "Buildability is determined conservatively from API "
+            "availability, authentication and access requirements. "
+            "Composio coverage is reported separately and is not "
+            "treated as proof that the underlying app is buildable."
+        ),
+
+        "accuracy_note": (
+            "Dataset statistics describe agent research output. "
+            "They are not claims of 100-app factual accuracy. "
+            "Accuracy should be reported from the separately "
+            "human-verified sample."
+        ),
     },
 
     "results":
@@ -581,6 +830,9 @@ output = {
         "mcp":
             dict(mcp_counter),
 
+        "buildability":
+            dict(buildability_counter),
+
         "categories":
             dict(category_counter),
 
@@ -601,7 +853,10 @@ output = {
             }
 
             for x in top_apps
-        ]
+        ],
+
+        "top_opportunities":
+            opportunities[:15],
     },
 
     "merge_errors":
@@ -682,27 +937,39 @@ print(
 )
 
 print(
-    f"Merge errors:               "
-    f"{len(merge_errors)}"
+    f"Critical fields complete:   "
+    f"{critical_fields_complete}/100"
 )
+
+print()
+print("Buildability:")
+
+for key, value in buildability_counter.items():
+    print(f"  {key}: {value}")
 
 print()
 print("Coverage:")
 
 for key, value in coverage_counter.items():
-
-    print(
-        f"  {key}: {value}"
-    )
+    print(f"  {key}: {value}")
 
 print()
 print("Top apps by actual Composio tools:")
 
 for item in top_apps:
-
     print(
         f"  {item['app']}: "
         f"{item['composio']['tool_count']}"
+    )
+
+print()
+print("Top toolkit opportunities:")
+
+for item in opportunities[:10]:
+    print(
+        f"  {item['app']}: "
+        f"{item['score']}/10 - "
+        f"{', '.join(item['reasons'])}"
     )
 
 print()
