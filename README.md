@@ -79,7 +79,7 @@ The final `index.html` is self-contained and requires no backend.
 
 **Live Case Study:** https://reenmayee.github.io/ai-research/
 
-It can be deployed using GitHub Pages, Netlify, or Vercel.
+It can be deployed using GitHub Pages.
 
 ## Principle
 
