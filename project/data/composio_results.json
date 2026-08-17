@@ -1,0 +1,2089 @@
+[
+  {
+    "id": 1,
+    "app": "Salesforce",
+    "category": "CRM and Sales",
+    "website": "https://salesforce.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "salesforce"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "SALESFORCE_RUN_SOQL_QUERY",
+        "SALESFORCE_GET_ALL_FIELDS_FOR_OBJECT",
+        "SALESFORCE_GET_OPPORTUNITY",
+        "SALESFORCE_LIST_OPPORTUNITIES",
+        "SALESFORCE_GET_RECORD_COUNTS"
+      ],
+      "tool_count": 5,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 2,
+    "app": "HubSpot",
+    "category": "CRM and Sales",
+    "website": "https://hubspot.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "hubspot"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "HUBSPOT_GET_ACCOUNT_INFO",
+        "HUBSPOT_LIST_CONTACTS",
+        "HUBSPOT_SEARCH_CRM_OBJECTS_BY_CRITERIA",
+        "HUBSPOT_LIST_GRANTED_SCOPES",
+        "HUBSPOT_LIST_CONTACT_PROPERTIES",
+        "HUBSPOT_SEARCH_CONTACTS_BY_CRITERIA",
+        "HUBSPOT_LIST_COMPANIES",
+        "HUBSPOT_SEARCH_COMPANIES"
+      ],
+      "tool_count": 8,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 3,
+    "app": "Pipedrive",
+    "category": "CRM and Sales",
+    "website": "https://pipedrive.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "pipedrive"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "PIPEDRIVE_ADD_A_PERSON",
+        "PIPEDRIVE_UPDATE_A_PERSON",
+        "PIPEDRIVE_ADD_AN_ORGANIZATION",
+        "PIPEDRIVE_UPDATE_AN_ORGANIZATION",
+        "PIPEDRIVE_GET_DETAILS_OF_AN_ORGANIZATION",
+        "PIPEDRIVE_GET_ORGANIZATION",
+        "PIPEDRIVE_ADD_A_DEAL",
+        "PIPEDRIVE_UPDATE_A_DEAL",
+        "PIPEDRIVE_GET_DETAILS_OF_A_DEAL",
+        "PIPEDRIVE_ADD_AN_ACTIVITY",
+        "PIPEDRIVE_UPDATE_AN_ACTIVITY",
+        "PIPEDRIVE_GET_DETAILS_OF_AN_ACTIVITY",
+        "PIPEDRIVE_GET_CURRENT_USER_DATA",
+        "PIPEDRIVE_SEARCH_PERSONS",
+        "PIPEDRIVE_GET_ALL_DEALS",
+        "PIPEDRIVE_GET_ALL_PERSONS",
+        "PIPEDRIVE_GET_ALL_ORGANIZATIONS",
+        "PIPEDRIVE_GET_ALL_PIPELINES",
+        "PIPEDRIVE_SEARCH_DEALS",
+        "PIPEDRIVE_SEARCH_ORGANIZATIONS",
+        "PIPEDRIVE_REQUEST_AUTHORIZATION",
+        "PIPEDRIVE_GET_ALL_ACTIVITIES_BETA",
+        "PIPEDRIVE_GET_PERSON",
+        "PIPEDRIVE_REFRESH_TOKENS"
+      ],
+      "tool_count": 24,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 4,
+    "app": "Attio",
+    "category": "CRM and Sales",
+    "website": "https://attio.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "attio"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "ATTIO_LIST_OBJECTS",
+        "ATTIO_CREATE_DEAL_RECORD",
+        "ATTIO_LIST_NOTES",
+        "ATTIO_LIST_COMPANIES",
+        "ATTIO_GET_DEAL_RECORD",
+        "ATTIO_LIST_ATTRIBUTES",
+        "ATTIO_LIST_WORKSPACE_MEMBERS",
+        "ATTIO_LIST_ATTRIBUTE_OPTIONS",
+        "ATTIO_GET_OBJECT",
+        "ATTIO_LIST_RECORDS",
+        "ATTIO_CREATE_NOTE"
+      ],
+      "tool_count": 11,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 5,
+    "app": "Twenty",
+    "category": "CRM and Sales",
+    "website": "https://twenty.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "capsule_crm",
+        "zoho",
+        "apollo",
+        "magnetic",
+        "mailsoftly",
+        "fireberry"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 6,
+    "app": "Podio",
+    "category": "CRM and Sales",
+    "website": "https://podio.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "procfu"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 7,
+    "app": "Zoho CRM",
+    "category": "CRM and Sales",
+    "website": "https://zoho.com/crm",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "zoho"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "ZOHO_LIST_MODULES",
+        "ZOHO_CREATE_EMAIL_DRAFT",
+        "ZOHO_LIST_DEALS",
+        "ZOHO_CREATE_DEAL",
+        "ZOHO_GET_MODULE_FIELDS",
+        "ZOHO_GET_RELATED_LISTS",
+        "ZOHO_GET_ZOHO_RECORDS",
+        "ZOHO_GET_FROM_ADDRESSES",
+        "ZOHO_UPDATE_EMAIL_DRAFT",
+        "ZOHO_SEARCH_DEALS"
+      ],
+      "tool_count": 10,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 8,
+    "app": "Close",
+    "category": "CRM and Sales",
+    "website": "https://close.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "close"
+      ],
+      "related_toolkits": [
+        "zoho"
+      ],
+      "tools": [
+        "CLOSE_CREATE_LEAD",
+        "CLOSE_CREATE_TASK"
+      ],
+      "tool_count": 2,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 9,
+    "app": "Copper",
+    "category": "CRM and Sales",
+    "website": "https://copper.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "zoom"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 10,
+    "app": "DealCloud",
+    "category": "CRM and Sales",
+    "website": "https://api.docs.dealcloud.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "api_labz"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 11,
+    "app": "Zendesk",
+    "category": "Support and Helpdesk",
+    "website": "https://zendesk.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "zendesk"
+      ],
+      "related_toolkits": [
+        "helpdesk",
+        "hubspot",
+        "repairshopr"
+      ],
+      "tools": [
+        "ZENDESK_LIST_ZENDESK_TICKETS",
+        "ZENDESK_GET_ABOUT_ME",
+        "ZENDESK_GET_ZENDESK_TICKET_BY_ID"
+      ],
+      "tool_count": 3,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 12,
+    "app": "Intercom",
+    "category": "Support and Helpdesk",
+    "website": "https://intercom.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "gleap"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 13,
+    "app": "Freshdesk",
+    "category": "Support and Helpdesk",
+    "website": "https://freshdesk.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "freshdesk"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "FRESHDESK_VIEW_SETTINGS",
+        "FRESHDESK_CREATE_SOLUTION_CATEGORY",
+        "FRESHDESK_GET_ACCOUNT",
+        "FRESHDESK_LIST_PRODUCTS",
+        "FRESHDESK_UPDATE_SOLUTION_CATEGORY",
+        "FRESHDESK_LIST_SOLUTION_CATEGORIES"
+      ],
+      "tool_count": 6,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 14,
+    "app": "Front",
+    "category": "Support and Helpdesk",
+    "website": "https://front.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "helpdesk",
+        "hubspot",
+        "repairshopr",
+        "zendesk"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 15,
+    "app": "Pylon",
+    "category": "Support and Helpdesk",
+    "website": "https://usepylon.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "pylon_mcp"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 16,
+    "app": "LiveAgent",
+    "category": "Support and Helpdesk",
+    "website": "https://liveagent.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "salesforce_service_cloud"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 17,
+    "app": "Plain",
+    "category": "Support and Helpdesk",
+    "website": "https://plain.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "plain"
+      ],
+      "related_toolkits": [
+        "zendesk"
+      ],
+      "tools": [
+        "PLAIN_CREATE_THREAD",
+        "PLAIN_GET_CUSTOMER_BY_EMAIL",
+        "PLAIN_SEND_MESSAGE",
+        "PLAIN_UPSERT_CUSTOMER"
+      ],
+      "tool_count": 4,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 18,
+    "app": "Help Scout",
+    "category": "Support and Helpdesk",
+    "website": "https://helpscout.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "help_scout"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "HELP_SCOUT_LIST_CUSTOMER_PHONES",
+        "HELP_SCOUT_GET_CUSTOMER",
+        "HELP_SCOUT_LIST_CUSTOMERS",
+        "HELP_SCOUT_CREATE_CUSTOMER_PHONE"
+      ],
+      "tool_count": 4,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 19,
+    "app": "Gorgias",
+    "category": "Support and Helpdesk",
+    "website": "https://gorgias.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "gorgias"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "GORGIAS_CREATE_ACCOUNT_SETTING",
+        "GORGIAS_CREATE_TICKET",
+        "GORGIAS_CREATE_TEAM",
+        "GORGIAS_LIST_ACCOUNT_SETTINGS",
+        "GORGIAS_UPDATE_ACCOUNT_SETTING",
+        "GORGIAS_CREATE_CUSTOMER",
+        "GORGIAS_LIST_CUSTOMERS",
+        "GORGIAS_UPDATE_TEAM"
+      ],
+      "tool_count": 8,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 20,
+    "app": "Gladly",
+    "category": "Support and Helpdesk",
+    "website": "https://gladly.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "helpdesk",
+        "hubspot",
+        "repairshopr",
+        "zendesk"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 21,
+    "app": "Slack",
+    "category": "Communications and Messaging",
+    "website": "https://slack.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "slack"
+      ],
+      "related_toolkits": [
+        "slackbot"
+      ],
+      "tools": [
+        "SLACKBOT_FIND_CHANNELS",
+        "SLACKBOT_FIND_USERS",
+        "SLACKBOT_OPEN_DM",
+        "SLACKBOT_SEND_MESSAGE",
+        "SLACKBOT_JOIN_AN_EXISTING_CONVERSATION",
+        "SLACKBOT_FETCH_CONVERSATION_HISTORY",
+        "SLACKBOT_UPDATES_A_MESSAGE",
+        "SLACK_FIND_CHANNELS",
+        "SLACK_SEND_MESSAGE",
+        "SLACK_JOIN_AN_EXISTING_CONVERSATION"
+      ],
+      "tool_count": 10,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 22,
+    "app": "Twilio",
+    "category": "Communications and Messaging",
+    "website": "https://twilio.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "chatbotkit"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 23,
+    "app": "Zoho Cliq",
+    "category": "Communications and Messaging",
+    "website": "https://zoho.com/cliq",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "zoho_mail"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 24,
+    "app": "Lark",
+    "category": "Communications and Messaging",
+    "website": "https://open.larksuite.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "chatbotkit"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 25,
+    "app": "Pumble",
+    "category": "Communications and Messaging",
+    "website": "https://pumble.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "pipedrive"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 26,
+    "app": "Discord",
+    "category": "Communications and Messaging",
+    "website": "https://discord.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "discordbot",
+        "chatbotkit"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 27,
+    "app": "Telegram",
+    "category": "Communications and Messaging",
+    "website": "https://core.telegram.org",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "telegram"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "TELEGRAM_GET_ME",
+        "TELEGRAM_GET_UPDATES",
+        "TELEGRAM_SEND_MESSAGE",
+        "TELEGRAM_GET_CHAT",
+        "TELEGRAM_GET_CHAT_MEMBER",
+        "TELEGRAM_GET_CHAT_HISTORY",
+        "TELEGRAM_GET_CHAT_ADMINISTRATORS"
+      ],
+      "tool_count": 7,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 28,
+    "app": "WhatsApp Business",
+    "category": "Communications and Messaging",
+    "website": "https://developers.facebook.com/docs/whatsapp",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "whatsapp"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "WHATSAPP_SEND_MESSAGE",
+        "WHATSAPP_SEND_MEDIA_BY_ID",
+        "WHATSAPP_UPLOAD_MEDIA",
+        "WHATSAPP_SEND_MEDIA",
+        "WHATSAPP_SEND_REPLY",
+        "WHATSAPP_GET_MEDIA_INFO",
+        "WHATSAPP_GET_PHONE_NUMBERS",
+        "WHATSAPP_SEND_TEMPLATE_MESSAGE"
+      ],
+      "tool_count": 8,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 29,
+    "app": "Aircall",
+    "category": "Communications and Messaging",
+    "website": "https://aircall.io",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "chatbotkit"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 30,
+    "app": "Vonage",
+    "category": "Communications and Messaging",
+    "website": "https://developer.vonage.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "vapi"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 31,
+    "app": "Google Ads",
+    "category": "Marketing Ads Email Social",
+    "website": "https://developers.google.com/google-ads",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "googleads"
+      ],
+      "related_toolkits": [
+        "gmail",
+        "googledrive"
+      ],
+      "tools": [
+        "GOOGLEADS_GET_CAMPAIGN_BY_NAME",
+        "GOOGLEADS_CREATE_CUSTOMER_LIST",
+        "GOOGLEADS_ADD_OR_REMOVE_TO_CUSTOMER_LIST",
+        "GOOGLEADS_GET_CUSTOMER_LISTS",
+        "GOOGLEADS_GET_CAMPAIGN_BY_ID"
+      ],
+      "tool_count": 5,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 32,
+    "app": "Meta Ads",
+    "category": "Marketing Ads Email Social",
+    "website": "https://developers.facebook.com/docs/marketing-apis",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "metaads"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "METAADS_CREATE_CAMPAIGN",
+        "METAADS_CREATE_AD_SET",
+        "METAADS_CREATE_AD_CREATIVE",
+        "METAADS_CREATE_AD",
+        "METAADS_GET_AD_ACCOUNTS",
+        "METAADS_GET_PAGE_ACCOUNTS",
+        "METAADS_UPLOAD_AD_IMAGE",
+        "METAADS_LIST_TARGETING_SEARCH",
+        "METAADS_GET_INSIGHTS",
+        "METAADS_UPDATE_CAMPAIGN"
+      ],
+      "tool_count": 10,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 33,
+    "app": "LinkedIn Ads",
+    "category": "Marketing Ads Email Social",
+    "website": "https://learn.microsoft.com/linkedin/marketing",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "linkedin",
+        "linkedin_ads"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "LINKEDIN_ADS_GET_TARGETING_FACETS",
+        "LINKEDIN_ADS_GET_TARGETING_ENTITIES",
+        "LINKEDIN_GET_AD_TARGETING_FACETS",
+        "LINKEDIN_SEARCH_AD_TARGETING_ENTITIES",
+        "LINKEDIN_ADS_GET_AD_ANALYTICS",
+        "LINKEDIN_ADS_GET_AUDIENCE_COUNTS",
+        "LINKEDIN_ADS_GET_SUPPLY_FORECASTS"
+      ],
+      "tool_count": 7,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 34,
+    "app": "GoHighLevel",
+    "category": "Marketing Ads Email Social",
+    "website": "https://highlevel.stoplight.io",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "gemini",
+        "heygen"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 35,
+    "app": "Mailchimp",
+    "category": "Marketing Ads Email Social",
+    "website": "https://mailchimp.com/developer",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "mailchimp"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "MAILCHIMP_LIST_FACEBOOK_ADS",
+        "MAILCHIMP_LIST_FACEBOOK_ADS_REPORTS",
+        "MAILCHIMP_ADD_CAMPAIGN",
+        "MAILCHIMP_GET_FACEBOOK_AD_INFO",
+        "MAILCHIMP_GET_FACEBOOK_AD_REPORT",
+        "MAILCHIMP_LIST_FACEBOOK_ECOMMERCE_REPORT",
+        "MAILCHIMP_SET_CAMPAIGN_CONTENT"
+      ],
+      "tool_count": 7,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 36,
+    "app": "Klaviyo",
+    "category": "Marketing Ads Email Social",
+    "website": "https://developers.klaviyo.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "klaviyo"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "KLAVIYO_CREATE_CAMPAIGN",
+        "KLAVIYO_ASSIGN_CAMPAIGN_MESSAGE_TEMPLATE",
+        "KLAVIYO_CREATE_CAMPAIGN_SEND_JOB",
+        "KLAVIYO_GET_TEMPLATES",
+        "KLAVIYO_GET_CAMPAIGN_CAMPAIGN_MESSAGES",
+        "KLAVIYO_GET_CAMPAIGN_MESSAGE",
+        "KLAVIYO_UPDATE_CAMPAIGN_MESSAGE",
+        "KLAVIYO_CANCEL_CAMPAIGN_SEND",
+        "KLAVIYO_CREATE_TEMPLATE"
+      ],
+      "tool_count": 9,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 37,
+    "app": "systeme.io",
+    "category": "Marketing Ads Email Social",
+    "website": "https://systeme.io",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "composio_search",
+        "gemini"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 38,
+    "app": "Pinterest",
+    "category": "Marketing Ads Email Social",
+    "website": "https://developers.pinterest.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "benchmark_email"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 39,
+    "app": "Threads",
+    "category": "Marketing Ads Email Social",
+    "website": "https://developers.facebook.com/docs/threads",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "zernio_mcp",
+        "toneden"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 40,
+    "app": "SendGrid",
+    "category": "Marketing Ads Email Social",
+    "website": "https://sendgrid.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "sendgrid"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "SENDGRID_RETRIEVE_ALL_LISTS",
+        "SENDGRID_ADD_OR_UPDATE_A_CONTACT",
+        "SENDGRID_CREATE_SINGLE_SEND",
+        "SENDGRID_SCHEDULE_SINGLE_SEND",
+        "SENDGRID_CREATE_A_LIST",
+        "SENDGRID_GET_ALL_SENDER_IDENTITIES",
+        "SENDGRID_GET_SUPPRESSION_GROUPS",
+        "SENDGRID_IMPORT_CONTACTS",
+        "SENDGRID_GET_SINGLE_SEND_BY_ID",
+        "SENDGRID_UPDATE_SINGLE_SEND"
+      ],
+      "tool_count": 10,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 41,
+    "app": "Shopify",
+    "category": "Ecommerce",
+    "website": "https://shopify.dev",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "shopify"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "SHOPIFY_GET_SHOP_DETAILS",
+        "SHOPIFY_QUERY_ONLINE_STORE",
+        "SHOPIFY_GET_THEMES",
+        "SHOPIFY_GET_POLICIES",
+        "SHOPIFY_GET_PRODUCTS_PAGINATED",
+        "SHOPIFY_LIST_PAGES",
+        "SHOPIFY_GET_PAGE_BY_ID",
+        "SHOPIFY_QUERY_SHOP",
+        "SHOPIFY_LIST_THEME_ASSETS",
+        "SHOPIFY_GET_CUSTOM_COLLECTIONS",
+        "SHOPIFY_RUN_BULK_OPERATION_QUERY"
+      ],
+      "tool_count": 11,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 42,
+    "app": "WooCommerce",
+    "category": "Ecommerce",
+    "website": "https://woocommerce.com/document/woocommerce-rest-api",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "finerworks",
+        "mailerlite"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 43,
+    "app": "BigCommerce",
+    "category": "Ecommerce",
+    "website": "https://developer.bigcommerce.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "mailerlite"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 44,
+    "app": "Salesforce Commerce Cloud",
+    "category": "Ecommerce",
+    "website": "https://developer.salesforce.com/docs/commerce",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "salesforce_service_cloud"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 45,
+    "app": "Magento Adobe Commerce",
+    "category": "Ecommerce",
+    "website": "https://developer.adobe.com/commerce",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "aws_marketplace_mcp"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 46,
+    "app": "Squarespace",
+    "category": "Ecommerce",
+    "website": "https://developers.squarespace.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "finerworks"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 47,
+    "app": "Ecwid",
+    "category": "Ecommerce",
+    "website": "https://api-docs.ecwid.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "aws_marketplace_mcp"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 48,
+    "app": "Gumroad",
+    "category": "Ecommerce",
+    "website": "https://gumroad.com/api",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "gumroad"
+      ],
+      "related_toolkits": [
+        "hyperbrowser"
+      ],
+      "tools": [
+        "GUMROAD_GET_USER",
+        "GUMROAD_LIST_PRODUCTS",
+        "GUMROAD_GET_SALES"
+      ],
+      "tool_count": 3,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 49,
+    "app": "Amazon Selling Partner",
+    "category": "Ecommerce",
+    "website": "https://developer-docs.amazon.com/sp-api",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "aws_marketplace_mcp"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 50,
+    "app": "fanbasis",
+    "category": "Ecommerce",
+    "website": "https://fanbasis.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "benchmark_email"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 51,
+    "app": "DataForSEO",
+    "category": "Data SEO and Scraping",
+    "website": "https://docs.dataforseo.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "dataforseo"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "DATAFORSEO_CREATE_ON_PAGE_TASK_POST",
+        "DATAFORSEO_GET_ON_PAGE_SUMMARY_BY_ID",
+        "DATAFORSEO_GET_ON_PAGE_PAGES",
+        "DATAFORSEO_LIST_ON_PAGE_TASKS_READY",
+        "DATAFORSEO_POST_ON_PAGE_SUMMARY",
+        "DATAFORSEO_FORCE_ON_PAGE_CRAWL"
+      ],
+      "tool_count": 6,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 52,
+    "app": "SE Ranking",
+    "category": "Data SEO and Scraping",
+    "website": "https://seranking.com/api",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "similarweb_digitalrank_api"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 53,
+    "app": "Ahrefs",
+    "category": "Data SEO and Scraping",
+    "website": "https://ahrefs.com/api",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "ahrefs"
+      ],
+      "related_toolkits": [
+        "semrush"
+      ],
+      "tools": [
+        "AHREFS_EXPLORE_KEYWORDS_OVERVIEW"
+      ],
+      "tool_count": 1,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 54,
+    "app": "MrScraper",
+    "category": "Data SEO and Scraping",
+    "website": "https://docs.mrscraper.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "mrscraper"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "MRSCRAPER_HEAL_MANUAL_SCRAPER",
+        "MRSCRAPER_RERUN_AI_SCRAPER",
+        "MRSCRAPER_BULK_RERUN_AI_SCRAPER",
+        "MRSCRAPER_CREATE_AI_SCRAPER",
+        "MRSCRAPER_RERUN_MANUAL_SCRAPER",
+        "MRSCRAPER_BULK_RERUN_MANUAL_SCRAPER",
+        "MRSCRAPER_GET_RESULT",
+        "MRSCRAPER_LIST_RESULTS"
+      ],
+      "tool_count": 8,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 55,
+    "app": "Apify",
+    "category": "Data SEO and Scraping",
+    "website": "https://docs.apify.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "apify"
+      ],
+      "related_toolkits": [
+        "googlesheets"
+      ],
+      "tools": [
+        "APIFY_RUN_ACTOR",
+        "APIFY_GET_RUN_DATASET_ITEMS",
+        "APIFY_GET_DATASET_ITEMS",
+        "APIFY_ACTOR_RUN_GET",
+        "APIFY_GET_LIST_OF_TASKS",
+        "APIFY_RUN_ACTOR_SYNC_GET_DATASET_ITEMS",
+        "APIFY_ACTOR_TASK_GET"
+      ],
+      "tool_count": 7,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 56,
+    "app": "Firecrawl",
+    "category": "Data SEO and Scraping",
+    "website": "https://firecrawl.dev",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "firecrawl"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "FIRECRAWL_SCRAPE",
+        "FIRECRAWL_SEARCH",
+        "FIRECRAWL_CRAWL_V2",
+        "FIRECRAWL_EXTRACT",
+        "FIRECRAWL_CRAWL_GET",
+        "FIRECRAWL_BATCH_SCRAPE",
+        "FIRECRAWL_BATCH_SCRAPE_GET",
+        "FIRECRAWL_CRAWL_GET_ERRORS",
+        "FIRECRAWL_CRAWL_CANCEL",
+        "FIRECRAWL_EXTRACT_GET"
+      ],
+      "tool_count": 10,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 57,
+    "app": "Bright Data",
+    "category": "Data SEO and Scraping",
+    "website": "https://brightdata.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "brightdata"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "BRIGHTDATA_LIST_WEB_UNLOCKER_ZONES",
+        "BRIGHTDATA_WEB_UNLOCKER",
+        "BRIGHTDATA_CRAWL_API",
+        "BRIGHTDATA_GET_SNAPSHOT_STATUS",
+        "BRIGHTDATA_GET_SNAPSHOT_RESULTS"
+      ],
+      "tool_count": 5,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 58,
+    "app": "Sherlock",
+    "category": "Data SEO and Scraping",
+    "website": "https://github.com/sherlock-project/sherlock",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "agenty",
+        "prerender",
+        "zenrows"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 59,
+    "app": "Waterfall.io",
+    "category": "Data SEO and Scraping",
+    "website": "https://waterfall.io",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "firecrawl",
+        "scrapfly"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 60,
+    "app": "Clay",
+    "category": "Data SEO and Scraping",
+    "website": "https://clay.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "firecrawl",
+        "scrapfly"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 61,
+    "app": "GitHub",
+    "category": "Developer Infra and Data",
+    "website": "https://docs.github.com/rest",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "github"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "GITHUB_GET_A_REPOSITORY",
+        "GITHUB_SEARCH_CODE",
+        "GITHUB_GET_REPOSITORY_CONTENT",
+        "GITHUB_GET_A_TREE",
+        "GITHUB_SEARCH_CODE_ALL_PAGES",
+        "GITHUB_GET_RAW_REPOSITORY_CONTENT"
+      ],
+      "tool_count": 6,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 62,
+    "app": "Vercel",
+    "category": "Developer Infra and Data",
+    "website": "https://vercel.com/docs/rest-api",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "vercel"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "VERCEL_SEARCH_REPO",
+        "VERCEL_GET_CONFIGURATIONS",
+        "VERCEL_LIST_INTEGRATION_LOG_DRAINS",
+        "VERCEL_UPDATE_PROJECT_DATA_CACHE",
+        "VERCEL_GET_TEAMS",
+        "VERCEL_GET_DRAINS"
+      ],
+      "tool_count": 6,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 63,
+    "app": "Netlify",
+    "category": "Developer Infra and Data",
+    "website": "https://docs.netlify.com/api",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "neon"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 64,
+    "app": "Cloudflare",
+    "category": "Developer Infra and Data",
+    "website": "https://developers.cloudflare.com/api",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "cloudflare"
+      ],
+      "related_toolkits": [
+        "cloudflare_api_key"
+      ],
+      "tools": [
+        "CLOUDFLARE_API_KEY_LIST_ZONES",
+        "CLOUDFLARE_LIST_DNS_RECORDS",
+        "CLOUDFLARE_API_KEY_CREATE_DNS_RECORD",
+        "CLOUDFLARE_LIST_ZONES",
+        "CLOUDFLARE_API_KEY_LIST_DNS_RECORDS",
+        "CLOUDFLARE_UPDATE_DNS_RECORD",
+        "CLOUDFLARE_API_KEY_OVERWRITE_DNS_RECORD",
+        "CLOUDFLARE_CREATE_ZONE",
+        "CLOUDFLARE_CREATE_DNS_RECORD"
+      ],
+      "tool_count": 9,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 65,
+    "app": "Supabase",
+    "category": "Developer Infra and Data",
+    "website": "https://supabase.com/docs",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "supabase"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "SUPABASE_DEPLOY_FUNCTION",
+        "SUPABASE_CREATE_A_FUNCTION",
+        "SUPABASE_UPDATE_A_FUNCTION",
+        "SUPABASE_UPDATES_PROJECT_S_SUPAVISOR_CONFIG",
+        "SUPABASE_UPDATES_PROJECT_S_POSTGREST_CONFIG",
+        "SUPABASE_RETRIEVE_A_FUNCTION_BODY",
+        "SUPABASE_INVOKE_EDGE_FUNCTION",
+        "SUPABASE_LIST_ALL_FUNCTIONS",
+        "SUPABASE_GETS_PROJECT_S_SUPAVISOR_CONFIG",
+        "SUPABASE_GET_PROJECT_S_PGBOUNCER_CONFIG",
+        "SUPABASE_GETS_PROJECT_S_POSTGREST_CONFIG"
+      ],
+      "tool_count": 11,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 66,
+    "app": "Neo4j",
+    "category": "Developer Infra and Data",
+    "website": "https://neo4j.com/docs/api",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "neo4j"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "NEO4J_RESTORE_SNAPSHOT",
+        "NEO4J_GET_INSTANCE_BETA",
+        "NEO4J_AGGREGATE_DIRECTORS",
+        "NEO4J_LIST_SNAPSHOTS",
+        "NEO4J_GET_SNAPSHOT",
+        "NEO4J_LIST_INSTANCES_BETA",
+        "NEO4J_UPDATE_INSTANCE_BETA"
+      ],
+      "tool_count": 7,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 67,
+    "app": "Snowflake",
+    "category": "Developer Infra and Data",
+    "website": "https://docs.snowflake.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "snowflake"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "SNOWFLAKE_FETCH_CATALOG_INTEGRATION",
+        "SNOWFLAKE_GET_UNRESOLVED_INCIDENTS",
+        "SNOWFLAKE_GET_COMPONENT_STATUS",
+        "SNOWFLAKE_GET_STATUS_SUMMARY",
+        "SNOWFLAKE_EXECUTE_SQL",
+        "SNOWFLAKE_SHOW_TABLES",
+        "SNOWFLAKE_GET_STATUS_ROLLUP",
+        "SNOWFLAKE_GET_ACTIVE_SCHEDULED_MAINTENANCES"
+      ],
+      "tool_count": 8,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 68,
+    "app": "MongoDB Atlas",
+    "category": "Developer Infra and Data",
+    "website": "https://mongodb.com/docs/atlas/api",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "neon"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 69,
+    "app": "Datadog",
+    "category": "Developer Infra and Data",
+    "website": "https://docs.datadoghq.com/api",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "datadog"
+      ],
+      "related_toolkits": [
+        "launch_darkly",
+        "better_stack"
+      ],
+      "tools": [
+        "DATADOG_LIST_AWS_INTEGRATION",
+        "DATADOG_LIST_HOSTS"
+      ],
+      "tool_count": 2,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 70,
+    "app": "Sentry",
+    "category": "Developer Infra and Data",
+    "website": "https://docs.sentry.io/api",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "sentry"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "SENTRY_GET_ORGANIZATION_DETAILS",
+        "SENTRY_RETRIEVE_ORGANIZATION_INTEGRATIONS_LIST",
+        "SENTRY_GET_INTEGRATION_DETAILS_BY_ORG",
+        "SENTRY_RETRIEVE_ORG_INTEGRATION_CONFIG",
+        "SENTRY_GET_SENTRY_APP_INSTALLATIONS_FOR_ORGANIZATION",
+        "SENTRY_RETRIEVE_THE_CUSTOM_INTEGS_CREATED_BY_AN_ORG",
+        "SENTRY_RETRIEVE_A_CUSTOM_INTEGRATION_BY_ID_OR_SLUG"
+      ],
+      "tool_count": 7,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 71,
+    "app": "Notion",
+    "category": "Productivity and Project Management",
+    "website": "https://developers.notion.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "notion"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "NOTION_SEARCH_NOTION_PAGE",
+        "NOTION_CREATE_DATABASE",
+        "NOTION_INSERT_ROW_DATABASE",
+        "NOTION_UPDATE_SCHEMA_DATABASE",
+        "NOTION_UPSERT_ROW_DATABASE",
+        "NOTION_UPDATE_ROW_DATABASE",
+        "NOTION_FETCH_DATABASE"
+      ],
+      "tool_count": 7,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 72,
+    "app": "Airtable",
+    "category": "Productivity and Project Management",
+    "website": "https://airtable.com/developers",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "airtable"
+      ],
+      "related_toolkits": [
+        "api_labz"
+      ],
+      "tools": [
+        "AIRTABLE_LIST_BASES",
+        "AIRTABLE_GET_BASE_SCHEMA",
+        "AIRTABLE_GET_USER_INFO",
+        "AIRTABLE_LIST_RECORDS",
+        "AIRTABLE_GET_RECORD"
+      ],
+      "tool_count": 5,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 73,
+    "app": "Linear",
+    "category": "Productivity and Project Management",
+    "website": "https://developers.linear.app",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "linear"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "LINEAR_LIST_LINEAR_PROJECTS",
+        "LINEAR_LIST_LINEAR_TEAMS",
+        "LINEAR_LIST_LINEAR_ISSUES",
+        "LINEAR_SEARCH_ISSUES",
+        "LINEAR_GET_CURRENT_USER",
+        "LINEAR_GET_LINEAR_ISSUE",
+        "LINEAR_RUN_QUERY_OR_MUTATION",
+        "LINEAR_LIST_LINEAR_USERS",
+        "LINEAR_LIST_LINEAR_STATES",
+        "LINEAR_LIST_LINEAR_LABELS"
+      ],
+      "tool_count": 10,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 74,
+    "app": "Jira",
+    "category": "Productivity and Project Management",
+    "website": "https://developer.atlassian.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "jira"
+      ],
+      "related_toolkits": [
+        "linear"
+      ],
+      "tools": [
+        "JIRA_GET_ALL_PROJECTS",
+        "JIRA_GET_PROJECT",
+        "JIRA_GET_ISSUE"
+      ],
+      "tool_count": 3,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 75,
+    "app": "Asana",
+    "category": "Productivity and Project Management",
+    "website": "https://developers.asana.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "asana"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "ASANA_GET_MULTIPLE_WORKSPACES",
+        "ASANA_GET_PROJECT_TEMPLATES",
+        "ASANA_GET_TASK_TEMPLATES",
+        "ASANA_SEARCH_TASKS_IN_WORKSPACE",
+        "ASANA_GET_WORKSPACE_PROJECTS",
+        "ASANA_GET_A_PROJECT",
+        "ASANA_GET_MULTIPLE_PROJECTS",
+        "ASANA_CREATE_A_TASK",
+        "ASANA_GET_TASK_COUNTS_FOR_PROJECT",
+        "ASANA_ADD_TASK_DEPENDENCIES"
+      ],
+      "tool_count": 10,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 76,
+    "app": "Monday.com",
+    "category": "Productivity and Project Management",
+    "website": "https://developer.monday.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "monday_mcp"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 77,
+    "app": "ClickUp",
+    "category": "Productivity and Project Management",
+    "website": "https://clickup.com/api",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "clickup"
+      ],
+      "related_toolkits": [
+        "googletasks"
+      ],
+      "tools": [
+        "CLICKUP_GET_AUTHORIZED_TEAMS_WORKSPACES",
+        "CLICKUP_GET_SPACES",
+        "CLICKUP_GET_FOLDERS",
+        "CLICKUP_GET_LIST",
+        "CLICKUP_CREATE_TASK",
+        "CLICKUP_GET_LISTS",
+        "CLICKUP_GET_ACCESSIBLE_CUSTOM_FIELDS",
+        "CLICKUP_GET_FOLDER",
+        "CLICKUP_GET_TASK",
+        "CLICKUP_ADD_TAG_TO_TASK"
+      ],
+      "tool_count": 10,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 78,
+    "app": "Coda",
+    "category": "Productivity and Project Management",
+    "website": "https://coda.io/developers",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "coda"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "CODA_LIST_TABLES",
+        "CODA_RESOLVE_BROWSER_LINK",
+        "CODA_SEARCH_DOCS",
+        "CODA_LIST_AVAILABLE_DOCS",
+        "CODA_GET_A_TABLE",
+        "CODA_LIST_TABLE_ROWS",
+        "CODA_LIST_COLUMNS",
+        "CODA_SEARCH_ROW"
+      ],
+      "tool_count": 8,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 79,
+    "app": "Smartsheet",
+    "category": "Productivity and Project Management",
+    "website": "https://smartsheet.com/developers",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "teamcamp"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 80,
+    "app": "Harvest",
+    "category": "Productivity and Project Management",
+    "website": "https://help.getharvest.com/api-v2",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "harvest"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "HARVEST_CREATE_TIME_ENTRY",
+        "HARVEST_LIST_PROJECTS",
+        "HARVEST_LIST_TIME_ENTRIES",
+        "HARVEST_LIST_TASKS",
+        "HARVEST_GET_TIME_ENTRY",
+        "HARVEST_UPDATE_TIME_ENTRY"
+      ],
+      "tool_count": 6,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 81,
+    "app": "Stripe",
+    "category": "Finance and Fintech",
+    "website": "https://stripe.com/docs/api",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "stripe"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "STRIPE_FUND_TEST_CASH_BALANCE",
+        "STRIPE_LIST_FINANCIAL_CONNECTIONS_ACCOUNTS",
+        "STRIPE_CREATE_TRANSFER",
+        "STRIPE_GET_LINKED_ACCOUNT",
+        "STRIPE_CREATE_PAYMENT_LINK",
+        "STRIPE_CREATE_PAYMENT_METHOD_DOMAIN",
+        "STRIPE_GET_V1_INVOICE_PAYMENTS_OVERVIEW2",
+        "STRIPE_CREATE_FINANCIAL_CONNECTIONS_SESSION",
+        "STRIPE_LIST_APPS_SECRETS",
+        "STRIPE_CREATE_PAYMENT_INTENT",
+        "STRIPE_GET_CUSTOMERS_CUSTOMER_CASH_BALANCE",
+        "STRIPE_CREATE_CUSTOMER",
+        "STRIPE_RETRIEVE_BALANCE"
+      ],
+      "tool_count": 13,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 82,
+    "app": "Plaid",
+    "category": "Finance and Fintech",
+    "website": "https://plaid.com/docs",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "composio_search",
+        "clarity_ai_mcp"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 83,
+    "app": "Binance",
+    "category": "Finance and Fintech",
+    "website": "https://binance-docs.github.io",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "composio_search"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 84,
+    "app": "Paygent Connect",
+    "category": "Finance and Fintech",
+    "website": "https://www.nmi.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "composio_search"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 85,
+    "app": "iPayX",
+    "category": "Finance and Fintech",
+    "website": "https://ipayx.ai/docs",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "composio_search"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 86,
+    "app": "QuickBooks",
+    "category": "Finance and Fintech",
+    "website": "https://developer.intuit.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "quickbooks"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "QUICKBOOKS_GET_COMPANY_INFO",
+        "QUICKBOOKS_GET_REPORTS",
+        "QUICKBOOKS_QUERY_ENTITIES",
+        "QUICKBOOKS_GET_REPORT_ACCOUNT_LIST",
+        "QUICKBOOKS_GET_TRANSACTION_LIST_REPORT",
+        "QUICKBOOKS_GET_GENERAL_LEDGER_REPORT",
+        "QUICKBOOKS_CREATE_INVOICE",
+        "QUICKBOOKS_LIST_INVOICES",
+        "QUICKBOOKS_CREATE_BILL"
+      ],
+      "tool_count": 9,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 87,
+    "app": "Xero",
+    "category": "Finance and Fintech",
+    "website": "https://developer.xero.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "xero"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "XERO_GET_CONNECTIONS",
+        "XERO_LIST_INVOICES",
+        "XERO_CREATE_PAYMENT",
+        "XERO_LIST_ACCOUNTS",
+        "XERO_GET_INVOICE",
+        "XERO_LIST_PAYMENTS",
+        "XERO_LIST_BANK_TRANSACTIONS"
+      ],
+      "tool_count": 7,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 88,
+    "app": "Brex",
+    "category": "Finance and Fintech",
+    "website": "https://developer.brex.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "brex"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "BREX_LIST_CARDS",
+        "BREX_CREATE_FIELD",
+        "BREX_GET_CARD_DETAILS",
+        "BREX_GET_CARD_NUMBER",
+        "BREX_GET_FIELD_BY_ID",
+        "BREX_UPDATE_FIELD"
+      ],
+      "tool_count": 6,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 89,
+    "app": "Ramp",
+    "category": "Finance and Fintech",
+    "website": "https://docs.ramp.com",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "ramp"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "RAMP_LIST_ACCOUNTING_TAX_RATES",
+        "RAMP_UPLOAD_TAX_RATES",
+        "RAMP_POST_ACCOUNTING_CONNECTION",
+        "RAMP_GET_ACCOUNTING_CONNECTION",
+        "RAMP_UPDATE_ACCOUNTING_TAX_RATE",
+        "RAMP_UPLOAD_TAX_CODE_OPTIONS",
+        "RAMP_DELETE_ACCOUNTING_TAX_RATES",
+        "RAMP_GET_ACCOUNTING_ALL_CONNECTIONS"
+      ],
+      "tool_count": 8,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 90,
+    "app": "PitchBook",
+    "category": "Finance and Fintech",
+    "website": "https://pitchbook.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "composio_search"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 91,
+    "app": "NotebookLM",
+    "category": "AI Research and Media",
+    "website": "https://cloud.google.com/gemini",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "notebook_lm"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "NOTEBOOK_LM_CREATE_NOTEBOOK",
+        "NOTEBOOK_LM_UPLOAD_SOURCE_FILE",
+        "NOTEBOOK_LM_SHARE_NOTEBOOK",
+        "NOTEBOOK_LM_ADD_TEXT_SOURCES",
+        "NOTEBOOK_LM_LIST_RECENT_NOTEBOOKS"
+      ],
+      "tool_count": 5,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 92,
+    "app": "Otter AI",
+    "category": "AI Research and Media",
+    "website": "https://help.otter.ai",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "composio_search",
+        "serpapi"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 93,
+    "app": "Fathom",
+    "category": "AI Research and Media",
+    "website": "https://fathom.video",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "fathom"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "FATHOM_LIST_MEETINGS",
+        "FATHOM_GET_RECORDING_SUMMARY",
+        "FATHOM_GET_RECORDING_TRANSCRIPT",
+        "FATHOM_LIST_TEAMS",
+        "FATHOM_LIST_TEAM_MEMBERS",
+        "FATHOM_CREATE_WEBHOOK",
+        "FATHOM_DELETE_WEBHOOK"
+      ],
+      "tool_count": 7,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 94,
+    "app": "Consensus",
+    "category": "AI Research and Media",
+    "website": "https://consensus.app",
+    "composio": {
+      "coverage": "confirmed",
+      "matched_toolkits": [
+        "consensus"
+      ],
+      "related_toolkits": [],
+      "tools": [
+        "CONSENSUS_SEARCH_PAPERS"
+      ],
+      "tool_count": 1,
+      "connection_required": true
+    }
+  },
+  {
+    "id": 95,
+    "app": "Reducto",
+    "category": "AI Research and Media",
+    "website": "https://reducto.ai",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "composio_search"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 96,
+    "app": "Devin",
+    "category": "AI Research and Media",
+    "website": "https://docs.devin.ai",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "devin_mcp"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 97,
+    "app": "higgsfield",
+    "category": "AI Research and Media",
+    "website": "https://higgsfield.ai/cli",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "ai_ml_api"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 98,
+    "app": "Mermaid CLI",
+    "category": "AI Research and Media",
+    "website": "https://github.com/mermaid-js/mermaid-cli",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "mermaid_chart_mcp"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 99,
+    "app": "YouTube Transcript",
+    "category": "AI Research and Media",
+    "website": "https://transcriptapi.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "composio_search",
+        "youtube"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  },
+  {
+    "id": 100,
+    "app": "Grain",
+    "category": "AI Research and Media",
+    "website": "https://grain.com",
+    "composio": {
+      "coverage": "semantic_match_only",
+      "matched_toolkits": [],
+      "related_toolkits": [
+        "granola_mcp",
+        "composio_search"
+      ],
+      "tools": [],
+      "tool_count": 0,
+      "connection_required": false
+    }
+  }
+]

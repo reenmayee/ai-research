@@ -1,0 +1,1115 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>100-App Agent Toolkit Research — Case Study</title>
+<style>:root{--ink:#172033;--ink2:#24314a;--muted:#667085;--paper:#f7f8f5;--line:#dfe4dc;--navy:#18243a;--blue:#3f5f8f;--teal:#2f7d73;--coral:#d96b58;--green:#2d7a5b;--shadow:0 12px 35px rgba(30,42,58,.08)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:radial-gradient(900px 500px at 100% 0%,rgba(63,95,143,.08),transparent 62%),radial-gradient(800px 480px at 0% 30%,rgba(47,125,115,.06),transparent 60%),var(--paper);font:14px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:-.008em}body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.35;background-image:linear-gradient(rgba(24,36,58,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(24,36,58,.025) 1px,transparent 1px);background-size:32px 32px}a{color:var(--blue);text-decoration:none;font-weight:700}a:hover{color:var(--teal);text-decoration:underline}.wrap{max-width:1440px;margin:auto;padding:34px 30px 90px}.kicker{display:inline-flex;align-items:center;gap:9px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:850;color:var(--blue);border:1px solid #cfd8e5;background:rgba(255,255,255,.72);padding:7px 11px;border-radius:5px}.kicker:before{content:"";width:7px;height:7px;border-radius:2px;background:var(--coral)}h1{font-size:clamp(42px,5.6vw,76px);line-height:.96;letter-spacing:-.065em;max-width:1100px;margin:20px 0 18px;font-weight:900;color:var(--navy)}h2{font-size:25px;line-height:1.15;letter-spacing:-.035em;margin:0 0 9px;color:var(--navy)}h3{margin:0 0 7px;color:var(--navy)}p{margin:7px 0}.sub{max-width:930px;color:var(--muted);font-size:16px;line-height:1.75}.headline{margin:26px 0;background:var(--navy);color:#fff;border:0;border-radius:7px;padding:23px 25px;font-size:15px;box-shadow:var(--shadow);position:relative;overflow:hidden}.headline:before{content:"";position:absolute;right:0;top:0;width:5px;height:100%;background:linear-gradient(var(--coral),#e6ad69)}.headline strong{color:#fff}.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:18px 0}.card,.insight,.step,.vrow{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:7px;padding:18px;box-shadow:var(--shadow);backdrop-filter:blur(8px)}.card{position:relative;overflow:hidden}.card:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--teal)}.num{font-size:32px;font-weight:900;letter-spacing:-.055em;color:var(--navy)}.muted{color:var(--muted);font-size:11px;line-height:1.45}.section{margin-top:48px}.section>h2{display:flex;align-items:center;gap:12px}.section>h2:before{content:"";width:28px;height:2px;background:var(--coral)}.section>h2:after{content:"";flex:0 0 80px;height:1px;background:var(--line)}.insights{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.insight{transition:.18s transform,.18s box-shadow}.insight:hover{transform:translateY(-2px);box-shadow:0 16px 42px rgba(30,42,58,.11)}.pill{display:inline-block;padding:3px 8px;border-radius:4px;border:1px solid var(--line);background:#f5f7f3;color:#566174;font-size:11px;margin:1px 2px}.pill.good{border-color:#b9d8ca;color:var(--green);background:#f1f8f4}.grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.bars .barrow{margin:13px 0}.barhead{display:flex;justify-content:space-between;color:var(--ink2)}.bar{height:7px;background:#e7ebe5;border-radius:2px;overflow:hidden;margin-top:7px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--teal));border-radius:2px}.flow{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}.step{flex:1;min-width:175px}.step strong{color:var(--navy)}.arrow{align-self:center;color:#a2a9b4;font-size:20px}.verify{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.vrow{padding:15px}.score{font-size:29px;font-weight:900;letter-spacing:-.04em;color:var(--navy)}.proof{display:grid;grid-template-columns:1fr 1fr;gap:14px}pre{white-space:pre-wrap;background:#172033;border:1px solid #26334a;border-radius:6px;padding:14px;color:#e9eef5;overflow:auto;font:12px/1.65 "SFMono-Regular",Consolas,monospace}table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}th{text-align:left;padding:12px 11px;background:#f0f3ef;color:#556174;font-size:10px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2}td{padding:12px 11px;border-bottom:1px solid #edf0eb;vertical-align:top;color:#354052}tr:last-child td{border-bottom:0}tr:hover td{background:#fafbf9}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0;background:#fff;border:1px solid var(--line);border-radius:7px;padding:10px}input,select{border:1px solid #d5dbd3;background:#f9faf8;color:var(--ink);border-radius:5px;padding:9px 10px;outline:none}.badge,.tag{border:1px solid #d7ddd5;background:#f7f9f6;color:#596578;border-radius:4px}.badge{padding:6px 9px;font-size:11px}.tag{padding:3px 7px;font-size:10px}.footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}@media(max-width:1050px){.stats{grid-template-columns:repeat(3,1fr)}.insights{grid-template-columns:1fr 1fr}}@media(max-width:760px){.wrap{padding:24px 16px 60px}h1{font-size:43px}.stats,.insights,.grid2,.proof,.verify{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.flow{display:grid;grid-template-columns:1fr}.arrow{display:none}.section>h2:after{display:none}}</style></head><body><main class="wrap">
+<div class="kicker">Agent Toolkit Research · 100-App Case Study</div>
+<h1>52/100 apps are already directly covered. The bigger opportunity is turning the other 48 into reliable agent integrations.</h1>
+<p class="sub">A reproducible pipeline researched all 100 requested apps using the Composio SDK/MCP for toolkit discovery and an official-site evidence crawler for authentication, access model, API surface and MCP signals. A human verification loop then sampled the weakest field and exposed false negatives.</p>
+<section class="brief"><div class="brief-label">THE ASSIGNMENT · IN ONE VIEW</div><div class="brief-grid"><div><b>Research 100 apps</b><span>Category + one-line description · auth · self-serve vs gated · API surface · MCP · buildability · evidence</span></div><div><b>Find the patterns</b><span>Cluster the results. Show dominant auth, access models, blockers, easy wins and outreach opportunities.</span></div><div><b>Build it with an agent</b><span>Automate the research with Composio SDK/MCP; explain the workflow and where a human was needed.</span></div><div><b>Verify accuracy</b><span>Sample the output against real docs, show hits and misses, and demonstrate how verification improved the result.</span></div></div></section>
+<div class="headline"><strong>Executive finding:</strong> the easiest expansion surface is Developer Infra + Productivity (8/10 direct coverage each); Ecommerce is the clearest gap (2/10). The first pass was strongest at Composio coverage discovery and weakest at authentication extraction. <strong>We report that weakness instead of hiding it.</strong></div>
+<div class="stats">
+<div class="card"><div class="num">100</div><div class="muted">apps researched</div></div>
+<div class="card"><div class="num" style="color:var(--green)">52</div><div class="muted">confirmed direct Composio toolkits</div></div>
+<div class="card"><div class="num" style="color:var(--amber)">48</div><div class="muted">semantic-only matches needing validation/toolkit work</div></div>
+<div class="card"><div class="num">380</div><div class="muted">actual Composio tools found</div></div>
+<div class="card"><div class="num">22</div><div class="muted">records complete on first automated pass</div></div>
+</div>
+
+<section class="section"><h2>Patterns — what matters beyond the 100 rows</h2><div class="insights">
+<div class="insight"><h3>Auth: OAuth2 leads, but the crawler missed too much</h3><p>First-pass detected signals: OAuth2 <b>21</b>, API key <b>14</b>, Bearer token <b>10</b>, JWT <b>1</b>. But <b>65/100</b> were unknown, so this is a signal distribution, not ground truth.</p></div>
+<div class="insight"><h3>Access is fragmented</h3><p>First-pass access signals: self-serve <b>18</b>, conditional <b>27</b>, gated <b>16</b>, unknown <b>39</b>. “Conditional” commonly means a free/trial developer path exists but some production/partner capabilities are gated.</p></div>
+<div class="insight"><h3>The common blocker is integration coverage</h3><p><b>48</b> apps had semantic matches but no direct Composio toolkit. Importantly, <b>18/48</b> still had API signals. That means many opportunities are integration/toolkit work, not API discovery from scratch.</p></div>
+</div></section>
+
+<section class="section grid2"><div class="card bars"><h2>Category heatmap</h2><div class="barrow"><div class="barhead"><span>Productivity and Project Management</span><b>8/10</b></div><div class="bar"><i style="width:80%"></i></div><div class="tiny">59 Composio tools · 80% direct coverage</div></div><div class="barrow"><div class="barhead"><span>Developer Infra and Data</span><b>8/10</b></div><div class="bar"><i style="width:80%"></i></div><div class="tiny">56 Composio tools · 80% direct coverage</div></div><div class="barrow"><div class="barhead"><span>Marketing Ads Email Social</span><b>6/10</b></div><div class="bar"><i style="width:60%"></i></div><div class="tiny">48 Composio tools · 60% direct coverage</div></div><div class="barrow"><div class="barhead"><span>Data SEO and Scraping</span><b>6/10</b></div><div class="bar"><i style="width:60%"></i></div><div class="tiny">37 Composio tools · 60% direct coverage</div></div><div class="barrow"><div class="barhead"><span>CRM and Sales</span><b>6/10</b></div><div class="bar"><i style="width:60%"></i></div><div class="tiny">60 Composio tools · 60% direct coverage</div></div><div class="barrow"><div class="barhead"><span>Support and Helpdesk</span><b>5/10</b></div><div class="bar"><i style="width:50%"></i></div><div class="tiny">25 Composio tools · 50% direct coverage</div></div><div class="barrow"><div class="barhead"><span>Finance and Fintech</span><b>5/10</b></div><div class="bar"><i style="width:50%"></i></div><div class="tiny">43 Composio tools · 50% direct coverage</div></div><div class="barrow"><div class="barhead"><span>Communications and Messaging</span><b>3/10</b></div><div class="bar"><i style="width:30%"></i></div><div class="tiny">25 Composio tools · 30% direct coverage</div></div><div class="barrow"><div class="barhead"><span>AI Research and Media</span><b>3/10</b></div><div class="bar"><i style="width:30%"></i></div><div class="tiny">13 Composio tools · 30% direct coverage</div></div><div class="barrow"><div class="barhead"><span>Ecommerce</span><b>2/10</b></div><div class="bar"><i style="width:20%"></i></div><div class="tiny">14 Composio tools · 20% direct coverage</div></div></div>
+<div class="card"><h2>Easy wins vs outreach</h2><h3 style="color:var(--green);margin-top:16px">Easy wins</h3><p>Developer Infra & Data, Productivity & Project Management: <b>8/10</b> direct coverage each.</p><p>These categories already have substantial tool breadth: 56 and 59 tools respectively.</p><h3 style="color:var(--amber);margin-top:20px">Needs outreach / toolkit work</h3><p>Ecommerce has only <b>2/10</b> direct coverage. Communications and AI Research are also low at <b>3/10</b>.</p><p>For semantic-only apps, validate the public API, credential flow, permissions and then build/extend a toolkit.</p></div></section>
+
+<section class="section"><h2>What the agent actually does</h2><div class="flow">
+<div class="step"><b>1 · Input</b><p>Loads the 100-app CSV, normalizes names and uses official sites as the research starting point.</p></div><div class="arrow">→</div>
+<div class="step"><b>2 · Composio scout</b><p>Creates a Composio SDK session with MCP enabled and discovers matched toolkits, tool slugs and connection requirements.</p></div><div class="arrow">→</div>
+<div class="step"><b>3 · Evidence researcher</b><p>Fetches official pages and extracts source-backed signals for OAuth/API key/token auth, self-serve/gating, REST/GraphQL/webhooks/SDK and MCP.</p></div><div class="arrow">→</div>
+<div class="step"><b>4 · Conservative merge</b><p>Direct toolkit coverage and semantic matches stay separate. Semantic matches never become fake tools.</p></div><div class="arrow">→</div>
+<div class="step"><b>5 · Human check</b><p>Official documentation is manually checked on a sample, especially where confidence is low or a field is missing.</p></div>
+</div><p class="tiny">Human was needed where page-level keyword evidence was ambiguous or incomplete — particularly authentication and production credential requirements. The pipeline flags these rows instead of guessing.</p></section>
+
+<section class="section"><h2>Proof — runnable research pipeline</h2><div class="proof"><div class="card"><h3>Run the agent</h3><pre>pip install composio python-dotenv pandas requests beautifulsoup4
+# .env
+COMPOSIO_API_KEY=...
+
+python agent_composio.py
+python evidence_researcher.py
+python merge_results.py</pre><button onclick="navigator.clipboard?.writeText('python agent_composio.py
+python evidence_researcher.py
+python merge_results.py');this.textContent='Copied run commands'">Copy run commands</button></div><div class="card"><h3>What is the proof artifact?</h3><p><b>data/final_results.json</b> is the machine-readable 100-app output. It is merged from the Composio coverage run and the evidence run.</p><p><b>index.html</b> is this reviewer-facing case study and embeds the full 100-row matrix.</p><p><b>README.md + scripts</b> explain how to reproduce the pipeline.</p><p class="tiny">No paid app accounts are required by the research design. If an app is gated, the correct result is “gated/conditional” rather than a fabricated credential path.</p></div></div></section>
+
+<section class="section"><h2>Verification — the loop caught real misses</h2>
+<div class="headline"><span class="score">3/12 → 12/12</span><br>
+The first automated pass was exact on only 3/12 sampled authentication records. We then cross-checked the same field against official developer documentation, corrected the sampled records, and reached 12/12 exact coverage on the verified sample.
+<b>This is sample-level verification, not a claim of 100-app ground truth.</b></div>
+<div class="verify">
+<div class="vrow"><b>What was tested</b><p>Authentication methods across a deliberately diverse 12-app sample.</p></div>
+<div class="vrow"><b>What changed</b><p>Missing OAuth, token, Basic-auth and compound credential requirements were exposed and corrected.</p></div>
+<div class="vrow"><b>First pass</b><p><span class="score">3 / 12</span> exact auth matches · 25.0%</p></div>
+<div class="vrow"><b>After official-doc check</b><p><span class="score">12 / 12</span> corrected sample · 100%</p></div>
+</div>
+<div class="verify"><div class="vrow"><b>Salesforce</b> <span class="pill warn">MISS / PARTIAL</span>
+        <p><b>Agent:</b> Not detected<br>
+        <b>Verified:</b> OAuth2</p>
+        <p>OAuth is required for Connect REST API; successful authorization returns access and refresh tokens.</p>
+        <a href="https://developer.salesforce.com/docs/platform/connect-rest-api/guide/intro_using_oauth.html" target="_blank" rel="noopener">official docs ↗</a></div><div class="vrow"><b>Pipedrive</b> <span class="pill warn">MISS / PARTIAL</span>
+        <p><b>Agent:</b> Not detected<br>
+        <b>Verified:</b> OAuth2</p>
+        <p>Pipedrive documents OAuth 2.0 authorization and token endpoints for app integrations.</p>
+        <a href="https://developers.pipedrive.com/docs/api/v1/Oauth" target="_blank" rel="noopener">official docs ↗</a></div><div class="vrow"><b>Google Ads</b> <span class="pill warn">MISS / PARTIAL</span>
+        <p><b>Agent:</b> OAuth2<br>
+        <b>Verified:</b> OAuth2, developer token</p>
+        <p>Google Ads requires OAuth 2.0 credentials plus a developer token for API calls.</p>
+        <a href="https://developers.google.com/google-ads/api/docs/oauth/overview" target="_blank" rel="noopener">official docs ↗</a></div><div class="vrow"><b>Shopify</b> <span class="pill warn">MISS / PARTIAL</span>
+        <p><b>Agent:</b> Not detected<br>
+        <b>Verified:</b> OAuth2, access token, session token</p>
+        <p>Shopify documents OAuth/authorization flows, API access tokens and session tokens for apps.</p>
+        <a href="https://shopify.dev/docs/apps/build/authentication-authorization" target="_blank" rel="noopener">official docs ↗</a></div><div class="vrow"><b>Twilio</b> <span class="pill warn">MISS / PARTIAL</span>
+        <p><b>Agent:</b> Not detected<br>
+        <b>Verified:</b> Basic, Auth Token, API key</p>
+        <p>Twilio documents Account SID/Auth Token authentication and API-key credentials; its APIs also document Basic authentication.</p>
+        <a href="https://www.twilio.com/docs/iam/api/authtoken" target="_blank" rel="noopener">official docs ↗</a></div><div class="vrow"><b>GitHub</b> <span class="pill warn">MISS / PARTIAL</span>
+        <p><b>Agent:</b> OAuth2<br>
+        <b>Verified:</b> Bearer token, OAuth2</p>
+        <p>GitHub supports personal access tokens, app-generated tokens and OAuth-related access tokens.</p>
+        <a href="https://docs.github.com/en/rest/authentication" target="_blank" rel="noopener">official docs ↗</a></div><div class="vrow"><b>Stripe</b> <span class="pill warn">MISS / PARTIAL</span>
+        <p><b>Agent:</b> API key<br>
+        <b>Verified:</b> API key, Basic</p>
+        <p>Stripe uses API keys; API-key authentication is sent using HTTP Basic Auth.</p>
+        <a href="https://docs.stripe.com/api/authentication" target="_blank" rel="noopener">official docs ↗</a></div><div class="vrow"><b>Notion</b> <span class="pill good">HIT</span>
+        <p><b>Agent:</b> OAuth2, Bearer token<br>
+        <b>Verified:</b> OAuth2, Bearer token</p>
+        <p>Notion supports OAuth authorization and bearer-token based integration authorization.</p>
+        <a href="https://developers.notion.com/guides/get-started/authorization" target="_blank" rel="noopener">official docs ↗</a></div><div class="vrow"><b>Discord</b> <span class="pill warn">MISS / PARTIAL</span>
+        <p><b>Agent:</b> OAuth2<br>
+        <b>Verified:</b> Bearer token, OAuth2</p>
+        <p>Discord documents bot-token authentication and OAuth2 user access tokens.</p>
+        <a href="https://docs.discord.com/developers/platform/oauth2-and-permissions" target="_blank" rel="noopener">official docs ↗</a></div><div class="vrow"><b>HubSpot</b> <span class="pill warn">MISS / PARTIAL</span>
+        <p><b>Agent:</b> Not detected<br>
+        <b>Verified:</b> OAuth2, Bearer token</p>
+        <p>HubSpot documents OAuth and private-app access tokens in the Authorization header.</p>
+        <a href="https://developers.hubspot.com/blog/harnessing-the-power-of-hubspots-public-apis-with-postman" target="_blank" rel="noopener">official docs ↗</a></div><div class="vrow"><b>Apify</b> <span class="pill good">HIT</span>
+        <p><b>Agent:</b> Bearer token<br>
+        <b>Verified:</b> Bearer token</p>
+        <p>Apify API requests can use the secret API token as a Bearer token.</p>
+        <a href="https://docs.apify.com/api/v2" target="_blank" rel="noopener">official docs ↗</a></div><div class="vrow"><b>Snowflake</b> <span class="pill warn">MISS / PARTIAL</span>
+        <p><b>Agent:</b> Not detected<br>
+        <b>Verified:</b> OAuth2, JWT, Bearer token</p>
+        <p>Snowflake documents OAuth and key-pair/JWT authentication; REST APIs also support programmatic access tokens.</p>
+        <a href="https://docs.snowflake.com/en/en/developer-guide/sql-api/authenticating" target="_blank" rel="noopener">official docs ↗</a></div></div>
+<p class="tiny"><b>Honesty:</b> the 100% figure applies only to the authentication field in this 12-app verification sample. The remaining records retain uncertainty/review flags rather than being presented as manually verified.</p>
+</section>
+<section class="section"><h2>Full 100-app research matrix</h2><p class="tiny">Each row captures the requested category/description, auth, self-serve vs gated signal, API surface + breadth, MCP signal, Composio coverage/tool count, buildability verdict/blocker and evidence links. “Not detected” means the automated pass did not find a reliable signal; it does not mean the app has no such capability.</p>
+<div class="tablebox"><div class="controls"><input id="q" placeholder="Search app, category, auth, blocker…"><select id="cat"><option value="">All categories</option><option>CRM and Sales</option><option>Support and Helpdesk</option><option>Communications and Messaging</option><option>Marketing Ads Email Social</option><option>Ecommerce</option><option>Data SEO and Scraping</option><option>Developer Infra and Data</option><option>Productivity and Project Management</option><option>Finance and Fintech</option><option>AI Research and Media</option></select><select id="cov"><option value="">All coverage</option><option value="confirmed">Direct toolkit</option><option value="semantic_match_only">Semantic-only</option></select></div><div class="scroll"><table><thead><tr><th>#</th><th>App</th><th>Category + what it does</th><th>Auth</th><th>Self-serve / gated</th><th>API surface / breadth / MCP</th><th>Composio coverage</th><th>Buildability + blocker</th><th>Evidence</th></tr></thead><tbody id="tbody"><tr>
+      <td class="id">1</td>
+      <td><strong>Salesforce</strong><div class="muted">https://salesforce.com</div></td>
+      <td><strong>CRM and Sales</strong><div class="muted">Enterprise CRM for sales, service, marketing and customer data.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">REST, SDK</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">5 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://developer.salesforce.com/" target="_blank" rel="noopener">api ↗</a><br><a href="https://www.salesforce.com/in/?ir=1" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">2</td>
+      <td><strong>HubSpot</strong><div class="muted">https://hubspot.com</div></td>
+      <td><strong>CRM and Sales</strong><div class="muted">CRM platform combining sales, marketing, customer service and content tools.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">8 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://www.hubspot.com/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">3</td>
+      <td><strong>Pipedrive</strong><div class="muted">https://pipedrive.com</div></td>
+      <td><strong>CRM and Sales</strong><div class="muted">Sales CRM focused on pipeline, deals, activities and sales workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Webhooks</span><div class="muted">medium breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">24 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://developers.pipedrive.com" target="_blank" rel="noopener">api ↗</a><br><a href="https://www.pipedrive.com/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">4</td>
+      <td><strong>Attio</strong><div class="muted">https://attio.com</div></td>
+      <td><strong>CRM and Sales</strong><div class="muted">Modern CRM for managing contacts, companies, deals and relationship data.</div></td>
+      <td><span class="pill good">OAuth2</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">REST, Webhooks, SDK</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">11 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://attio.com/platform/developers" target="_blank" rel="noopener">auth ↗</a><br><a href="https://attio.com/" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">5</td>
+      <td><strong>Twenty</strong><div class="muted">https://twenty.com</div></td>
+      <td><strong>CRM and Sales</strong><div class="muted">Open-source CRM for managing people, companies, opportunities and workflows.</div></td>
+      <td><span class="pill good">OAuth2</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">GraphQL, Webhooks, SDK</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://twenty.com/" target="_blank" rel="noopener">auth ↗</a><br><a href="https://docs.twenty.com/developers/introduction" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">6</td>
+      <td><strong>Podio</strong><div class="muted">https://podio.com</div></td>
+      <td><strong>CRM and Sales</strong><div class="muted">CRM and sales platform for managing customer relationships and sales workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://podio.com/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">7</td>
+      <td><strong>Zoho CRM</strong><div class="muted">https://zoho.com/crm</div></td>
+      <td><strong>CRM and Sales</strong><div class="muted">CRM and sales platform for managing customer relationships and sales workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">GraphQL, SDK</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">10 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://www.zoho.com/crm/developer/" target="_blank" rel="noopener">api ↗</a><br><a href="https://www.zoho.com/en-in/crm/" target="_blank" rel="noopener">self_serve ↗</a><br><a href="https://www.zoho.com/crm/help/" target="_blank" rel="noopener">mcp ↗</a></td>
+    </tr><tr>
+      <td class="id">8</td>
+      <td><strong>Close</strong><div class="muted">https://close.com</div></td>
+      <td><strong>CRM and Sales</strong><div class="muted">CRM and sales platform for managing customer relationships and sales workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">REST, Webhooks</span><div class="muted">medium breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">2 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://close.com/" target="_blank" rel="noopener">api ↗</a><br><a href="https://close.com/api" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">9</td>
+      <td><strong>Copper</strong><div class="muted">https://copper.com</div></td>
+      <td><strong>CRM and Sales</strong><div class="muted">CRM and sales platform for managing customer relationships and sales workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://www.copper.com:443/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">10</td>
+      <td><strong>DealCloud</strong><div class="muted">https://api.docs.dealcloud.com</div></td>
+      <td><strong>CRM and Sales</strong><div class="muted">CRM and sales platform for managing customer relationships and sales workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">SDK</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://api.docs.dealcloud.com/" target="_blank" rel="noopener">api ↗</a><br><a href="https://api.docs.dealcloud.com/docs" target="_blank" rel="noopener">mcp ↗</a></td>
+    </tr><tr>
+      <td class="id">11</td>
+      <td><strong>Zendesk</strong><div class="muted">https://zendesk.com</div></td>
+      <td><strong>Support and Helpdesk</strong><div class="muted">Customer support platform for managing conversations, tickets and service workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Webhooks, SDK</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">3 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://developer.zendesk.com/documentation/#georedirect" target="_blank" rel="noopener">api ↗</a><br><a href="https://developer.zendesk.com/api-reference/" target="_blank" rel="noopener">api ↗</a><br><a href="https://www.zendesk.com/in/#georedirect" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">12</td>
+      <td><strong>Intercom</strong><div class="muted">https://intercom.com</div></td>
+      <td><strong>Support and Helpdesk</strong><div class="muted">Customer support platform for managing conversations, tickets and service workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Webhooks</span><div class="muted">medium breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://developers.intercom.com/" target="_blank" rel="noopener">api ↗</a><br><a href="https://www.intercom.com/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">13</td>
+      <td><strong>Freshdesk</strong><div class="muted">https://freshdesk.com</div></td>
+      <td><strong>Support and Helpdesk</strong><div class="muted">Customer support platform for managing conversations, tickets and service workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">6 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://www.freshworks.com/freshdesk/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">14</td>
+      <td><strong>Front</strong><div class="muted">https://front.com</div></td>
+      <td><strong>Support and Helpdesk</strong><div class="muted">Customer support platform for managing conversations, tickets and service workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://front.com/" target="_blank" rel="noopener">self_serve ↗</a><br><a href="https://front.com/product/integrate-with-customer-service-apps-front" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">15</td>
+      <td><strong>Pylon</strong><div class="muted">https://usepylon.com</div></td>
+      <td><strong>Support and Helpdesk</strong><div class="muted">Customer support platform for managing conversations, tickets and service workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://usepylon.com" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">16</td>
+      <td><strong>LiveAgent</strong><div class="muted">https://liveagent.com</div></td>
+      <td><strong>Support and Helpdesk</strong><div class="muted">Customer support platform for managing conversations, tickets and service workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://www.liveagent.com/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">17</td>
+      <td><strong>Plain</strong><div class="muted">https://plain.com</div></td>
+      <td><strong>Support and Helpdesk</strong><div class="muted">Customer support platform for managing conversations, tickets and service workflows.</div></td>
+      <td><span class="pill good">API key, Bearer token</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">GraphQL, Webhooks, SDK</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">4 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://www.plain.com/docs/graphql/introduction" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">18</td>
+      <td><strong>Help Scout</strong><div class="muted">https://helpscout.com</div></td>
+      <td><strong>Support and Helpdesk</strong><div class="muted">Customer support platform for managing conversations, tickets and service workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">4 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://www.helpscout.com/" target="_blank" rel="noopener">self_serve ↗</a><br><a href="https://www.helpscout.com/knowledge-base/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">19</td>
+      <td><strong>Gorgias</strong><div class="muted">https://gorgias.com</div></td>
+      <td><strong>Support and Helpdesk</strong><div class="muted">Customer support platform for managing conversations, tickets and service workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">8 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://www.gorgias.com/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">20</td>
+      <td><strong>Gladly</strong><div class="muted">https://gladly.com</div></td>
+      <td><strong>Support and Helpdesk</strong><div class="muted">Customer support platform for managing conversations, tickets and service workflows.</div></td>
+      <td><span class="pill good">OAuth2</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://www.gladly.ai/gladly-developer-platform/" target="_blank" rel="noopener">auth ↗</a><br><a href="https://www.gladly.ai/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">21</td>
+      <td><strong>Slack</strong><div class="muted">https://slack.com</div></td>
+      <td><strong>Communications and Messaging</strong><div class="muted">Team communication platform for channels, messaging, apps and automation.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">SDK</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">10 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://docs.slack.dev/" target="_blank" rel="noopener">api ↗</a><br><a href="https://slack.com/intl/en-in/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">22</td>
+      <td><strong>Twilio</strong><div class="muted">https://twilio.com</div></td>
+      <td><strong>Communications and Messaging</strong><div class="muted">Communications platform providing programmable messaging, voice and other APIs.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">REST</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://www.twilio.com:443/docs" target="_blank" rel="noopener">api ↗</a><br><a href="https://www.twilio.com/en-us" target="_blank" rel="noopener">self_serve ↗</a><br><a href="https://www.twilio.com/en-us/developers" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">23</td>
+      <td><strong>Zoho Cliq</strong><div class="muted">https://zoho.com/cliq</div></td>
+      <td><strong>Communications and Messaging</strong><div class="muted">Communication platform for messaging, calls, notifications or collaboration.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://www.zoho.com/cliq/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">24</td>
+      <td><strong>Lark</strong><div class="muted">https://open.larksuite.com</div></td>
+      <td><strong>Communications and Messaging</strong><div class="muted">Communication platform for messaging, calls, notifications or collaboration.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://open.larksuite.com" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">25</td>
+      <td><strong>Pumble</strong><div class="muted">https://pumble.com</div></td>
+      <td><strong>Communications and Messaging</strong><div class="muted">Communication platform for messaging, calls, notifications or collaboration.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: possible</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://pumble.com/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">26</td>
+      <td><strong>Discord</strong><div class="muted">https://discord.com</div></td>
+      <td><strong>Communications and Messaging</strong><div class="muted">Communication platform for messaging, calls, notifications or collaboration.</div></td>
+      <td><span class="pill good">OAuth2</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">Webhooks, SDK</span><div class="muted">medium breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://docs.discord.com/developers/intro" target="_blank" rel="noopener">auth ↗</a><br><a href="https://discord.com/developers" target="_blank" rel="noopener">api ↗</a><br><a href="https://discord.com/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">27</td>
+      <td><strong>Telegram</strong><div class="muted">https://core.telegram.org</div></td>
+      <td><strong>Communications and Messaging</strong><div class="muted">Communication platform for messaging, calls, notifications or collaboration.</div></td>
+      <td><span class="pill good">OAuth2</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">7 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://core.telegram.org/" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">28</td>
+      <td><strong>WhatsApp Business</strong><div class="muted">https://developers.facebook.com/docs/whatsapp</div></td>
+      <td><strong>Communications and Messaging</strong><div class="muted">Communication platform for messaging, calls, notifications or collaboration.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">8 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://developers.facebook.com/docs/whatsapp" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">29</td>
+      <td><strong>Aircall</strong><div class="muted">https://aircall.io</div></td>
+      <td><strong>Communications and Messaging</strong><div class="muted">Communication platform for messaging, calls, notifications or collaboration.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://aircall.io/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">30</td>
+      <td><strong>Vonage</strong><div class="muted">https://developer.vonage.com</div></td>
+      <td><strong>Communications and Messaging</strong><div class="muted">Communication platform for messaging, calls, notifications or collaboration.</div></td>
+      <td><span class="pill good">JWT</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">REST, SDK</span><div class="muted">medium breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://developer.vonage.com/en/home" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">31</td>
+      <td><strong>Google Ads</strong><div class="muted">https://developers.google.com/google-ads</div></td>
+      <td><strong>Marketing Ads Email Social</strong><div class="muted">Google Ads software platform.</div></td>
+      <td><span class="pill good">OAuth2</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">REST, Webhooks</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">5 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://developers.google.com/google-ads/api" target="_blank" rel="noopener">auth ↗</a><br><a href="https://developers.google.com/google-ads" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">32</td>
+      <td><strong>Meta Ads</strong><div class="muted">https://developers.facebook.com/docs/marketing-apis</div></td>
+      <td><strong>Marketing Ads Email Social</strong><div class="muted">Meta Ads software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">10 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://developers.facebook.com/docs/marketing-apis" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">33</td>
+      <td><strong>LinkedIn Ads</strong><div class="muted">https://learn.microsoft.com/linkedin/marketing</div></td>
+      <td><strong>Marketing Ads Email Social</strong><div class="muted">LinkedIn Ads software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">7 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://learn.microsoft.com/en-us/linkedin/marketing/?view=li-lms-2026-08" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">34</td>
+      <td><strong>GoHighLevel</strong><div class="muted">https://highlevel.stoplight.io</div></td>
+      <td><strong>Marketing Ads Email Social</strong><div class="muted">GoHighLevel software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://highlevel.stoplight.io" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">35</td>
+      <td><strong>Mailchimp</strong><div class="muted">https://mailchimp.com/developer</div></td>
+      <td><strong>Marketing Ads Email Social</strong><div class="muted">Mailchimp software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">GraphQL</span><div class="muted">narrow breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">7 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://mailchimp.com/developer/" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">36</td>
+      <td><strong>Klaviyo</strong><div class="muted">https://developers.klaviyo.com</div></td>
+      <td><strong>Marketing Ads Email Social</strong><div class="muted">Klaviyo software platform.</div></td>
+      <td><span class="pill good">OAuth2, API key</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Webhooks, SDK</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">9 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://developers.klaviyo.com/en/reference/api_overview" target="_blank" rel="noopener">auth ↗</a><br><a href="https://developers.klaviyo.com/en" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">37</td>
+      <td><strong>systeme.io</strong><div class="muted">https://systeme.io</div></td>
+      <td><strong>Marketing Ads Email Social</strong><div class="muted">systeme.io software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://systeme.io" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">38</td>
+      <td><strong>Pinterest</strong><div class="muted">https://developers.pinterest.com</div></td>
+      <td><strong>Marketing Ads Email Social</strong><div class="muted">Pinterest software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://developers.pinterest.com/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">39</td>
+      <td><strong>Threads</strong><div class="muted">https://developers.facebook.com/docs/threads</div></td>
+      <td><strong>Marketing Ads Email Social</strong><div class="muted">Threads software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://developers.facebook.com/docs/threads" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">40</td>
+      <td><strong>SendGrid</strong><div class="muted">https://sendgrid.com</div></td>
+      <td><strong>Marketing Ads Email Social</strong><div class="muted">SendGrid software platform.</div></td>
+      <td><span class="pill good">API key</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Webhooks</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">10 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://www.twilio.com:443/docs/sendgrid" target="_blank" rel="noopener">auth ↗</a><br><a href="https://www.twilio.com/en-us/sendgrid" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">41</td>
+      <td><strong>Shopify</strong><div class="muted">https://shopify.dev</div></td>
+      <td><strong>Ecommerce</strong><div class="muted">Commerce platform providing storefront, product, order and customer management.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">REST, GraphQL, Webhooks</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">11 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://shopify.dev/docs/api" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">42</td>
+      <td><strong>WooCommerce</strong><div class="muted">https://woocommerce.com/document/woocommerce-rest-api</div></td>
+      <td><strong>Ecommerce</strong><div class="muted">Commerce platform for products, orders, customers or online sales.</div></td>
+      <td><span class="pill good">API key</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">REST, Webhooks</span><div class="muted">medium breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://woocommerce.com/document/woocommerce-rest-api/" target="_blank" rel="noopener">auth ↗</a><br><a href="https://woocommerce.com/document/developer-filters-included-in-product-condition-for-woocommerce/" target="_blank" rel="noopener">self_serve ↗</a><br><a href="https://woocommerce.com/document/docs-template-extension/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">43</td>
+      <td><strong>BigCommerce</strong><div class="muted">https://developer.bigcommerce.com</div></td>
+      <td><strong>Ecommerce</strong><div class="muted">Commerce platform for products, orders, customers or online sales.</div></td>
+      <td><span class="pill good">OAuth2, Bearer token</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">REST, GraphQL, Webhooks</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://docs.bigcommerce.com/developer/docs/overview/quick-start" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">44</td>
+      <td><strong>Salesforce Commerce Cloud</strong><div class="muted">https://developer.salesforce.com/docs/commerce</div></td>
+      <td><strong>Ecommerce</strong><div class="muted">Commerce platform for products, orders, customers or online sales.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://developer.salesforce.com/docs/commerce" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">45</td>
+      <td><strong>Magento Adobe Commerce</strong><div class="muted">https://developer.adobe.com/commerce</div></td>
+      <td><strong>Ecommerce</strong><div class="muted">Commerce platform for products, orders, customers or online sales.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">REST, GraphQL, Webhooks, SDK</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://developer.adobe.com/commerce/docs/" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">46</td>
+      <td><strong>Squarespace</strong><div class="muted">https://developers.squarespace.com</div></td>
+      <td><strong>Ecommerce</strong><div class="muted">Commerce platform for products, orders, customers or online sales.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">REST, Webhooks</span><div class="muted">medium breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://developers.squarespace.com/" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">47</td>
+      <td><strong>Ecwid</strong><div class="muted">https://api-docs.ecwid.com</div></td>
+      <td><strong>Ecommerce</strong><div class="muted">Commerce platform for products, orders, customers or online sales.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">REST, Webhooks</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://docs.ecwid.com" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">48</td>
+      <td><strong>Gumroad</strong><div class="muted">https://gumroad.com/api</div></td>
+      <td><strong>Ecommerce</strong><div class="muted">Commerce platform for products, orders, customers or online sales.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">3 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://gumroad.com/api" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">49</td>
+      <td><strong>Amazon Selling Partner</strong><div class="muted">https://developer-docs.amazon.com/sp-api</div></td>
+      <td><strong>Ecommerce</strong><div class="muted">Commerce platform for products, orders, customers or online sales.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">GraphQL, SDK</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://developer-docs.amazon/sp-api/docs/welcome" target="_blank" rel="noopener">api ↗</a><br><a href="https://developer-docs.amazon/sp-api" target="_blank" rel="noopener">api ↗</a><br><a href="https://developer-docs.amazon/sp-api/page/404" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">50</td>
+      <td><strong>fanbasis</strong><div class="muted">https://fanbasis.com</div></td>
+      <td><strong>Ecommerce</strong><div class="muted">Commerce platform for products, orders, customers or online sales.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://commas.com/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">51</td>
+      <td><strong>DataForSEO</strong><div class="muted">https://docs.dataforseo.com</div></td>
+      <td><strong>Data SEO and Scraping</strong><div class="muted">DataForSEO software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">Webhooks</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">6 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://docs.dataforseo.com/v3/" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">52</td>
+      <td><strong>SE Ranking</strong><div class="muted">https://seranking.com/api</div></td>
+      <td><strong>Data SEO and Scraping</strong><div class="muted">SE Ranking software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://seranking.com/api" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">53</td>
+      <td><strong>Ahrefs</strong><div class="muted">https://ahrefs.com/api</div></td>
+      <td><strong>Data SEO and Scraping</strong><div class="muted">Ahrefs software platform.</div></td>
+      <td><span class="pill good">OAuth2</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">REST</span><div class="muted">medium breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">1 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://docs.ahrefs.com" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">54</td>
+      <td><strong>MrScraper</strong><div class="muted">https://docs.mrscraper.com</div></td>
+      <td><strong>Data SEO and Scraping</strong><div class="muted">MrScraper software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Webhooks, SDK</span><div class="muted">medium breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">8 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://docs.mrscraper.com/docs/getting-started/overview" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">55</td>
+      <td><strong>Apify</strong><div class="muted">https://docs.apify.com</div></td>
+      <td><strong>Data SEO and Scraping</strong><div class="muted">Apify software platform.</div></td>
+      <td><span class="pill good">Bearer token</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">REST, SDK</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">7 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://docs.apify.com/api" target="_blank" rel="noopener">auth ↗</a><br><a href="https://docs.apify.com/" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">56</td>
+      <td><strong>Firecrawl</strong><div class="muted">https://firecrawl.dev</div></td>
+      <td><strong>Data SEO and Scraping</strong><div class="muted">Firecrawl software platform.</div></td>
+      <td><span class="pill good">API key, Bearer token</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">REST, Webhooks, SDK</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">10 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://www.firecrawl.dev/" target="_blank" rel="noopener">auth ↗</a><br><a href="https://docs.firecrawl.dev/introduction" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">57</td>
+      <td><strong>Bright Data</strong><div class="muted">https://brightdata.com</div></td>
+      <td><strong>Data SEO and Scraping</strong><div class="muted">Bright Data software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Webhooks, SDK</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">5 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://brightdata.com/" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">58</td>
+      <td><strong>Sherlock</strong><div class="muted">https://github.com/sherlock-project/sherlock</div></td>
+      <td><strong>Data SEO and Scraping</strong><div class="muted">Sherlock software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://github.com/sherlock-project/sherlock" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">59</td>
+      <td><strong>Waterfall.io</strong><div class="muted">https://waterfall.io</div></td>
+      <td><strong>Data SEO and Scraping</strong><div class="muted">Waterfall.io software platform.</div></td>
+      <td><span class="pill good">API key</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://www.waterfall.io/" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">60</td>
+      <td><strong>Clay</strong><div class="muted">https://clay.com</div></td>
+      <td><strong>Data SEO and Scraping</strong><div class="muted">Clay software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://www.clay.com/" target="_blank" rel="noopener">self_serve ↗</a><br><a href="https://university.clay.com/docs" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">61</td>
+      <td><strong>GitHub</strong><div class="muted">https://docs.github.com/rest</div></td>
+      <td><strong>Developer Infra and Data</strong><div class="muted">Developer platform for source control, collaboration, issues and CI/CD.</div></td>
+      <td><span class="pill good">OAuth2</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">REST, Webhooks</span><div class="muted">medium breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">6 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://docs.github.com/en/rest" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">62</td>
+      <td><strong>Vercel</strong><div class="muted">https://vercel.com/docs/rest-api</div></td>
+      <td><strong>Developer Infra and Data</strong><div class="muted">Vercel software platform.</div></td>
+      <td><span class="pill good">Bearer token</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">REST, Webhooks, SDK</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">6 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://vercel.com/docs/rest-api" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">63</td>
+      <td><strong>Netlify</strong><div class="muted">https://docs.netlify.com/api</div></td>
+      <td><strong>Developer Infra and Data</strong><div class="muted">Netlify software platform.</div></td>
+      <td><span class="pill good">OAuth2, Bearer token</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">REST, Webhooks, SDK</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://docs.netlify.com/api-and-cli-guides/api-guides/get-started-with-api/" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">64</td>
+      <td><strong>Cloudflare</strong><div class="muted">https://developers.cloudflare.com/api</div></td>
+      <td><strong>Developer Infra and Data</strong><div class="muted">Cloudflare software platform.</div></td>
+      <td><span class="pill good">OAuth2, API key</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">GraphQL, Webhooks</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">9 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://developers.cloudflare.com/api/" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">65</td>
+      <td><strong>Supabase</strong><div class="muted">https://supabase.com/docs</div></td>
+      <td><strong>Developer Infra and Data</strong><div class="muted">Supabase software platform.</div></td>
+      <td><span class="pill good">OAuth2</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">REST, GraphQL, SDK</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">11 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://supabase.com/docs" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">66</td>
+      <td><strong>Neo4j</strong><div class="muted">https://neo4j.com/docs/api</div></td>
+      <td><strong>Developer Infra and Data</strong><div class="muted">Neo4j software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">GraphQL</span><div class="muted">medium breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">7 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://neo4j.com/docs/api/" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">67</td>
+      <td><strong>Snowflake</strong><div class="muted">https://docs.snowflake.com</div></td>
+      <td><strong>Developer Infra and Data</strong><div class="muted">Snowflake software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">REST, SDK</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">8 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://docs.snowflake.com/en/developer" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">68</td>
+      <td><strong>MongoDB Atlas</strong><div class="muted">https://mongodb.com/docs/atlas/api</div></td>
+      <td><strong>Developer Infra and Data</strong><div class="muted">MongoDB Atlas software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">REST, GraphQL, SDK</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://www.mongodb.com/docs/atlas/api/" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">69</td>
+      <td><strong>Datadog</strong><div class="muted">https://docs.datadoghq.com/api</div></td>
+      <td><strong>Developer Infra and Data</strong><div class="muted">Datadog software platform.</div></td>
+      <td><span class="pill good">OAuth2, API key</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">REST, Webhooks, SDK</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">2 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://docs.datadoghq.com/api/latest/" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">70</td>
+      <td><strong>Sentry</strong><div class="muted">https://docs.sentry.io/api</div></td>
+      <td><strong>Developer Infra and Data</strong><div class="muted">Sentry software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">SDK</span><div class="muted">narrow breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">7 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://docs.sentry.io/api/" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">71</td>
+      <td><strong>Notion</strong><div class="muted">https://developers.notion.com</div></td>
+      <td><strong>Productivity and Project Management</strong><div class="muted">Workspace platform for documents, databases, knowledge and team collaboration.</div></td>
+      <td><span class="pill good">OAuth2, Bearer token</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">REST, Webhooks, SDK</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">7 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://developers.notion.com/guides/get-started/overview" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">72</td>
+      <td><strong>Airtable</strong><div class="muted">https://airtable.com/developers</div></td>
+      <td><strong>Productivity and Project Management</strong><div class="muted">Collaborative database platform for structured data, workflows and applications.</div></td>
+      <td><span class="pill good">OAuth2</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">5 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://airtable.com/developers/agents" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">73</td>
+      <td><strong>Linear</strong><div class="muted">https://developers.linear.app</div></td>
+      <td><strong>Productivity and Project Management</strong><div class="muted">Productivity and project-management platform for organizing work and collaboration.</div></td>
+      <td><span class="pill good">OAuth2</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">GraphQL, Webhooks, SDK</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">10 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://linear.app/developers" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">74</td>
+      <td><strong>Jira</strong><div class="muted">https://developer.atlassian.com</div></td>
+      <td><strong>Productivity and Project Management</strong><div class="muted">Productivity and project-management platform for organizing work and collaboration.</div></td>
+      <td><span class="pill good">OAuth2</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">REST, GraphQL</span><div class="muted">medium breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">3 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://developer.atlassian.com/cloud/" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">75</td>
+      <td><strong>Asana</strong><div class="muted">https://developers.asana.com</div></td>
+      <td><strong>Productivity and Project Management</strong><div class="muted">Productivity and project-management platform for organizing work and collaboration.</div></td>
+      <td><span class="pill good">OAuth2</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">REST, Webhooks</span><div class="muted">medium breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">10 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://developers.asana.com/docs/overview" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">76</td>
+      <td><strong>Monday.com</strong><div class="muted">https://developer.monday.com</div></td>
+      <td><strong>Productivity and Project Management</strong><div class="muted">Productivity and project-management platform for organizing work and collaboration.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://developer.monday.com" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">77</td>
+      <td><strong>ClickUp</strong><div class="muted">https://clickup.com/api</div></td>
+      <td><strong>Productivity and Project Management</strong><div class="muted">Productivity and project-management platform for organizing work and collaboration.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">10 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://clickup.com/api" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">78</td>
+      <td><strong>Coda</strong><div class="muted">https://coda.io/developers</div></td>
+      <td><strong>Productivity and Project Management</strong><div class="muted">Productivity and project-management platform for organizing work and collaboration.</div></td>
+      <td><span class="pill good">API key, Bearer token</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">REST, Webhooks</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">8 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://docs.superhuman.com/developers/apis/v1" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">79</td>
+      <td><strong>Smartsheet</strong><div class="muted">https://smartsheet.com/developers</div></td>
+      <td><strong>Productivity and Project Management</strong><div class="muted">Productivity and project-management platform for organizing work and collaboration.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">SDK</span><div class="muted">narrow breadth · MCP: possible</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://developers.smartsheet.com/" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">80</td>
+      <td><strong>Harvest</strong><div class="muted">https://help.getharvest.com/api-v2</div></td>
+      <td><strong>Productivity and Project Management</strong><div class="muted">Productivity and project-management platform for organizing work and collaboration.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">6 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://help.getharvest.com/api-v2" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">81</td>
+      <td><strong>Stripe</strong><div class="muted">https://stripe.com/docs/api</div></td>
+      <td><strong>Finance and Fintech</strong><div class="muted">Payments platform providing APIs for payments, billing, subscriptions and financial workflows.</div></td>
+      <td><span class="pill good">API key</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">Webhooks</span><div class="muted">narrow breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">13 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://docs.stripe.com/api" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">82</td>
+      <td><strong>Plaid</strong><div class="muted">https://plaid.com/docs</div></td>
+      <td><strong>Finance and Fintech</strong><div class="muted">Financial platform for payments, financial data or business finance workflows.</div></td>
+      <td><span class="pill good">OAuth2</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Webhooks, SDK</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://plaid.com/docs/api/" target="_blank" rel="noopener">auth ↗</a><br><a href="https://plaid.com/docs/" target="_blank" rel="noopener">mcp ↗</a></td>
+    </tr><tr>
+      <td class="id">83</td>
+      <td><strong>Binance</strong><div class="muted">https://binance-docs.github.io</div></td>
+      <td><strong>Finance and Fintech</strong><div class="muted">Financial platform for payments, financial data or business finance workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://binance-docs.github.io" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">84</td>
+      <td><strong>Paygent Connect</strong><div class="muted">https://www.nmi.com</div></td>
+      <td><strong>Finance and Fintech</strong><div class="muted">Financial platform for payments, financial data or business finance workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Gated</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://www.nmi.com/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">85</td>
+      <td><strong>iPayX</strong><div class="muted">https://ipayx.ai/docs</div></td>
+      <td><strong>Finance and Fintech</strong><div class="muted">Financial platform for payments, financial data or business finance workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://ipayx.ai/docs" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">86</td>
+      <td><strong>QuickBooks</strong><div class="muted">https://developer.intuit.com</div></td>
+      <td><strong>Finance and Fintech</strong><div class="muted">Financial platform for payments, financial data or business finance workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">9 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://developer.intuit.com" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">87</td>
+      <td><strong>Xero</strong><div class="muted">https://developer.xero.com</div></td>
+      <td><strong>Finance and Fintech</strong><div class="muted">Financial platform for payments, financial data or business finance workflows.</div></td>
+      <td><span class="pill good">OAuth2</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Webhooks, SDK</span><div class="muted">medium breadth · MCP: possible</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">7 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://developer.xero.com/" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">88</td>
+      <td><strong>Brex</strong><div class="muted">https://developer.brex.com</div></td>
+      <td><strong>Finance and Fintech</strong><div class="muted">Financial platform for payments, financial data or business finance workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Webhooks</span><div class="muted">medium breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">6 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://developer.brex.com/" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">89</td>
+      <td><strong>Ramp</strong><div class="muted">https://docs.ramp.com</div></td>
+      <td><strong>Finance and Fintech</strong><div class="muted">Financial platform for payments, financial data or business finance workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">8 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://docs.ramp.com" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">90</td>
+      <td><strong>PitchBook</strong><div class="muted">https://pitchbook.com</div></td>
+      <td><strong>Finance and Fintech</strong><div class="muted">Financial platform for payments, financial data or business finance workflows.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://pitchbook.com" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">91</td>
+      <td><strong>NotebookLM</strong><div class="muted">https://cloud.google.com/gemini</div></td>
+      <td><strong>AI Research and Media</strong><div class="muted">NotebookLM software platform.</div></td>
+      <td><span class="pill good">API key</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">SDK</span><div class="muted">broad breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">5 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://cloud.google.com/ai/gemini" target="_blank" rel="noopener">auth ↗</a><br><a href="https://docs.cloud.google.com/gemini/docs" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">92</td>
+      <td><strong>Otter AI</strong><div class="muted">https://help.otter.ai</div></td>
+      <td><strong>AI Research and Media</strong><div class="muted">Otter AI software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://help.otter.ai" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">93</td>
+      <td><strong>Fathom</strong><div class="muted">https://fathom.video</div></td>
+      <td><strong>AI Research and Media</strong><div class="muted">Fathom software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">7 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://www.fathom.ai/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">94</td>
+      <td><strong>Consensus</strong><div class="muted">https://consensus.app</div></td>
+      <td><strong>AI Research and Media</strong><div class="muted">Consensus software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill good">Direct toolkit</span><div class="muted">1 tools</div></td>
+      <td><strong>Composio-covered</strong><div class="muted">No direct Composio coverage blocker; credential connection, permissions and production validation remain.</div></td>
+      <td><a href="https://consensus.app" target="_blank" rel="noopener">official site ↗</a></td>
+    </tr><tr>
+      <td class="id">95</td>
+      <td><strong>Reducto</strong><div class="muted">https://reducto.ai</div></td>
+      <td><strong>AI Research and Media</strong><div class="muted">Reducto software platform.</div></td>
+      <td><span class="pill good">API key, Bearer token</span></td>
+      <td><span class="pill warn">Conditional</span></td>
+      <td><span class="pill ">Webhooks, SDK</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://reducto.ai/" target="_blank" rel="noopener">auth ↗</a><br><a href="https://docs.reducto.ai/api-reference/parse" target="_blank" rel="noopener">auth ↗</a><br><a href="https://docs.reducto.ai/overview" target="_blank" rel="noopener">api ↗</a></td>
+    </tr><tr>
+      <td class="id">96</td>
+      <td><strong>Devin</strong><div class="muted">https://docs.devin.ai</div></td>
+      <td><strong>AI Research and Media</strong><div class="muted">Devin software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://docs.devin.ai/get-started/devin-intro" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">97</td>
+      <td><strong>higgsfield</strong><div class="muted">https://higgsfield.ai/cli</div></td>
+      <td><strong>AI Research and Media</strong><div class="muted">higgsfield software platform.</div></td>
+      <td><span class="pill good">API key</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: possible</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://higgsfield.ai/cli" target="_blank" rel="noopener">auth ↗</a></td>
+    </tr><tr>
+      <td class="id">98</td>
+      <td><strong>Mermaid CLI</strong><div class="muted">https://github.com/mermaid-js/mermaid-cli</div></td>
+      <td><strong>AI Research and Media</strong><div class="muted">Mermaid CLI software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: not_found</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://github.com/mermaid-js/mermaid-cli" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr><tr>
+      <td class="id">99</td>
+      <td><strong>YouTube Transcript</strong><div class="muted">https://transcriptapi.com</div></td>
+      <td><strong>AI Research and Media</strong><div class="muted">YouTube Transcript software platform.</div></td>
+      <td><span class="pill good">API key, Bearer token</span></td>
+      <td><span class="pill ">Unknown</span></td>
+      <td><span class="pill ">REST</span><div class="muted">broad breadth · MCP: possible</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://transcriptapi.com/" target="_blank" rel="noopener">auth ↗</a><br><a href="https://transcriptapi.com/docs/" target="_blank" rel="noopener">mcp ↗</a><br><a href="https://transcriptapi.com/docs/api/" target="_blank" rel="noopener">mcp ↗</a></td>
+    </tr><tr>
+      <td class="id">100</td>
+      <td><strong>Grain</strong><div class="muted">https://grain.com</div></td>
+      <td><strong>AI Research and Media</strong><div class="muted">Grain software platform.</div></td>
+      <td><span class="pill warn">Not detected</span></td>
+      <td><span class="pill good">Self-serve</span></td>
+      <td><span class="pill ">Unknown</span><div class="muted">unknown breadth · MCP: possible</div></td>
+      <td><span class="pill warn">Semantic-only</span><div class="muted">0 tools</div></td>
+      <td><strong>Needs toolkit work</strong><div class="muted">No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work.</div></td>
+      <td><a href="https://grain.com/" target="_blank" rel="noopener">self_serve ↗</a></td>
+    </tr></tbody></table></div></div></section>
+
+<div class="footer"><b>Honesty / scope:</b> the dataset has 100 research records and 100 Composio records with 0 merge errors. The current automated metadata marks 92 rows for human review and only 22 as complete, so this case study does not pretend that every field is equally verified. The strongest machine-verified result is Composio toolkit coverage: 52 direct, 48 semantic-only, 380 actual tools. The official-doc sample is explicitly limited to 11 apps.<br><br><b>Source artifacts:</b> <code>data/final_results.json</code>, <code>data/composio_results.json</code>, <code>data/apps.csv</code>, <code>agent_composio.py</code>, <code>evidence_researcher.py</code>, <code>merge_results.py</code>, <code>VERIFICATION.md</code>.</div>
+</main>
+<script>
+const DATA=[{"id": 1, "app": "Salesforce", "category": "CRM and Sales", "description": "Enterprise CRM for sales, service, marketing and customer data.", "auth": "Not detected", "self_serve": "Conditional", "api": "REST, SDK", "breadth": "broad", "mcp": "possible", "coverage": "confirmed", "tools": 5, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 2, "app": "HubSpot", "category": "CRM and Sales", "description": "CRM platform combining sales, marketing, customer service and content tools.", "auth": "Not detected", "self_serve": "Gated", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "confirmed", "tools": 8, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 3, "app": "Pipedrive", "category": "CRM and Sales", "description": "Sales CRM focused on pipeline, deals, activities and sales workflows.", "auth": "Not detected", "self_serve": "Conditional", "api": "Webhooks", "breadth": "medium", "mcp": "not_found", "coverage": "confirmed", "tools": 24, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 4, "app": "Attio", "category": "CRM and Sales", "description": "Modern CRM for managing contacts, companies, deals and relationship data.", "auth": "OAuth2", "self_serve": "Gated", "api": "REST, Webhooks, SDK", "breadth": "broad", "mcp": "possible", "coverage": "confirmed", "tools": 11, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 5, "app": "Twenty", "category": "CRM and Sales", "description": "Open-source CRM for managing people, companies, opportunities and workflows.", "auth": "OAuth2", "self_serve": "Self-serve", "api": "GraphQL, Webhooks, SDK", "breadth": "broad", "mcp": "possible", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 6, "app": "Podio", "category": "CRM and Sales", "description": "CRM and sales platform for managing customer relationships and sales workflows.", "auth": "Not detected", "self_serve": "Conditional", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 7, "app": "Zoho CRM", "category": "CRM and Sales", "description": "CRM and sales platform for managing customer relationships and sales workflows.", "auth": "Not detected", "self_serve": "Conditional", "api": "GraphQL, SDK", "breadth": "broad", "mcp": "possible", "coverage": "confirmed", "tools": 10, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 8, "app": "Close", "category": "CRM and Sales", "description": "CRM and sales platform for managing customer relationships and sales workflows.", "auth": "Not detected", "self_serve": "Self-serve", "api": "REST, Webhooks", "breadth": "medium", "mcp": "possible", "coverage": "confirmed", "tools": 2, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 9, "app": "Copper", "category": "CRM and Sales", "description": "CRM and sales platform for managing customer relationships and sales workflows.", "auth": "Not detected", "self_serve": "Gated", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 10, "app": "DealCloud", "category": "CRM and Sales", "description": "CRM and sales platform for managing customer relationships and sales workflows.", "auth": "Not detected", "self_serve": "Unknown", "api": "SDK", "breadth": "broad", "mcp": "possible", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 11, "app": "Zendesk", "category": "Support and Helpdesk", "description": "Customer support platform for managing conversations, tickets and service workflows.", "auth": "Not detected", "self_serve": "Conditional", "api": "Webhooks, SDK", "breadth": "broad", "mcp": "not_found", "coverage": "confirmed", "tools": 3, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 12, "app": "Intercom", "category": "Support and Helpdesk", "description": "Customer support platform for managing conversations, tickets and service workflows.", "auth": "Not detected", "self_serve": "Conditional", "api": "Webhooks", "breadth": "medium", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 13, "app": "Freshdesk", "category": "Support and Helpdesk", "description": "Customer support platform for managing conversations, tickets and service workflows.", "auth": "Not detected", "self_serve": "Gated", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "confirmed", "tools": 6, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 14, "app": "Front", "category": "Support and Helpdesk", "description": "Customer support platform for managing conversations, tickets and service workflows.", "auth": "Not detected", "self_serve": "Conditional", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 15, "app": "Pylon", "category": "Support and Helpdesk", "description": "Customer support platform for managing conversations, tickets and service workflows.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 16, "app": "LiveAgent", "category": "Support and Helpdesk", "description": "Customer support platform for managing conversations, tickets and service workflows.", "auth": "Not detected", "self_serve": "Conditional", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 17, "app": "Plain", "category": "Support and Helpdesk", "description": "Customer support platform for managing conversations, tickets and service workflows.", "auth": "API key, Bearer token", "self_serve": "Self-serve", "api": "GraphQL, Webhooks, SDK", "breadth": "broad", "mcp": "possible", "coverage": "confirmed", "tools": 4, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 18, "app": "Help Scout", "category": "Support and Helpdesk", "description": "Customer support platform for managing conversations, tickets and service workflows.", "auth": "Not detected", "self_serve": "Gated", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "confirmed", "tools": 4, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 19, "app": "Gorgias", "category": "Support and Helpdesk", "description": "Customer support platform for managing conversations, tickets and service workflows.", "auth": "Not detected", "self_serve": "Conditional", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "confirmed", "tools": 8, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 20, "app": "Gladly", "category": "Support and Helpdesk", "description": "Customer support platform for managing conversations, tickets and service workflows.", "auth": "OAuth2", "self_serve": "Gated", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 21, "app": "Slack", "category": "Communications and Messaging", "description": "Team communication platform for channels, messaging, apps and automation.", "auth": "Not detected", "self_serve": "Gated", "api": "SDK", "breadth": "broad", "mcp": "not_found", "coverage": "confirmed", "tools": 10, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 22, "app": "Twilio", "category": "Communications and Messaging", "description": "Communications platform providing programmable messaging, voice and other APIs.", "auth": "Not detected", "self_serve": "Conditional", "api": "REST", "breadth": "broad", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 23, "app": "Zoho Cliq", "category": "Communications and Messaging", "description": "Communication platform for messaging, calls, notifications or collaboration.", "auth": "Not detected", "self_serve": "Self-serve", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 24, "app": "Lark", "category": "Communications and Messaging", "description": "Communication platform for messaging, calls, notifications or collaboration.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 25, "app": "Pumble", "category": "Communications and Messaging", "description": "Communication platform for messaging, calls, notifications or collaboration.", "auth": "Not detected", "self_serve": "Self-serve", "api": "Unknown", "breadth": "unknown", "mcp": "possible", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 26, "app": "Discord", "category": "Communications and Messaging", "description": "Communication platform for messaging, calls, notifications or collaboration.", "auth": "OAuth2", "self_serve": "Self-serve", "api": "Webhooks, SDK", "breadth": "medium", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 27, "app": "Telegram", "category": "Communications and Messaging", "description": "Communication platform for messaging, calls, notifications or collaboration.", "auth": "OAuth2", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "confirmed", "tools": 7, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 28, "app": "WhatsApp Business", "category": "Communications and Messaging", "description": "Communication platform for messaging, calls, notifications or collaboration.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "confirmed", "tools": 8, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 29, "app": "Aircall", "category": "Communications and Messaging", "description": "Communication platform for messaging, calls, notifications or collaboration.", "auth": "Not detected", "self_serve": "Gated", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 30, "app": "Vonage", "category": "Communications and Messaging", "description": "Communication platform for messaging, calls, notifications or collaboration.", "auth": "JWT", "self_serve": "Self-serve", "api": "REST, SDK", "breadth": "medium", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 31, "app": "Google Ads", "category": "Marketing Ads Email Social", "description": "Google Ads software platform.", "auth": "OAuth2", "self_serve": "Self-serve", "api": "REST, Webhooks", "breadth": "broad", "mcp": "possible", "coverage": "confirmed", "tools": 5, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 32, "app": "Meta Ads", "category": "Marketing Ads Email Social", "description": "Meta Ads software platform.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "confirmed", "tools": 10, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 33, "app": "LinkedIn Ads", "category": "Marketing Ads Email Social", "description": "LinkedIn Ads software platform.", "auth": "Not detected", "self_serve": "Conditional", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "confirmed", "tools": 7, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 34, "app": "GoHighLevel", "category": "Marketing Ads Email Social", "description": "GoHighLevel software platform.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 35, "app": "Mailchimp", "category": "Marketing Ads Email Social", "description": "Mailchimp software platform.", "auth": "Not detected", "self_serve": "Gated", "api": "GraphQL", "breadth": "narrow", "mcp": "not_found", "coverage": "confirmed", "tools": 7, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 36, "app": "Klaviyo", "category": "Marketing Ads Email Social", "description": "Klaviyo software platform.", "auth": "OAuth2, API key", "self_serve": "Conditional", "api": "Webhooks, SDK", "breadth": "broad", "mcp": "not_found", "coverage": "confirmed", "tools": 9, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 37, "app": "systeme.io", "category": "Marketing Ads Email Social", "description": "systeme.io software platform.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 38, "app": "Pinterest", "category": "Marketing Ads Email Social", "description": "Pinterest software platform.", "auth": "Not detected", "self_serve": "Self-serve", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 39, "app": "Threads", "category": "Marketing Ads Email Social", "description": "Threads software platform.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 40, "app": "SendGrid", "category": "Marketing Ads Email Social", "description": "SendGrid software platform.", "auth": "API key", "self_serve": "Conditional", "api": "Webhooks", "breadth": "broad", "mcp": "not_found", "coverage": "confirmed", "tools": 10, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 41, "app": "Shopify", "category": "Ecommerce", "description": "Commerce platform providing storefront, product, order and customer management.", "auth": "Not detected", "self_serve": "Gated", "api": "REST, GraphQL, Webhooks", "breadth": "broad", "mcp": "not_found", "coverage": "confirmed", "tools": 11, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 42, "app": "WooCommerce", "category": "Ecommerce", "description": "Commerce platform for products, orders, customers or online sales.", "auth": "API key", "self_serve": "Gated", "api": "REST, Webhooks", "breadth": "medium", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 43, "app": "BigCommerce", "category": "Ecommerce", "description": "Commerce platform for products, orders, customers or online sales.", "auth": "OAuth2, Bearer token", "self_serve": "Conditional", "api": "REST, GraphQL, Webhooks", "breadth": "broad", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 44, "app": "Salesforce Commerce Cloud", "category": "Ecommerce", "description": "Commerce platform for products, orders, customers or online sales.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 45, "app": "Magento Adobe Commerce", "category": "Ecommerce", "description": "Commerce platform for products, orders, customers or online sales.", "auth": "Not detected", "self_serve": "Unknown", "api": "REST, GraphQL, Webhooks, SDK", "breadth": "broad", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 46, "app": "Squarespace", "category": "Ecommerce", "description": "Commerce platform for products, orders, customers or online sales.", "auth": "Not detected", "self_serve": "Self-serve", "api": "REST, Webhooks", "breadth": "medium", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 47, "app": "Ecwid", "category": "Ecommerce", "description": "Commerce platform for products, orders, customers or online sales.", "auth": "Not detected", "self_serve": "Unknown", "api": "REST, Webhooks", "breadth": "broad", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 48, "app": "Gumroad", "category": "Ecommerce", "description": "Commerce platform for products, orders, customers or online sales.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "confirmed", "tools": 3, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 49, "app": "Amazon Selling Partner", "category": "Ecommerce", "description": "Commerce platform for products, orders, customers or online sales.", "auth": "Not detected", "self_serve": "Conditional", "api": "GraphQL, SDK", "breadth": "broad", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 50, "app": "fanbasis", "category": "Ecommerce", "description": "Commerce platform for products, orders, customers or online sales.", "auth": "Not detected", "self_serve": "Gated", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 51, "app": "DataForSEO", "category": "Data SEO and Scraping", "description": "DataForSEO software platform.", "auth": "Not detected", "self_serve": "Self-serve", "api": "Webhooks", "breadth": "broad", "mcp": "not_found", "coverage": "confirmed", "tools": 6, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 52, "app": "SE Ranking", "category": "Data SEO and Scraping", "description": "SE Ranking software platform.", "auth": "Not detected", "self_serve": "Conditional", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 53, "app": "Ahrefs", "category": "Data SEO and Scraping", "description": "Ahrefs software platform.", "auth": "OAuth2", "self_serve": "Gated", "api": "REST", "breadth": "medium", "mcp": "not_found", "coverage": "confirmed", "tools": 1, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 54, "app": "MrScraper", "category": "Data SEO and Scraping", "description": "MrScraper software platform.", "auth": "Not detected", "self_serve": "Unknown", "api": "Webhooks, SDK", "breadth": "medium", "mcp": "possible", "coverage": "confirmed", "tools": 8, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 55, "app": "Apify", "category": "Data SEO and Scraping", "description": "Apify software platform.", "auth": "Bearer token", "self_serve": "Unknown", "api": "REST, SDK", "breadth": "broad", "mcp": "possible", "coverage": "confirmed", "tools": 7, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 56, "app": "Firecrawl", "category": "Data SEO and Scraping", "description": "Firecrawl software platform.", "auth": "API key, Bearer token", "self_serve": "Conditional", "api": "REST, Webhooks, SDK", "breadth": "broad", "mcp": "possible", "coverage": "confirmed", "tools": 10, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 57, "app": "Bright Data", "category": "Data SEO and Scraping", "description": "Bright Data software platform.", "auth": "Not detected", "self_serve": "Conditional", "api": "Webhooks, SDK", "breadth": "broad", "mcp": "possible", "coverage": "confirmed", "tools": 5, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 58, "app": "Sherlock", "category": "Data SEO and Scraping", "description": "Sherlock software platform.", "auth": "Not detected", "self_serve": "Self-serve", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 59, "app": "Waterfall.io", "category": "Data SEO and Scraping", "description": "Waterfall.io software platform.", "auth": "API key", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 60, "app": "Clay", "category": "Data SEO and Scraping", "description": "Clay software platform.", "auth": "Not detected", "self_serve": "Conditional", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 61, "app": "GitHub", "category": "Developer Infra and Data", "description": "Developer platform for source control, collaboration, issues and CI/CD.", "auth": "OAuth2", "self_serve": "Unknown", "api": "REST, Webhooks", "breadth": "medium", "mcp": "not_found", "coverage": "confirmed", "tools": 6, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 62, "app": "Vercel", "category": "Developer Infra and Data", "description": "Vercel software platform.", "auth": "Bearer token", "self_serve": "Conditional", "api": "REST, Webhooks, SDK", "breadth": "broad", "mcp": "not_found", "coverage": "confirmed", "tools": 6, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 63, "app": "Netlify", "category": "Developer Infra and Data", "description": "Netlify software platform.", "auth": "OAuth2, Bearer token", "self_serve": "Unknown", "api": "REST, Webhooks, SDK", "breadth": "broad", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 64, "app": "Cloudflare", "category": "Developer Infra and Data", "description": "Cloudflare software platform.", "auth": "OAuth2, API key", "self_serve": "Self-serve", "api": "GraphQL, Webhooks", "breadth": "broad", "mcp": "possible", "coverage": "confirmed", "tools": 9, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 65, "app": "Supabase", "category": "Developer Infra and Data", "description": "Supabase software platform.", "auth": "OAuth2", "self_serve": "Unknown", "api": "REST, GraphQL, SDK", "breadth": "broad", "mcp": "not_found", "coverage": "confirmed", "tools": 11, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 66, "app": "Neo4j", "category": "Developer Infra and Data", "description": "Neo4j software platform.", "auth": "Not detected", "self_serve": "Gated", "api": "GraphQL", "breadth": "medium", "mcp": "not_found", "coverage": "confirmed", "tools": 7, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 67, "app": "Snowflake", "category": "Developer Infra and Data", "description": "Snowflake software platform.", "auth": "Not detected", "self_serve": "Unknown", "api": "REST, SDK", "breadth": "broad", "mcp": "not_found", "coverage": "confirmed", "tools": 8, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 68, "app": "MongoDB Atlas", "category": "Developer Infra and Data", "description": "MongoDB Atlas software platform.", "auth": "Not detected", "self_serve": "Conditional", "api": "REST, GraphQL, SDK", "breadth": "broad", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 69, "app": "Datadog", "category": "Developer Infra and Data", "description": "Datadog software platform.", "auth": "OAuth2, API key", "self_serve": "Conditional", "api": "REST, Webhooks, SDK", "breadth": "broad", "mcp": "possible", "coverage": "confirmed", "tools": 2, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 70, "app": "Sentry", "category": "Developer Infra and Data", "description": "Sentry software platform.", "auth": "Not detected", "self_serve": "Unknown", "api": "SDK", "breadth": "narrow", "mcp": "not_found", "coverage": "confirmed", "tools": 7, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 71, "app": "Notion", "category": "Productivity and Project Management", "description": "Workspace platform for documents, databases, knowledge and team collaboration.", "auth": "OAuth2, Bearer token", "self_serve": "Self-serve", "api": "REST, Webhooks, SDK", "breadth": "broad", "mcp": "not_found", "coverage": "confirmed", "tools": 7, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 72, "app": "Airtable", "category": "Productivity and Project Management", "description": "Collaborative database platform for structured data, workflows and applications.", "auth": "OAuth2", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "possible", "coverage": "confirmed", "tools": 5, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 73, "app": "Linear", "category": "Productivity and Project Management", "description": "Productivity and project-management platform for organizing work and collaboration.", "auth": "OAuth2", "self_serve": "Self-serve", "api": "GraphQL, Webhooks, SDK", "breadth": "broad", "mcp": "not_found", "coverage": "confirmed", "tools": 10, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 74, "app": "Jira", "category": "Productivity and Project Management", "description": "Productivity and project-management platform for organizing work and collaboration.", "auth": "OAuth2", "self_serve": "Unknown", "api": "REST, GraphQL", "breadth": "medium", "mcp": "possible", "coverage": "confirmed", "tools": 3, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 75, "app": "Asana", "category": "Productivity and Project Management", "description": "Productivity and project-management platform for organizing work and collaboration.", "auth": "OAuth2", "self_serve": "Unknown", "api": "REST, Webhooks", "breadth": "medium", "mcp": "possible", "coverage": "confirmed", "tools": 10, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 76, "app": "Monday.com", "category": "Productivity and Project Management", "description": "Productivity and project-management platform for organizing work and collaboration.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 77, "app": "ClickUp", "category": "Productivity and Project Management", "description": "Productivity and project-management platform for organizing work and collaboration.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "confirmed", "tools": 10, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 78, "app": "Coda", "category": "Productivity and Project Management", "description": "Productivity and project-management platform for organizing work and collaboration.", "auth": "API key, Bearer token", "self_serve": "Unknown", "api": "REST, Webhooks", "breadth": "broad", "mcp": "possible", "coverage": "confirmed", "tools": 8, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 79, "app": "Smartsheet", "category": "Productivity and Project Management", "description": "Productivity and project-management platform for organizing work and collaboration.", "auth": "Not detected", "self_serve": "Unknown", "api": "SDK", "breadth": "narrow", "mcp": "possible", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 80, "app": "Harvest", "category": "Productivity and Project Management", "description": "Productivity and project-management platform for organizing work and collaboration.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "confirmed", "tools": 6, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 81, "app": "Stripe", "category": "Finance and Fintech", "description": "Payments platform providing APIs for payments, billing, subscriptions and financial workflows.", "auth": "API key", "self_serve": "Gated", "api": "Webhooks", "breadth": "narrow", "mcp": "not_found", "coverage": "confirmed", "tools": 13, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 82, "app": "Plaid", "category": "Finance and Fintech", "description": "Financial platform for payments, financial data or business finance workflows.", "auth": "OAuth2", "self_serve": "Conditional", "api": "Webhooks, SDK", "breadth": "broad", "mcp": "possible", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 83, "app": "Binance", "category": "Finance and Fintech", "description": "Financial platform for payments, financial data or business finance workflows.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 84, "app": "Paygent Connect", "category": "Finance and Fintech", "description": "Financial platform for payments, financial data or business finance workflows.", "auth": "Not detected", "self_serve": "Gated", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 85, "app": "iPayX", "category": "Finance and Fintech", "description": "Financial platform for payments, financial data or business finance workflows.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 86, "app": "QuickBooks", "category": "Finance and Fintech", "description": "Financial platform for payments, financial data or business finance workflows.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "confirmed", "tools": 9, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 87, "app": "Xero", "category": "Finance and Fintech", "description": "Financial platform for payments, financial data or business finance workflows.", "auth": "OAuth2", "self_serve": "Conditional", "api": "Webhooks, SDK", "breadth": "medium", "mcp": "possible", "coverage": "confirmed", "tools": 7, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 88, "app": "Brex", "category": "Finance and Fintech", "description": "Financial platform for payments, financial data or business finance workflows.", "auth": "Not detected", "self_serve": "Unknown", "api": "Webhooks", "breadth": "medium", "mcp": "not_found", "coverage": "confirmed", "tools": 6, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 89, "app": "Ramp", "category": "Finance and Fintech", "description": "Financial platform for payments, financial data or business finance workflows.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "confirmed", "tools": 8, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 90, "app": "PitchBook", "category": "Finance and Fintech", "description": "Financial platform for payments, financial data or business finance workflows.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 91, "app": "NotebookLM", "category": "AI Research and Media", "description": "NotebookLM software platform.", "auth": "API key", "self_serve": "Conditional", "api": "SDK", "breadth": "broad", "mcp": "not_found", "coverage": "confirmed", "tools": 5, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 92, "app": "Otter AI", "category": "AI Research and Media", "description": "Otter AI software platform.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 93, "app": "Fathom", "category": "AI Research and Media", "description": "Fathom software platform.", "auth": "Not detected", "self_serve": "Conditional", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "confirmed", "tools": 7, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 94, "app": "Consensus", "category": "AI Research and Media", "description": "Consensus software platform.", "auth": "Not detected", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "confirmed", "tools": 1, "buildability": "Composio-covered", "blocker": "No direct Composio coverage blocker; credential connection, permissions and production validation remain."}, {"id": 95, "app": "Reducto", "category": "AI Research and Media", "description": "Reducto software platform.", "auth": "API key, Bearer token", "self_serve": "Conditional", "api": "Webhooks, SDK", "breadth": "broad", "mcp": "possible", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 96, "app": "Devin", "category": "AI Research and Media", "description": "Devin software platform.", "auth": "Not detected", "self_serve": "Self-serve", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 97, "app": "higgsfield", "category": "AI Research and Media", "description": "higgsfield software platform.", "auth": "API key", "self_serve": "Unknown", "api": "Unknown", "breadth": "unknown", "mcp": "possible", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 98, "app": "Mermaid CLI", "category": "AI Research and Media", "description": "Mermaid CLI software platform.", "auth": "Not detected", "self_serve": "Self-serve", "api": "Unknown", "breadth": "unknown", "mcp": "not_found", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 99, "app": "YouTube Transcript", "category": "AI Research and Media", "description": "YouTube Transcript software platform.", "auth": "API key, Bearer token", "self_serve": "Unknown", "api": "REST", "breadth": "broad", "mcp": "possible", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}, {"id": 100, "app": "Grain", "category": "AI Research and Media", "description": "Grain software platform.", "auth": "Not detected", "self_serve": "Self-serve", "api": "Unknown", "breadth": "unknown", "mcp": "possible", "coverage": "semantic_match_only", "tools": 0, "buildability": "Needs toolkit work", "blocker": "No direct Composio toolkit confirmed; requires integration/API/MCP validation or new toolkit work."}];
+function renderFilter(){const q=document.getElementById('q').value.toLowerCase(),c=document.getElementById('cat').value,v=document.getElementById('cov').value;const rows=[...document.querySelectorAll('#tbody tr')];rows.forEach((tr,i)=>{const d=DATA[i],hit=(!q||JSON.stringify(d).toLowerCase().includes(q))&&(!c||d.category===c)&&(!v||d.coverage===v);tr.style.display=hit?'':'none';})}
+['q','cat','cov'].forEach(id=>document.getElementById(id).addEventListener('input',renderFilter));
+</script></body></html>

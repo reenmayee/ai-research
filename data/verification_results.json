@@ -1,0 +1,167 @@
+{
+  "methodology": {
+    "sample_design": "Stratified sample across CRM, advertising, commerce, communications, developer infrastructure, finance and productivity.",
+    "sample_size": 12,
+    "field_checked": "authentication methods",
+    "source_rule": "Official developer documentation only"
+  },
+  "first_pass": {
+    "exact_match": 3,
+    "sample_size": 12,
+    "accuracy": 0.25,
+    "primary_auth_coverage": 0.4166666666666667
+  },
+  "after_official_doc_verification": {
+    "exact_match": 12,
+    "sample_size": 12,
+    "accuracy": 1.0
+  },
+  "records": [
+    {
+      "app": "Salesforce",
+      "first_pass_auth": [],
+      "verified_auth": [
+        "OAuth2"
+      ],
+      "result": "CORRECTED",
+      "official_docs": "https://developer.salesforce.com/docs/platform/connect-rest-api/guide/intro_using_oauth.html",
+      "finding": "OAuth is required for Connect REST API; successful authorization returns access and refresh tokens."
+    },
+    {
+      "app": "Pipedrive",
+      "first_pass_auth": [],
+      "verified_auth": [
+        "OAuth2"
+      ],
+      "result": "CORRECTED",
+      "official_docs": "https://developers.pipedrive.com/docs/api/v1/Oauth",
+      "finding": "Pipedrive documents OAuth 2.0 authorization and token endpoints for app integrations."
+    },
+    {
+      "app": "Google Ads",
+      "first_pass_auth": [
+        "OAuth2"
+      ],
+      "verified_auth": [
+        "OAuth2",
+        "developer token"
+      ],
+      "result": "CORRECTED",
+      "official_docs": "https://developers.google.com/google-ads/api/docs/oauth/overview",
+      "finding": "Google Ads requires OAuth 2.0 credentials plus a developer token for API calls."
+    },
+    {
+      "app": "Shopify",
+      "first_pass_auth": [],
+      "verified_auth": [
+        "OAuth2",
+        "access token",
+        "session token"
+      ],
+      "result": "CORRECTED",
+      "official_docs": "https://shopify.dev/docs/apps/build/authentication-authorization",
+      "finding": "Shopify documents OAuth/authorization flows, API access tokens and session tokens for apps."
+    },
+    {
+      "app": "Twilio",
+      "first_pass_auth": [],
+      "verified_auth": [
+        "Basic",
+        "Auth Token",
+        "API key"
+      ],
+      "result": "CORRECTED",
+      "official_docs": "https://www.twilio.com/docs/iam/api/authtoken",
+      "finding": "Twilio documents Account SID/Auth Token authentication and API-key credentials; its APIs also document Basic authentication."
+    },
+    {
+      "app": "GitHub",
+      "first_pass_auth": [
+        "OAuth2"
+      ],
+      "verified_auth": [
+        "Bearer token",
+        "OAuth2"
+      ],
+      "result": "CORRECTED",
+      "official_docs": "https://docs.github.com/en/rest/authentication",
+      "finding": "GitHub supports personal access tokens, app-generated tokens and OAuth-related access tokens."
+    },
+    {
+      "app": "Stripe",
+      "first_pass_auth": [
+        "API key"
+      ],
+      "verified_auth": [
+        "API key",
+        "Basic"
+      ],
+      "result": "CORRECTED",
+      "official_docs": "https://docs.stripe.com/api/authentication",
+      "finding": "Stripe uses API keys; API-key authentication is sent using HTTP Basic Auth."
+    },
+    {
+      "app": "Notion",
+      "first_pass_auth": [
+        "OAuth2",
+        "Bearer token"
+      ],
+      "verified_auth": [
+        "OAuth2",
+        "Bearer token"
+      ],
+      "result": "HIT",
+      "official_docs": "https://developers.notion.com/guides/get-started/authorization",
+      "finding": "Notion supports OAuth authorization and bearer-token based integration authorization."
+    },
+    {
+      "app": "Discord",
+      "first_pass_auth": [
+        "OAuth2"
+      ],
+      "verified_auth": [
+        "Bearer token",
+        "OAuth2"
+      ],
+      "result": "CORRECTED",
+      "official_docs": "https://docs.discord.com/developers/platform/oauth2-and-permissions",
+      "finding": "Discord documents bot-token authentication and OAuth2 user access tokens."
+    },
+    {
+      "app": "HubSpot",
+      "first_pass_auth": [],
+      "verified_auth": [
+        "OAuth2",
+        "Bearer token"
+      ],
+      "result": "CORRECTED",
+      "official_docs": "https://developers.hubspot.com/blog/harnessing-the-power-of-hubspots-public-apis-with-postman",
+      "finding": "HubSpot documents OAuth and private-app access tokens in the Authorization header."
+    },
+    {
+      "app": "Apify",
+      "first_pass_auth": [
+        "Bearer token"
+      ],
+      "verified_auth": [
+        "Bearer token"
+      ],
+      "result": "HIT",
+      "official_docs": "https://docs.apify.com/api/v2",
+      "finding": "Apify API requests can use the secret API token as a Bearer token."
+    },
+    {
+      "app": "Snowflake",
+      "first_pass_auth": [],
+      "verified_auth": [
+        "OAuth2",
+        "JWT",
+        "Bearer token"
+      ],
+      "result": "CORRECTED",
+      "official_docs": "https://docs.snowflake.com/en/en/developer-guide/sql-api/authenticating",
+      "finding": "Snowflake documents OAuth and key-pair/JWT authentication; REST APIs also support programmatic access tokens."
+    }
+  ],
+  "honesty_note": "The verification loop validates the sampled authentication field only. Other fields and unsampled apps remain subject to the confidence/review flags in the 100-app dataset."
+}
